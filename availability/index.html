@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Event Availability | Revelance Mason Ohio</title>
+<meta property="og:type" content="website">
+<meta property="og:title" content="Space Availability | Revelance">
+<meta property="og:description" content="Live availability calendar for boardrooms and event spaces at Revelance in Mason, Ohio.">
+<meta property="og:url" content="https://revelanceoh.com/availability/">
+<meta name="twitter:card" content="summary">
+
+<meta name="description" content="Check real-time availability for Revel Room, Taproom, C-Suite Lounge, E9 Golf Simulator, and boardrooms at Revelance in Mason, Ohio.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://revelanceoh.com/availability/">
+<meta property="og:image" content="https://revelanceoh.com/images/revel-room-banquet.webp">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Outfit:wght@300;400;500;600;700&display=swap"></noscript>
+<style>a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--gold-dark);outline-offset:2px}.skip-link{position:absolute;left:-9999px;top:0;z-index:2000;background:var(--gold);color:var(--black);padding:10px 18px;font-weight:700;border-radius:0 0 6px 0;text-decoration:none}.skip-link:focus{left:0}
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --gold:#C9A96E;--gold-light:#E8C98A;--gold-dark:#A07840;
+  --charcoal:#1E1E1E;--black:#0B0E11;--ash:#888;
+  --red:#c0392b;--red-light:rgba(192,57,43,.15);
+  --avail:rgba(255,255,255,.12);
+}
+html{font-size:16px;background:var(--black);overflow-y:scroll;scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{font-family:'Outfit',sans-serif;color:#fff;min-height:100vh}
+
+/* ── NAV ── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:14px 0;background:rgba(11,14,17,.96);backdrop-filter:blur(16px);border-bottom:1px solid rgba(201,169,110,.1)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 28px;display:flex;align-items:center;justify-content:space-between}
+.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-logo-icon{height:36px;width:36px}
+.nav-logo-text{color:#fff;font-size:15px;font-weight:300;letter-spacing:.28em;text-transform:uppercase}
+.nav-back{font-size:.78rem;color:rgba(255,255,255,.5);text-decoration:none;letter-spacing:.05em;transition:color .2s}
+.nav-back:hover{color:var(--gold)}
+
+/* ── PAGE HEADER ── */
+.page-header{padding:110px 0 40px;border-bottom:1px solid rgba(201,169,110,.12)}
+.page-header .container{max-width:1200px;margin:0 auto;padding:0 28px;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:20px}
+.header-label{font-size:.65rem;font-weight:700;letter-spacing:.18em;color:var(--gold);text-transform:uppercase;margin-bottom:10px}
+.header-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,2.8rem);font-weight:500;line-height:1.1}
+.header-title em{color:var(--gold-light);font-style:italic}
+.header-sub{font-size:.88rem;color:rgba(255,255,255,.4);margin-top:10px;max-width:420px;line-height:1.6}
+
+/* ── SPACE FILTERS ── */
+.filter-bar{max-width:1200px;margin:0 auto;padding:24px 28px;display:flex;gap:8px;flex-wrap:wrap}
+.space-btn{background:none;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.5);padding:7px 16px;border-radius:4px;font-size:.72rem;font-weight:400;letter-spacing:.05em;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .2s;white-space:nowrap}
+.space-btn:hover{border-color:rgba(201,169,110,.5);color:rgba(201,169,110,.8)}
+.space-btn.active{border-color:var(--gold);color:var(--gold);font-weight:600;background:rgba(201,169,110,.08)}
+
+/* ── MAIN LAYOUT ── */
+.cal-wrap{max-width:1200px;margin:0 auto;padding:0 28px 60px}
+
+/* ── CAL NAV ── */
+.cal-nav{display:flex;align-items:center;justify-content:space-between;padding:8px 0 20px;flex-wrap:wrap;gap:12px}
+.month-nav{display:flex;align-items:center;gap:16px}
+.nav-btn{background:rgba(255,255,255,.06);border:none;color:#fff;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:1.2rem;display:flex;align-items:center;justify-content:center;transition:background .2s;line-height:1;font-family:sans-serif}
+.nav-btn:hover{background:rgba(201,169,110,.15)}
+.month-title{min-width:150px;text-align:center}
+.month-name{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:500}
+.month-year{font-size:.72rem;color:var(--ash);margin-top:2px}
+.legend{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.legend-item{display:flex;align-items:center;gap:6px;font-size:.68rem;color:var(--ash);letter-spacing:.04em}
+.legend-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.view-toggle{display:flex;background:rgba(255,255,255,.05);border-radius:6px;overflow:hidden;border:1px solid rgba(255,255,255,.08)}
+.view-btn{background:none;border:none;color:var(--ash);padding:7px 18px;font-size:.72rem;cursor:pointer;font-family:'Outfit',sans-serif;letter-spacing:.05em;transition:all .2s}
+.view-btn.active{background:rgba(201,169,110,.12);color:var(--gold);font-weight:600}
+
+/* ── CALENDAR GRID ── */
+.day-headers{display:grid;grid-template-columns:repeat(7,1fr);margin-bottom:4px}
+.day-header{text-align:center;font-size:.62rem;font-weight:700;letter-spacing:.12em;color:rgba(255,255,255,.25);padding:8px 0;text-transform:uppercase}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
+.cal-cell{min-height:80px;display:flex;flex-direction:column;padding:8px;border-radius:6px;background:rgba(255,255,255,.03);border:1px solid transparent;transition:all .15s;cursor:pointer;position:relative}
+.cal-cell:hover{background:rgba(201,169,110,.07);border-color:rgba(201,169,110,.15)}
+.cal-cell.empty{background:none;border:none;cursor:default;pointer-events:none}
+.cal-cell.past{opacity:.3;pointer-events:none}
+.cal-cell.today{border-color:rgba(201,169,110,.35)}
+.cal-cell.selected{background:rgba(201,169,110,.1);border-color:var(--gold)}
+.day-num{font-size:.8rem;font-weight:400;color:rgba(255,255,255,.7);margin-bottom:4px}
+.cal-cell.today .day-num{color:var(--gold);font-weight:600}
+.cal-cell.selected .day-num{color:var(--gold-light);font-weight:600}
+.cell-blocks{display:flex;flex-direction:column;gap:2px;flex:1}
+.cell-block{height:4px;border-radius:2px;width:100%}
+.cell-avail-dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.15);margin-top:auto;align-self:flex-start}
+
+/* ── DETAIL PANEL ── */
+.detail-panel{margin-top:16px;background:rgba(255,255,255,.03);border:1px solid rgba(201,169,110,.18);border-radius:12px;padding:28px;animation:fadeIn .25s ease}
+.detail-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px}
+.detail-weekday{font-size:.62rem;color:var(--gold);letter-spacing:.14em;text-transform:uppercase;margin-bottom:5px}
+.detail-date{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:500}
+.close-btn{background:none;border:none;color:rgba(255,255,255,.3);font-size:1.1rem;cursor:pointer;padding:4px 8px;transition:color .2s;line-height:1}
+.close-btn:hover{color:#fff}
+
+/* ── SPACE ROWS ── */
+.space-rows{display:flex;flex-direction:column;gap:16px}
+.space-row{}
+.space-row-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.space-row-name{font-size:.78rem;font-weight:600;letter-spacing:.04em}
+.space-row-type{font-size:.62rem;color:var(--ash);letter-spacing:.06em;text-transform:uppercase}
+
+/* EVENT SPACE — simple available/booked card */
+.event-space-card{padding:14px 18px;border-radius:8px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.event-space-card.available{background:rgba(201,169,110,.07);border:1px solid rgba(201,169,110,.2)}
+.event-space-card.booked{background:rgba(192,57,43,.07);border:1px solid rgba(192,57,43,.2)}
+.event-space-status{font-size:.82rem;font-weight:500}
+.event-space-card.available .event-space-status{color:var(--gold-light)}
+.event-space-card.booked .event-space-status{color:#e74c3c}
+.event-space-note{font-size:.72rem;color:rgba(255,255,255,.35);margin-top:3px}
+.request-btn{background:var(--gold);color:var(--black);padding:9px 20px;border-radius:4px;font-size:.75rem;font-weight:700;letter-spacing:.05em;text-decoration:none;white-space:nowrap;transition:background .2s;font-family:'Outfit',sans-serif;border:none;cursor:pointer;display:inline-block}
+.request-btn:hover{background:var(--gold-dark)}
+.request-btn.ghost{background:none;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.5);font-weight:400}
+.request-btn.ghost:hover{border-color:var(--gold);color:var(--gold)}
+
+/* BOARDROOM / E9 — timeline view */
+.timeline{position:relative;background:rgba(255,255,255,.04);border-radius:6px;overflow:hidden;height:28px;margin-bottom:8px}
+.timeline-block{position:absolute;top:0;height:100%;border-radius:3px;display:flex;align-items:center;justify-content:center}
+.timeline-block.booked{background:var(--red);opacity:.85}
+.timeline-block.buffer{background:rgba(192,57,43,.35)}
+.timeline-block.available{background:rgba(201,169,110,.18);border:1px solid rgba(201,169,110,.25);cursor:pointer;transition:background .2s}
+.timeline-block.available:hover{background:rgba(201,169,110,.3)}
+.timeline-label{font-size:.55rem;font-weight:600;color:#fff;letter-spacing:.04em;white-space:nowrap;overflow:hidden;padding:0 4px;text-overflow:ellipsis}
+.timeline-label.dark{color:rgba(0,0,0,.7)}
+.time-markers{display:flex;justify-content:space-between;margin-bottom:12px}
+.time-marker{font-size:.6rem;color:rgba(255,255,255,.2);letter-spacing:.03em}
+.avail-slots{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.avail-slot{background:rgba(201,169,110,.1);border:1px solid rgba(201,169,110,.25);padding:6px 12px;border-radius:4px;font-size:.72rem;color:var(--gold-light);cursor:pointer;transition:all .2s;font-family:'Outfit',sans-serif}
+.avail-slot:hover{background:rgba(201,169,110,.2);border-color:var(--gold)}
+.avail-slot.selected-slot{background:rgba(201,169,110,.25);border-color:var(--gold)}
+.no-avail{font-size:.75rem;color:rgba(255,255,255,.3);padding:4px 0}
+
+/* ── REQUEST FORM ── */
+.request-panel{margin-top:20px;padding:20px;background:rgba(201,169,110,.06);border:1px solid rgba(201,169,110,.18);border-radius:8px;animation:fadeIn .2s ease}
+.request-panel h4{font-size:.88rem;font-weight:600;margin-bottom:14px;color:var(--gold-light)}
+.request-note{font-size:.78rem;color:rgba(255,255,255,.5);margin-bottom:16px;line-height:1.5}
+.request-summary{font-size:.78rem;color:#fff;margin-bottom:16px;padding:10px 14px;background:rgba(255,255,255,.04);border-radius:6px;line-height:1.7}
+.request-summary span{color:var(--gold)}
+
+/* ── LIST VIEW ── */
+.list-view{animation:fadeIn .25s ease}
+.list-empty{text-align:center;padding:60px 0;color:var(--ash);font-size:.88rem}
+.list-date-group{margin-bottom:28px}
+.list-date-heading{font-family:'Playfair Display',serif;font-size:1rem;font-weight:500;color:rgba(255,255,255,.5);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.06)}
+.list-space-row{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-radius:6px;margin-bottom:6px;flex-wrap:wrap;gap:8px}
+.list-space-row.booked-row{background:rgba(192,57,43,.07);border:1px solid rgba(192,57,43,.12)}
+.list-space-row.avail-row{background:rgba(201,169,110,.05);border:1px solid rgba(201,169,110,.12)}
+.list-space-name{font-size:.82rem;font-weight:500}
+.list-space-detail{font-size:.72rem;color:var(--ash);margin-top:2px}
+.list-status-booked{font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#e74c3c}
+.list-status-avail{font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gold)}
+
+/* ── LOADING / ERROR ── */
+.spinner-wrap{text-align:center;padding:80px 0}
+.spinner{display:inline-block;width:36px;height:36px;border:2px solid rgba(201,169,110,.15);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite}
+.spinner-text{font-size:.8rem;color:var(--ash);margin-top:14px}
+
+/* ── FOOTER ── */
+.cal-footer{margin-top:40px;padding-top:24px;border-top:1px solid rgba(255,255,255,.07);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.cal-footer p{font-size:.72rem;color:rgba(255,255,255,.3);line-height:1.6;max-width:520px}
+.cal-footer a{font-size:.75rem;color:var(--gold);font-weight:600;letter-spacing:.04em;text-decoration:none}
+.cal-footer a:hover{color:var(--gold-light)}
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+@media(max-width:768px){
+  .page-header .container,.filter-bar,.cal-wrap{padding-left:20px;padding-right:20px}
+  .legend{display:none}
+  .cal-cell{min-height:52px;padding:6px 4px}
+  .day-num{font-size:.7rem}
+  .space-status-grid{grid-template-columns:1fr 1fr}
+  .cal-nav{flex-direction:column;align-items:flex-start;gap:12px}
+}
+</style>
+<!-- Google Analytics -->
+<script>(function(){if(location.hostname!=='revelanceoh.com'&&location.hostname!=='www.revelanceoh.com')return;var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-V2N2YENTZE';document.head.appendChild(s);})();</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-V2N2YENTZE');</script>
+<!-- Microsoft Clarity -->
+<script type="text/javascript">if(location.hostname==='revelanceoh.com'||location.hostname==='www.revelanceoh.com')(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","vw2yag9k4k");</script>
+<script id="rev-gclid">(function(){var D=7776e6;function gc(n){var m=document.cookie.match("(?:^|; )"+n+"=([^;]*)");return m?decodeURIComponent(m[1]):"";}function sc(n,v){try{var d=new Date();d.setTime(d.getTime()+D);document.cookie=n+"="+encodeURIComponent(v)+";expires="+d.toUTCString()+";path=/;SameSite=Lax";}catch(e){}}window.revGetCookie=gc;function load(){try{var r=JSON.parse(localStorage.getItem("rev_attrib")||"null");if(r&&r.ts&&(Date.now()-r.ts)<D)return r;}catch(e){}return null;}function save(o){try{localStorage.setItem("rev_attrib",JSON.stringify(o));}catch(e){}}var q={};try{new URLSearchParams(location.search).forEach(function(v,k){q[k.toLowerCase()]=v;});}catch(e){}var KEYS=["gclid","wbraid","gbraid","utm_source","utm_medium","utm_campaign","utm_adgroup","utm_term","utm_matchtype","utm_content"];var st=load(),fresh=false;if(!st){st={ts:Date.now(),landing_page:location.pathname,first_seen:new Date().toISOString()};fresh=true;}var ch=false;KEYS.forEach(function(k){if(q[k]&&!st[k]){st[k]=q[k];ch=true;if(k==="gclid"&&!st.gclid_date){st.gclid_date=new Date().toISOString();}}});if(!st.gclid&&gc("rev_gclid")){st.gclid=gc("rev_gclid");st.gclid_date=st.gclid_date||gc("rev_gclid_date")||new Date().toISOString();ch=true;}if(!st.wbraid&&gc("rev_wbraid")){st.wbraid=gc("rev_wbraid");ch=true;}if(!st.gbraid&&gc("rev_gbraid")){st.gbraid=gc("rev_gbraid");ch=true;}if(fresh||ch){save(st);}if(st.gclid){sc("rev_gclid",st.gclid);sc("rev_gclid_date",st.gclid_date||"");}if(st.wbraid){sc("rev_wbraid",st.wbraid);}if(st.gbraid){sc("rev_gbraid",st.gbraid);}var ADGROUP_NAMES={"196591922094":"Day Pass / Flexible","196581950574":"Conquest – COhatch","198074154619":"Private Offices – Mason","203050376572":"Near Cincinnati","197142649639":"Coworking – Mason","196581950614":"Conquest – ORCA","198210445335":"Dedicated Desk","201528140041":"Work From Home Alternative"};var AD_NAMES={"814477549832":"Main Ad – Day Pass","814365112968":"Control Ad – COhatch","814416607430":"Main Ad – Coworking Mason","814360757272":"Main Ad – Private Offices","814479674384":"Main Ad – Near Cincinnati","815257525595":"Switcher Ad – COhatch","814365112971":"Control Ad – ORCA","814552654462":"Main Ad – WFH Alternative","814433717923":"Main Ad – Dedicated Desk","815183711266":"Switcher Ad – ORCA"};var MATCH={e:"exact",p:"phrase",b:"broad"};function mp(t,v){if(!v)return"";return t[v]||v;}window.revFillGclid=function(f){try{if(!f)return;var s=load()||st||{};function set(n,v){var i=f.querySelector('input[name="'+n+'"]');if(i)i.value=v||"";}set("gclid",s.gclid);set("gclid_date",s.gclid_date);var ads=!!(s.gclid||s.wbraid||s.gbraid)||((s.utm_source||"").toLowerCase()==="google"&&(s.utm_medium||"").toLowerCase()==="cpc");set("lead_source",ads?"Google Ads":"Direct / Organic");set("utm_campaign",s.utm_campaign);set("utm_adgroup",mp(ADGROUP_NAMES,s.utm_adgroup));set("utm_term",s.utm_term);set("utm_matchtype",mp(MATCH,(s.utm_matchtype||"").toLowerCase()));set("utm_content",mp(AD_NAMES,s.utm_content));set("landing_page",s.landing_page);}catch(e){}};})();</script></head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="../" class="nav-brand">
+      <img src="../images/logo-r-icon.png" class="nav-logo-icon" alt="R">
+      <span class="nav-logo-text">Revelance</span>
+    </a>
+    <a href="../plan-your-event/" class="nav-back">← Plan Your Event</a>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div id="main-content" class="page-header">
+  <div class="container">
+    <div>
+      <div class="header-label">— Mason, Ohio Private Business Club</div>
+      <h1 class="header-title">Reserve your <em>date</em></h1>
+      <p class="header-sub">Real-time availability across all Revelance spaces. Click any date to see what's open and request your booking.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SPACE FILTERS -->
+<div class="filter-bar" id="spaceFilters"></div>
+
+<!-- MAIN -->
+<div class="cal-wrap">
+  <div class="cal-nav">
+    <div class="month-nav">
+      <button class="nav-btn" onclick="prevMonth()">&#8249;</button>
+      <div class="month-title">
+        <div class="month-name" id="monthName"></div>
+        <div class="month-year" id="monthYear"></div>
+      </div>
+      <button class="nav-btn" onclick="nextMonth()">&#8250;</button>
+    </div>
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:var(--red)"></div>Booked</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--gold)"></div>Partially Available</div>
+      <div class="legend-item"><div class="legend-dot" style="background:rgba(255,255,255,.2)"></div>Available</div>
+    </div>
+    <div class="view-toggle">
+      <button class="view-btn active" id="btnMonth" onclick="setView('month')">Month</button>
+      <button class="view-btn" id="btnList" onclick="setView('list')">List</button>
+    </div>
+  </div>
+
+  <!-- MONTH VIEW -->
+  <div id="calendarView">
+    <div class="day-headers">
+      <div class="day-header">Sun</div><div class="day-header">Mon</div><div class="day-header">Tue</div>
+      <div class="day-header">Wed</div><div class="day-header">Thu</div><div class="day-header">Fri</div><div class="day-header">Sat</div>
+    </div>
+    <div id="calGrid"></div>
+    <div id="detailPanel"></div>
+  </div>
+
+  <!-- LIST VIEW -->
+  <div id="listView" style="display:none" class="list-view">
+    <div id="listContent"></div>
+  </div>
+
+  <div class="cal-footer">
+    <p>Availability updates in real time from our booking system. Buffer time for setup and cleanup is included. Contact us with any questions about a specific date.</p>
+    <a href="../plan-your-event/">Plan your event →</a>
+  </div>
+</div>
+
+<script>
+// ── CONFIG ──────────────────────────────────────────────────────────────────
+// API key handled server-side via Netlify function
+
+// ── DATE HELPER — timezone-safe constructor ───────────────────────────────
+// Avoids ambiguous string parsing: new Date("YYYY-MM-DDThh:mm:ss") without
+// a timezone suffix is implementation-defined in older environments.
+function mkDt(dateStr, h, m, s) {
+  var p = dateStr.split('-');
+  return new Date(+p[0], +p[1]-1, +p[2], h||0, m||0, s||0);
+}
+
+const CALENDARS = [
+  { id: 'c_5f57a9d1e93c225ee476613b3099647fa6bf28535cde4377628df1f9761f8eb0@group.calendar.google.com', name: 'C-Suite Lounge', source: 'direct' },
+  { id: 'c_a425d9b651911bfa8fafc5f1f235fdad9a67b4a4f300184340eae910c9315bfa@group.calendar.google.com', name: 'Cornerstone Boardroom', source: 'direct' },
+  { id: 'c_320e76443a6415ea4da77e21572498307677573577613342a2238cb06ba5d483@group.calendar.google.com', name: 'Revel Room', source: 'direct' },
+  { id: 'c_9101c989a5a3bd79a6e9c56d2188cafc3b088ec6d39a068986812f550ac07402@group.calendar.google.com', name: 'Foundation Boardroom', source: 'direct' },
+  { id: 'c_b35fff1daeff1aed45da45df0b249f34eac536763f5860cf19436001175c0f73@group.calendar.google.com', name: 'E9', source: 'direct' },
+  { id: 'c_46dbc58c26916e1b4ce1002317da13f95996c6fb0393879539901bf95d4da676@group.calendar.google.com', name: 'Horizon Boardroom', source: 'direct' },
+  { id: 'c_0df68281f751a260eca56839dc0bd223349755820973f722ccc525ed3bdf7d00@group.calendar.google.com', name: 'Overlook Boardroom', source: 'direct' },
+  { id: 'c_c86970c4824e467f90166f55bd0d5d4befc34fd6f8eb8bf96fbb4bed2f57b219@group.calendar.google.com', name: 'Taproom', source: 'direct' },
+  { id: 'c_73fe1d63640d4aa7f1052023f25c5fc8e204f83914b17bc72e35ecd9f3e5c2db@group.calendar.google.com', name: 'Perfect Venue', source: 'perfectvenue' },
+];
+
+// Space configuration
+const SPACE_CONFIG = {
+  'Revel Room':            { type: 'event',     buffer: 45, minHours: 2 },
+  'Taproom':              { type: 'event',     buffer: 45, minHours: 2 },
+  'C-Suite Lounge':        { type: 'bookable',  buffer: 15, minHours: 1 },
+  'E9':                    { type: 'bookable',  buffer: 15, minHours: 1 },
+  'Cornerstone Boardroom': { type: 'bookable',  buffer: 15, minHours: 1 },
+  'Foundation Boardroom':  { type: 'bookable',  buffer: 15, minHours: 1 },
+  'Horizon Boardroom':     { type: 'bookable',  buffer: 15, minHours: 1 },
+  'Overlook Boardroom':    { type: 'bookable',  buffer: 15, minHours: 1 },
+};
+
+const ALL_SPACES = Object.keys(SPACE_CONFIG);
+const EVENT_SPACES = ALL_SPACES.filter(s => SPACE_CONFIG[s].type === 'event');
+const BOOKABLE_SPACES = ALL_SPACES.filter(s => SPACE_CONFIG[s].type === 'bookable');
+
+const OPEN_HOUR = 8;   // 8am
+const CLOSE_HOUR = 23; // 11pm
+const TOTAL_MINS = (CLOSE_HOUR - OPEN_HOUR) * 60;
+
+const SPACE_FILTERS = ['All Spaces', ...ALL_SPACES];
+
+// Name aliases for Perfect Venue description parsing
+const SPACE_ALIASES = {
+  'revel room': 'Revel Room',
+  'e9 design simulator': 'E9', 'e9': 'E9', 'emergency 9': 'E9',
+  'taproom/sonder': 'Taproom', 'taproom/sonder': 'Taproom',
+  'taproom': 'Taproom', 'taproom': 'Taproom',
+  'c-suite lounge': 'C-Suite Lounge', 'c-suite': 'C-Suite Lounge',
+  'c suite': 'C-Suite Lounge', 'csuite': 'C-Suite Lounge',
+  'cornerstone boardroom': 'Cornerstone Boardroom', 'cornerstone': 'Cornerstone Boardroom',
+  'foundation boardroom': 'Foundation Boardroom', 'foundation': 'Foundation Boardroom',
+  'horizon boardroom': 'Horizon Boardroom', 'horizon': 'Horizon Boardroom',
+  'overlook boardroom': 'Overlook Boardroom', 'overlook': 'Overlook Boardroom',
+};
+
+const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+// ── STATE ───────────────────────────────────────────────────────────────────
+const today = new Date();
+let curYear = today.getFullYear();
+let curMonth = today.getMonth();
+let selectedSpace = 'All Spaces';
+let selectedDate = null;
+let selectedSlot = null; // { space, startMin, endMin }
+let curView = 'month';
+let isLoading = false;
+
+// spaceEvents[spaceName] = [ {startMs, endMs} ]
+let spaceEvents = {};
+let loadedRange = { year: null, month: null };
+
+// ── HELPERS ─────────────────────────────────────────────────────────────────
+function ds(y, m, d) {
+  return `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+}
+function todayStr() {
+  return ds(today.getFullYear(), today.getMonth(), today.getDate());
+}
+function minToTime(min) {
+  const h = Math.floor(min / 60) + OPEN_HOUR;
+  const m = min % 60;
+  const ampm = h >= 12 ? 'pm' : 'am';
+  const h12 = h > 12 ? h - 12 : h === 0 ? 12 : h;
+  return m === 0 ? `${h12}${ampm}` : `${h12}:${String(m).padStart(2,'0')}${ampm}`;
+}
+function pct(min) { return (min / TOTAL_MINS * 100).toFixed(2) + '%'; }
+
+function resolveSpaceName(raw) {
+  const key = raw.toLowerCase().trim();
+  if (SPACE_ALIASES[key]) return SPACE_ALIASES[key];
+  for (const [alias, name] of Object.entries(SPACE_ALIASES)) {
+    if (key.includes(alias) || alias.includes(key)) return name;
+  }
+  return null;
+}
+
+function parseSpacesFromDesc(desc) {
+  if (!desc) return [];
+  const match = desc.match(/(?:spaces?|rooms?|location)\s*:\s*([^\n\r]+)/i);
+  if (!match) return [];
+  return match[1].split(',').map(p => resolveSpaceName(p.trim())).filter(Boolean);
+}
+
+// ── DATA LOADING ─────────────────────────────────────────────────────────────
+function addEvent(spaceName, startMs, endMs) {
+  if (!SPACE_CONFIG[spaceName]) return;
+  if (!spaceEvents[spaceName]) spaceEvents[spaceName] = [];
+  spaceEvents[spaceName].push({ startMs, endMs });
+}
+
+function processEvents(events, calName, source) {
+  events.forEach(ev => {
+    if (source === 'perfectvenue') {
+      if (!(ev.summary || '').toLowerCase().includes('(confirmed)')) return;
+      const spaces = parseSpacesFromDesc(ev.description || '');
+      if (!spaces.length) return;
+      const startMs = ev.start.dateTime ? new Date(ev.start.dateTime).getTime() : mkDt(ev.start.date, 8).getTime();
+      const endMs   = ev.end.dateTime   ? new Date(ev.end.dateTime).getTime()   : mkDt(ev.end.date, 23).getTime();
+      spaces.forEach(s => addEvent(s, startMs, endMs));
+    } else {
+      const startMs = ev.start.dateTime ? new Date(ev.start.dateTime).getTime() : mkDt(ev.start.date, 8).getTime();
+      const endMs   = ev.end.dateTime   ? new Date(ev.end.dateTime).getTime()   : mkDt(ev.end.date, 23).getTime();
+      addEvent(calName, startMs, endMs);
+    }
+  });
+}
+
+async function fetchAllCals(timeMin, timeMax) {
+  const url = '/.netlify/functions/calendar?timeMin='+encodeURIComponent(timeMin)+'&timeMax='+encodeURIComponent(timeMax);
+  try {
+    const res = await fetch(url);
+    if (!res.ok) { console.warn('Calendar function failed:', res.status); return; }
+    const data = await res.json();
+    (data.calendars||[]).forEach(cal => {
+      if (cal.events && cal.events.length > 0) {
+        processEvents(cal.events, cal.name, cal.src);
+        console.log('Loaded:', cal.name, cal.events.length, 'events');
+      }
+    });
+  } catch(e) { console.warn('Calendar function error:', e); }
+}
+
+async function loadMonth(year, month) {
+  if (loadedRange.year === year && loadedRange.month === month) return;
+  isLoading = true;
+  spaceEvents = {};
+  render();
+  const timeMin = new Date(year, month, 1).toISOString();
+  const timeMax = new Date(year, month + 1, 1).toISOString();
+  await fetchAllCals(timeMin, timeMax);
+  loadedRange = { year, month };
+  isLoading = false;
+  render();
+}
+
+// ── AVAILABILITY LOGIC ───────────────────────────────────────────────────────
+// Get booked blocks for a space on a given date, with buffer applied
+// Returns array of {startMin, endMin, type:'booked'|'buffer'}
+function getBlocksForSpaceDate(spaceName, dateStr) {
+  const events = spaceEvents[spaceName] || [];
+  const cfg = SPACE_CONFIG[spaceName];
+  const buf = cfg ? cfg.buffer : 15;
+
+  const dayStart = mkDt(dateStr, 0).getTime();
+  const dayEnd   = mkDt(dateStr, 23, 59, 59).getTime();
+
+  const blocks = [];
+  events.forEach(ev => {
+    if (ev.endMs < dayStart || ev.startMs > dayEnd) return;
+    // Clamp to day
+    const evStart = Math.max(ev.startMs, dayStart);
+    const evEnd   = Math.min(ev.endMs, dayEnd);
+    // Convert to minutes from OPEN_HOUR
+    const startMin = Math.max(0, Math.round((evStart - dayStart) / 60000) - OPEN_HOUR * 60);
+    const endMin   = Math.min(TOTAL_MINS, Math.round((evEnd - dayStart) / 60000) - OPEN_HOUR * 60);
+    if (endMin <= 0 || startMin >= TOTAL_MINS) return;
+    // Buffer
+    const bufStart = Math.max(0, startMin - buf);
+    const bufEnd   = Math.min(TOTAL_MINS, endMin + buf);
+    blocks.push({ startMin: bufStart, endMin: bufEnd, bookedStart: startMin, bookedEnd: endMin });
+  });
+
+  // Sort and merge overlapping
+  blocks.sort((a, b) => a.startMin - b.startMin);
+  const merged = [];
+  blocks.forEach(b => {
+    if (merged.length && b.startMin <= merged[merged.length-1].endMin) {
+      merged[merged.length-1].endMin = Math.max(merged[merged.length-1].endMin, b.endMin);
+      merged[merged.length-1].bookedEnd = Math.max(merged[merged.length-1].bookedEnd, b.bookedEnd);
+    } else {
+      merged.push({...b});
+    }
+  });
+  return merged;
+}
+
+// Get available slots for bookable spaces
+function getAvailSlots(spaceName, dateStr) {
+  const cfg = SPACE_CONFIG[spaceName];
+  const minMins = (cfg ? cfg.minHours : 1) * 60;
+  const blocks = getBlocksForSpaceDate(spaceName, dateStr);
+  const slots = [];
+  let cursor = 0;
+  blocks.forEach(b => {
+    if (b.startMin - cursor >= minMins) slots.push({ startMin: cursor, endMin: b.startMin });
+    cursor = b.endMin;
+  });
+  if (TOTAL_MINS - cursor >= minMins) slots.push({ startMin: cursor, endMin: TOTAL_MINS });
+  return slots;
+}
+
+// Is a space fully booked on a date (no usable slots)?
+function isSpaceBooked(spaceName, dateStr) {
+  if (SPACE_CONFIG[spaceName]?.type === 'event') {
+    const blocks = getBlocksForSpaceDate(spaceName, dateStr);
+    return blocks.some(b => b.startMin === 0 && b.endMin === TOTAL_MINS) ||
+           (blocks.length > 0 && blocks.reduce((acc,b) => acc + (b.endMin - b.startMin), 0) >= TOTAL_MINS * 0.6);
+  }
+  return getAvailSlots(spaceName, dateStr).length === 0;
+}
+
+function isSpacePartial(spaceName, dateStr) {
+  const blocks = getBlocksForSpaceDate(spaceName, dateStr);
+  return blocks.length > 0 && !isSpaceBooked(spaceName, dateStr);
+}
+
+// ── RENDER CALENDAR ──────────────────────────────────────────────────────────
+function renderGrid() {
+  document.getElementById('monthName').textContent = MONTHS[curMonth];
+  document.getElementById('monthYear').textContent = curYear;
+
+  if (isLoading) {
+    document.getElementById('calGrid').innerHTML = `
+      <div style="grid-column:1/-1;padding:80px 0;text-align:center">
+        <div class="spinner"></div>
+        <div class="spinner-text">Loading availability...</div>
+      </div>`;
+    document.getElementById('detailPanel').innerHTML = '';
+    return;
+  }
+
+  const daysInMonth = new Date(curYear, curMonth + 1, 0).getDate();
+  const firstDay = new Date(curYear, curMonth, 1).getDay();
+  const tStr = todayStr();
+
+  let html = '';
+  for (let i = 0; i < firstDay; i++) html += '<div class="cal-cell empty"></div>';
+
+  for (let d = 1; d <= daysInMonth; d++) {
+    const dStr = ds(curYear, curMonth, d);
+    const isPast = dStr < tStr;
+    const isT = dStr === tStr;
+    const isSel = dStr === selectedDate;
+
+    // Determine which spaces to check
+    const spacesToCheck = selectedSpace === 'All Spaces' ? ALL_SPACES : [selectedSpace];
+    const bookedSpaces = spacesToCheck.filter(s => isSpaceBooked(s, dStr));
+    const partialSpaces = spacesToCheck.filter(s => !isSpaceBooked(s,dStr) && isSpacePartial(s,dStr));
+
+    let dotColor;
+    if (bookedSpaces.length === spacesToCheck.length) dotColor = 'var(--red)';
+    else if (bookedSpaces.length > 0 || partialSpaces.length > 0) dotColor = 'var(--gold)';
+    else dotColor = 'rgba(255,255,255,.15)';
+
+    // Small booking bars for visual density
+    let barsHtml = '';
+    if (!isPast && bookedSpaces.length > 0) {
+      barsHtml = `<div class="cell-blocks">` +
+        bookedSpaces.slice(0,3).map(() => `<div class="cell-block" style="background:var(--red);opacity:.5"></div>`).join('') +
+      `</div>`;
+    }
+
+    let cls = 'cal-cell';
+    if (isPast) cls += ' past';
+    if (isT) cls += ' today';
+    if (isSel) cls += ' selected';
+
+    html += `<div class="${cls}" onclick="selectDate('${dStr}')">
+      <div class="day-num">${d}</div>
+      ${barsHtml}
+      <div class="cell-avail-dot" style="background:${dotColor}"></div>
+    </div>`;
+  }
+
+  document.getElementById('calGrid').innerHTML = `<div class="cal-grid">${html}</div>`;
+  renderDetailPanel();
+}
+
+function renderDetailPanel() {
+  const panel = document.getElementById('detailPanel');
+  if (!selectedDate) { panel.innerHTML = ''; return; }
+
+  const dObj = mkDt(selectedDate, 12);
+  const weekday = dObj.toLocaleDateString('en-US', { weekday: 'long' });
+  const fullDate = dObj.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+
+  const spacesToShow = selectedSpace === 'All Spaces' ? ALL_SPACES : [selectedSpace];
+
+  let rowsHtml = spacesToShow.map(space => {
+    const cfg = SPACE_CONFIG[space];
+    const booked = isSpaceBooked(space, selectedDate);
+    const partial = isSpacePartial(space, selectedDate);
+
+    if (cfg.type === 'event') {
+      // Simple card for event spaces
+      const status = booked ? 'booked' : 'available';
+      const statusText = booked ? '✗ Unavailable' : '✓ Available';
+      const note = booked ? 'This space is fully booked on this date' : `2-hour minimum · Bartender included`;
+      const btn = booked
+        ? `<a class="request-btn ghost" href="../plan-your-event/">See Other Dates</a>`
+        : `<button class="request-btn" onclick="requestSpace('${space}', '${fullDate}', null)">Request This Date →</button>`;
+      return `<div class="space-row">
+        <div class="space-row-header">
+          <div class="space-row-name">${space}</div>
+          <div class="space-row-type">Event Space</div>
+        </div>
+        <div class="event-space-card ${status}">
+          <div><div class="event-space-status">${statusText}</div><div class="event-space-note">${note}</div></div>
+          ${btn}
+        </div>
+      </div>`;
+    } else {
+      // Timeline for bookable spaces
+      const blocks = getBlocksForSpaceDate(space, selectedDate);
+      const slots = getAvailSlots(space, selectedDate);
+
+      // Build timeline HTML
+      let timelineHtml = `<div class="timeline">`;
+      // Available background
+      timelineHtml += `<div class="timeline-block available" style="left:0;width:100%"></div>`;
+      // Booked + buffer blocks
+      blocks.forEach(b => {
+        const l = pct(b.startMin);
+        const w = pct(b.endMin - b.startMin);
+        timelineHtml += `<div class="timeline-block booked" style="left:${l};width:${w}">
+          <span class="timeline-label">Booked</span>
+        </div>`;
+      });
+      timelineHtml += `</div>`;
+
+      // Time markers
+      const markers = [0, TOTAL_MINS * 0.25, TOTAL_MINS * 0.5, TOTAL_MINS * 0.75, TOTAL_MINS].map(m => minToTime(Math.round(m)));
+      const markersHtml = `<div class="time-markers">${markers.map(t => `<span class="time-marker">${t}</span>`).join('')}</div>`;
+
+      // Available slots
+      let slotsHtml = '';
+      if (slots.length === 0) {
+        slotsHtml = `<div class="no-avail">No availability on this date</div>`;
+      } else {
+        slotsHtml = `<div class="avail-slots">` +
+          slots.map(s => {
+            const id = `${space}|${s.startMin}|${s.endMin}`;
+            const isSelSlot = selectedSlot && selectedSlot.space === space && selectedSlot.startMin === s.startMin;
+            return `<button class="avail-slot${isSelSlot?' selected-slot':''}" onclick="selectSlot('${space}','${fullDate}',${s.startMin},${s.endMin})">
+              ${minToTime(s.startMin)} – ${minToTime(s.endMin)}
+            </button>`;
+          }).join('') +
+        `</div>`;
+      }
+
+      const label = booked ? 'Fully Booked' : partial ? 'Partially Available' : 'Available';
+      const labelColor = booked ? '#e74c3c' : partial ? 'var(--gold)' : 'rgba(255,255,255,.4)';
+
+      return `<div class="space-row">
+        <div class="space-row-header">
+          <div class="space-row-name">${space}</div>
+          <div class="space-row-type" style="color:${labelColor}">${label}</div>
+        </div>
+        ${timelineHtml}
+        ${markersHtml}
+        ${slotsHtml}
+      </div>`;
+    }
+  }).join('<hr style="border:none;border-top:1px solid rgba(255,255,255,.06);margin:8px 0">');
+
+  // Request panel
+  let requestHtml = '';
+  if (selectedSlot) {
+    const timeStr = `${minToTime(selectedSlot.startMin)} – ${minToTime(selectedSlot.endMin)}`;
+    requestHtml = `<div class="request-panel">
+      <h4>Request This Time Slot</h4>
+      <div class="request-summary">
+        <span>Space:</span> ${selectedSlot.space}<br>
+        <span>Date:</span> ${fullDate}<br>
+        <span>Time:</span> ${timeStr}
+      </div>
+      <p class="request-note">Click below to send us your request. We'll confirm availability and follow up within 24 hours.</p>
+      <a class="request-btn" href="../?interest=Boardroom+Rental&date=${encodeURIComponent(fullDate)}&space=${encodeURIComponent(selectedSlot.space)}&time=${encodeURIComponent(timeStr)}#contact">
+        Send Request →
+      </a>
+    </div>`;
+  }
+
+  panel.innerHTML = `<div class="detail-panel">
+    <div class="detail-top">
+      <div>
+        <div class="detail-weekday">${weekday}</div>
+        <div class="detail-date">${fullDate}</div>
+      </div>
+      <button class="close-btn" onclick="closeDetail()">✕</button>
+    </div>
+    <div class="space-rows">${rowsHtml}</div>
+    ${requestHtml}
+  </div>`;
+}
+
+// ── LIST VIEW ────────────────────────────────────────────────────────────────
+function renderList() {
+  document.getElementById('monthName').textContent = MONTHS[curMonth];
+  document.getElementById('monthYear').textContent = curYear;
+
+  if (isLoading) {
+    document.getElementById('listContent').innerHTML = `<div class="list-empty"><div class="spinner"></div></div>`;
+    return;
+  }
+
+  const daysInMonth = new Date(curYear, curMonth + 1, 0).getDate();
+  const tStr = todayStr();
+  const spacesToCheck = selectedSpace === 'All Spaces' ? ALL_SPACES : [selectedSpace];
+  let html = '';
+
+  for (let d = 1; d <= daysInMonth; d++) {
+    const dStr = ds(curYear, curMonth, d);
+    if (dStr < tStr) continue;
+    const dObj = mkDt(dStr, 12);
+    const bookedSpaces = spacesToCheck.filter(s => isSpaceBooked(s, dStr));
+    const partialSpaces = spacesToCheck.filter(s => !isSpaceBooked(s,dStr) && isSpacePartial(s,dStr));
+    if (bookedSpaces.length === 0 && partialSpaces.length === 0) continue;
+
+    const heading = dObj.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+    let rowsHtml = '';
+
+    bookedSpaces.forEach(s => {
+      rowsHtml += `<div class="list-space-row booked-row">
+        <div><div class="list-space-name">${s}</div><div class="list-space-detail">Fully booked</div></div>
+        <div class="list-status-booked">Unavailable</div>
+      </div>`;
+    });
+    partialSpaces.forEach(s => {
+      const slots = getAvailSlots(s, dStr);
+      const slotStr = slots.map(sl => `${minToTime(sl.startMin)}–${minToTime(sl.endMin)}`).join(', ');
+      rowsHtml += `<div class="list-space-row avail-row">
+        <div><div class="list-space-name">${s}</div><div class="list-space-detail">${slotStr}</div></div>
+        <div class="list-status-avail">Open Slots</div>
+      </div>`;
+    });
+
+    html += `<div class="list-date-group">
+      <div class="list-date-heading">${heading}</div>
+      ${rowsHtml}
+    </div>`;
+  }
+
+  document.getElementById('listContent').innerHTML = html || `<div class="list-empty">No bookings this month${selectedSpace !== 'All Spaces' ? ' for ' + selectedSpace : ''}</div>`;
+}
+
+// ── ACTIONS ──────────────────────────────────────────────────────────────────
+function selectDate(d) {
+  selectedDate = selectedDate === d ? null : d;
+  selectedSlot = null;
+  renderGrid();
+}
+
+function closeDetail() {
+  selectedDate = null;
+  selectedSlot = null;
+  renderGrid();
+}
+
+function selectSlot(space, dateStr, startMin, endMin) {
+  if (selectedSlot && selectedSlot.space === space && selectedSlot.startMin === startMin) {
+    selectedSlot = null;
+  } else {
+    selectedSlot = { space, dateStr, startMin, endMin };
+  }
+  renderDetailPanel();
+}
+
+function requestSpace(space, dateStr, timeStr) {
+  const url = `../?interest=Event+Space+Rental&space=${encodeURIComponent(space)}&date=${encodeURIComponent(dateStr)}#contact`;
+  window.location.href = url;
+}
+
+function setSpace(s) {
+  selectedSpace = s;
+  selectedDate = null;
+  selectedSlot = null;
+  buildFilters();
+  render();
+}
+
+function prevMonth() {
+  if (curMonth === 0) { curMonth = 11; curYear--; } else curMonth--;
+  selectedDate = null; selectedSlot = null;
+  loadMonth(curYear, curMonth);
+}
+
+function nextMonth() {
+  if (curMonth === 11) { curMonth = 0; curYear++; } else curMonth++;
+  selectedDate = null; selectedSlot = null;
+  loadMonth(curYear, curMonth);
+}
+
+function setView(v) {
+  curView = v;
+  document.getElementById('calendarView').style.display = v === 'month' ? 'block' : 'none';
+  document.getElementById('listView').style.display = v === 'list' ? 'block' : 'none';
+  document.getElementById('btnMonth').classList.toggle('active', v === 'month');
+  document.getElementById('btnList').classList.toggle('active', v === 'list');
+  render();
+}
+
+function render() {
+  if (curView === 'month') renderGrid();
+  else renderList();
+}
+
+function buildFilters() {
+  document.getElementById('spaceFilters').innerHTML = SPACE_FILTERS.map(s =>
+    `<button class="space-btn${s === selectedSpace ? ' active' : ''}" onclick="setSpace(${JSON.stringify(s)})">${s}</button>`
+  ).join('');
+}
+
+// ── INIT ─────────────────────────────────────────────────────────────────────
+buildFilters();
+loadMonth(curYear, curMonth);
+</script>
+</body>
+</html>

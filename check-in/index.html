@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Check In | Revelance</title>
+<meta name="description" content="Welcome to Revelance — complete your check-in.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://revelanceoh.com/check-in/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Check In | Revelance">
+<meta property="og:description" content="Welcome to Revelance — complete your check-in.">
+<meta property="og:url" content="https://revelanceoh.com/check-in/">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Outfit:wght@300;400;500;600;700&display=swap"></noscript>
+<style>
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--gold-dark);outline-offset:2px}
+.skip-link{position:absolute;left:-9999px;top:0;z-index:2000;background:var(--gold);color:var(--black);padding:10px 18px;font-weight:700;border-radius:0 0 6px 0;text-decoration:none}.skip-link:focus{left:0}
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--gold:#C9A96E;--gold-light:#D4BA85;--gold-dark:#B08C4A;--charcoal:#151A20;--black:#0B0E11;--pearl:#F4F5F6;--ash:#5A6572;--cloud:#E8EAED;--graphite:#3A4450}
+html{font-size:16px;background:var(--black);-webkit-font-smoothing:antialiased}
+body{font-family:'Outfit',sans-serif;color:#fff;min-height:100vh;display:flex;flex-direction:column}
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:14px 0;background:rgba(11,14,17,.96);backdrop-filter:blur(16px);border-bottom:1px solid rgba(201,169,110,.1)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between}
+.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-logo-icon{height:32px;width:32px}
+.nav-logo-text{color:#fff;font-size:14px;font-weight:300;letter-spacing:.28em;text-transform:uppercase}
+.nav-back{font-size:.78rem;color:rgba(255,255,255,.5);text-decoration:none;letter-spacing:.05em}
+.nav-back:hover{color:var(--gold)}
+main{flex:1;display:flex;align-items:flex-start;justify-content:center;padding:96px 16px 40px}
+.card{width:100%;max-width:480px;background:var(--charcoal);border:1px solid rgba(201,169,110,.18);border-top:4px solid var(--gold);border-radius:12px;padding:30px 24px 26px}
+.card .label{font-size:.62rem;font-weight:700;letter-spacing:.22em;color:var(--gold);text-transform:uppercase;margin-bottom:8px}
+.card h1{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:500;line-height:1.15;margin-bottom:8px}
+.card h1 em{color:var(--gold-light);font-style:italic}
+.card .sub{font-size:.86rem;color:rgba(255,255,255,.5);line-height:1.6;margin-bottom:20px}
+form input,form select{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:8px;color:#fff;padding:12px 14px;font-family:'Outfit',sans-serif;font-size:16px;margin-bottom:12px;transition:border-color .2s}
+form input::placeholder{color:rgba(255,255,255,.35)}
+form select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C9A96E' stroke-width='2' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+form select:invalid{color:rgba(255,255,255,.35)}
+form select option{color:#0B0E11;background:#fff}
+form input:focus,form select:focus{border-color:var(--gold);outline:none}
+.req-note{font-size:.72rem;color:rgba(255,255,255,.35);margin:-4px 0 14px}
+.vt-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.vt{position:relative}
+.vt input{position:absolute;opacity:0;pointer-events:none;width:auto;margin:0;padding:0}
+.vt label{display:block;text-align:center;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:8px;padding:12px 8px;cursor:pointer;font-size:.84rem;font-weight:600;transition:border-color .2s,background .2s}
+.vt input:checked+label{border-color:var(--gold);background:rgba(201,169,110,.12)}
+.vt input:focus-visible+label{outline:2px solid var(--gold-dark);outline-offset:2px}
+.btn{display:inline-block;width:100%;text-align:center;background:var(--gold);color:var(--black);font-weight:700;font-size:1rem;padding:14px 20px;border:none;border-radius:8px;cursor:pointer;font-family:'Outfit',sans-serif;letter-spacing:.02em;transition:background .2s}
+.btn:hover{background:var(--gold-light)}
+.fail{display:none;background:rgba(192,57,43,.15);border-left:3px solid #c0392b;padding:12px 14px;border-radius:6px;font-size:.82rem;line-height:1.6;margin-top:12px}
+.fail a{color:var(--gold-light)}
+#done{display:none;text-align:center;padding:14px 0 6px}
+#done .check{width:64px;height:64px;border-radius:50%;background:rgba(201,169,110,.15);border:2px solid var(--gold);color:var(--gold);font-size:2rem;line-height:60px;margin:0 auto 16px}
+#done h2{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:500;margin-bottom:8px}
+#done p{font-size:.88rem;color:rgba(255,255,255,.55);line-height:1.7}
+footer{padding:18px 16px;text-align:center;font-size:.72rem;color:rgba(255,255,255,.35)}
+@media(max-width:768px){input:not([type=checkbox]):not([type=radio]),select,textarea{font-size:16px}}
+</style>
+<script>(function(){if(location.hostname!=='revelanceoh.com'&&location.hostname!=='www.revelanceoh.com')return;var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-V2N2YENTZE';document.head.appendChild(s);})();</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-V2N2YENTZE');</script>
+<script type="text/javascript">if(location.hostname==='revelanceoh.com'||location.hostname==='www.revelanceoh.com')(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","vw2yag9k4k");</script>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="../" class="nav-brand">
+      <img src="../images/logo-r-icon.png" class="nav-logo-icon" alt="R">
+      <span class="nav-logo-text">Revelance</span>
+    </a>
+    <a href="../" class="nav-back">revelanceoh.com</a>
+  </div>
+</nav>
+<main id="main-content">
+  <div class="card">
+    <div id="formWrap">
+      <div class="label">— Welcome to Revelance</div>
+      <h1>Let&#8217;s get you <em>checked in</em></h1>
+      <p class="sub">Thirty seconds and you&#8217;re done &mdash; then grab a RoboJo coffee and make yourself at home.</p>
+      <div class="vt-grid" role="radiogroup" aria-label="What brings you in today?">
+        <div class="vt"><input type="radio" name="vt-ui" value="Day Pass" id="vtWork" checked><label for="vtWork">I&#8217;m here to work</label></div>
+        <div class="vt"><input type="radio" name="vt-ui" value="Guest" id="vtGuest"><label for="vtGuest">I&#8217;m meeting with someone</label></div>
+      </div>
+      <div id="lookupWrap" style="display:none;background:rgba(201,169,110,.08);border:1px solid rgba(201,169,110,.25);border-radius:10px;padding:16px 14px;margin-bottom:18px">
+        <p style="font-size:.82rem;font-weight:600;color:var(--gold-light);margin-bottom:10px">Signed up online? Pull up your pass:</p>
+        <input type="text" id="lookupQ" placeholder="Your email or pass code" aria-label="Your email or pass code" style="margin-bottom:10px" autocomplete="email">
+        <button type="button" class="btn" id="lookupBtn" style="font-size:.9rem;padding:11px 16px">Find My Pass</button>
+        <p id="lookupMsg" style="display:none;font-size:.78rem;margin-top:10px;line-height:1.5"></p>
+      </div>
+      <form name="check-in" id="checkInForm" method="POST" data-netlify="true">
+        <input type="hidden" name="form-name" value="check-in">
+        <input type="hidden" name="inquiry-type" value="&#127970; Front Desk Check-In">
+        <input type="hidden" name="visitor-type" id="vtField" value="Day Pass">
+        <input type="text" name="name" placeholder="Full name" required aria-label="Full name" autocomplete="name">
+        <input type="email" name="email" placeholder="Email address" required aria-label="Email address" autocomplete="email">
+        <input type="tel" name="phone" placeholder="Phone number" required aria-label="Phone number" autocomplete="tel">
+        <input type="text" name="mailing-address" placeholder="Mailing address" required aria-label="Mailing address" autocomplete="street-address">
+        <input type="text" name="company" id="ciCompany" placeholder="Company (optional)" aria-label="Company (optional)" autocomplete="organization">
+        <input type="text" name="meeting-with" id="ciMeetingWith" placeholder="Who are you meeting with? *" aria-label="Who are you meeting with?" style="display:none">
+        <select name="membership-interest" id="ciInterest" required aria-label="What are you most curious about?">
+          <option value="" disabled selected>What are you most curious about?</option>
+          <option>Just exploring today</option>
+          <option>Day Pass ($29/day)</option>
+          <option>Co-Revel Membership ($179/mo)</option>
+          <option>Dedicated Desk ($449/mo)</option>
+          <option>Executive Office ($1,599/mo)</option>
+          <option>Corporate Account (for teams)</option>
+        </select>
+        <input type="hidden" name="pass-code" id="ciPassCode" value="">
+        <p class="req-note">All fields required except company.</p>
+        <button type="submit" class="btn" id="checkInBtn">Check Me In &rarr;</button>
+        <div class="fail" id="failNote"><strong>Hmm, that didn&#8217;t go through.</strong> Please show this screen to the front desk, or call <a href="tel:5137945070">513-794-5070</a>.</div>
+      </form>
+    </div>
+    <div id="done">
+      <div class="check">&#10003;</div>
+      <h2>You&#8217;re all set&#33;</h2>
+      <p>Welcome to the club. Grab a coffee, find a seat you like, and flag down any team member if you need anything at all.</p>
+      <p id="doneNudge" style="margin-top:12px;color:var(--gold-light);font-size:.88rem;line-height:1.7"></p>
+    </div>
+  </div>
+</main>
+<footer>&copy; <span id="fy">2026</span> Revelance &middot; 8460 Duke Blvd, Mason, OH 45040</footer>
+<script>
+(function(){var e=document.getElementById("fy");if(e)e.textContent=new Date().getFullYear();})();
+// ── Visitor-type fork: working vs. meeting a member ──────────────────────
+(function(){
+  var form = document.getElementById('checkInForm');
+  function applyMode(){
+    var guest = document.getElementById('vtGuest').checked;
+    document.getElementById('vtField').value = guest ? 'Guest' : 'Day Pass';
+    var phone = form.elements.phone, addr = form.elements['mailing-address'],
+        comp = document.getElementById('ciCompany'), mw = document.getElementById('ciMeetingWith'),
+        sel = document.getElementById('ciInterest');
+    addr.style.display = guest ? 'none' : ''; addr.required = !guest;
+    sel.style.display = guest ? 'none' : ''; sel.required = !guest;
+    if (guest) sel.value = '';
+    mw.style.display = guest ? '' : 'none'; mw.required = guest;
+    phone.required = !guest;
+    phone.placeholder = guest ? 'Phone number (optional)' : 'Phone number';
+    phone.setAttribute('aria-label', guest ? 'Phone number (optional)' : 'Phone number');
+    comp.required = guest;
+    comp.placeholder = guest ? 'Company *' : 'Company (optional)';
+    comp.setAttribute('aria-label', guest ? 'Company' : 'Company (optional)');
+    document.querySelector('.req-note').textContent = guest
+      ? 'Just the basics — you’ll be with your host in a minute.'
+      : 'All fields required except company.';
+    var lw = document.getElementById('lookupWrap');
+    if (lw) lw.style.display = (guest || !LOOKUP_URL) ? 'none' : 'block';
+  }
+  document.getElementById('vtWork').addEventListener('change', applyMode);
+  document.getElementById('vtGuest').addEventListener('change', applyMode);
+  window.__applyVtMode = applyMode;
+})();
+// ── Signed-up-online lookup ──────────────────────────────────────────────
+// LOOKUP_URL is the Apps Script web app URL. Empty = feature hidden.
+var LOOKUP_URL = 'https://script.google.com/macros/s/AKfycbxrUHNdk2TxAvNe3U56LBprOIJJ9YW1xd1ATPDxQdDtwTiHt67LdmyDS7M938v0INIr/exec';
+(function(){
+  if (!LOOKUP_URL) return;
+  document.getElementById('lookupWrap').style.display = 'block';
+  var btn = document.getElementById('lookupBtn'), msg = document.getElementById('lookupMsg');
+  function runLookup(q){
+    if (!q) return;
+    btn.disabled = true; btn.textContent = 'Looking…';
+    var isEmail = q.indexOf('@') !== -1;
+    fetch(LOOKUP_URL + '?' + (isEmail ? 'email=' : 'code=') + encodeURIComponent(q))
+      .then(function(r){ return r.json(); })
+      .then(function(d){
+        btn.disabled = false; btn.textContent = 'Find My Pass';
+        msg.style.display = 'block';
+        var form = document.getElementById('checkInForm');
+        if (d.found) {
+          if (d.name) form.elements.name.value = d.name;
+          if (d.email) form.elements.email.value = d.email;
+          if (d.phone) form.elements.phone.value = d.phone;
+          if (d.company) form.elements.company.value = d.company;
+          if (d.passCode) document.getElementById('ciPassCode').value = d.passCode;
+          msg.style.color = 'var(--gold-light)';
+          msg.textContent = 'Welcome back' + (d.name ? ', ' + String(d.name).split(' ')[0] : '') +
+            '! We filled in what we have — just finish the rest below.';
+          form.elements['mailing-address'].focus();
+        } else {
+          msg.style.color = 'rgba(255,255,255,.55)';
+          msg.textContent = 'No signup found under that — no problem, just fill in the form below.';
+        }
+      })
+      .catch(function(){
+        btn.disabled = false; btn.textContent = 'Find My Pass';
+        msg.style.display = 'block';
+        msg.style.color = 'rgba(255,255,255,.55)';
+        msg.textContent = 'Lookup isn’t responding — just fill in the form below.';
+      });
+  }
+  btn.addEventListener('click', function(){ runLookup(document.getElementById('lookupQ').value.trim()); });
+  // Arriving from the welcome email: /check-in/?code=REV-XXXXX pre-fills automatically.
+  try {
+    var p = new URLSearchParams(location.search);
+    var auto = (p.get('code') || p.get('email') || '').trim();
+    if (auto) { document.getElementById('lookupQ').value = auto; runLookup(auto); }
+  } catch (e) {}
+})();
+document.getElementById('checkInForm').addEventListener('submit', function(ev){
+  ev.preventDefault();
+  var form = ev.target;
+  var btn = document.getElementById('checkInBtn');
+  btn.disabled = true; btn.textContent = 'One moment…';
+  var data = new FormData(form);
+  fetch('/', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    body: new URLSearchParams(data).toString()
+  }).then(function(r){
+    if (r.ok) {
+      document.getElementById('formWrap').style.display = 'none';
+      document.getElementById('done').style.display = 'block';
+      var interest = (form.elements['membership-interest'].value || '');
+      var nudges = {
+        'Executive Office ($1,599/mo)': 'While you\u2019re here, ask at the desk to see the Executive Offices \u2014 only two remain, and a five-minute look is worth it.',
+        'Dedicated Desk ($449/mo)': 'Ask at the desk to see the Dedicated Desk area on the Co-Revel floor \u2014 pick out the spot you\u2019d want.',
+        'Co-Revel Membership ($179/mo)': 'You\u2019re standing in it \u2014 the whole second floor is the Co-Revel workspace. Make today your trial run.',
+        'Corporate Account (for teams)': 'Ask the front desk to grab Patrick or Michelle \u2014 a Corporate Account takes about ten minutes to talk through.',
+        'Day Pass ($29/day)': 'Enjoy the day \u2014 and if it fits, day passes are $29 whenever you want to come back.'
+      };
+      if (nudges[interest]) document.getElementById('doneNudge').textContent = nudges[interest];
+    } else { throw new Error('status ' + r.status); }
+  }).catch(function(err){
+    console.error('check-in submit failed:', err);
+    btn.disabled = false; btn.textContent = 'Check Me In →';
+    document.getElementById('failNote').style.display = 'block';
+  });
+});
+</script>
+</body>
+</html>

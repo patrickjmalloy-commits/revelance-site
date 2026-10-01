@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>New Member Form | Revelance</title>
+<meta name="description" content="Complete your Revelance membership application.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://revelanceoh.com/new-member/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="New Member Form | Revelance">
+<meta property="og:description" content="Complete your Revelance membership application.">
+<meta property="og:url" content="https://revelanceoh.com/new-member/">
+<meta name="twitter:card" content="summary">
+<meta name="geo.region" content="US-OH">
+<meta name="geo.placename" content="Mason">
+<meta name="geo.position" content="39.3135;-84.3025">
+<meta name="ICBM" content="39.3135, -84.3025">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Outfit:wght@300;400;500;600;700&display=swap"></noscript>
+<style>
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--gold-dark);outline-offset:2px}
+.skip-link{position:absolute;left:-9999px;top:0;z-index:2000;background:var(--gold);color:var(--black);padding:10px 18px;font-weight:700;border-radius:0 0 6px 0;text-decoration:none}.skip-link:focus{left:0}
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--gold:#C9A96E;--gold-light:#D4BA85;--gold-dark:#B08C4A;--charcoal:#151A20;--black:#0B0E11;--pearl:#F4F5F6;--ash:#5A6572;--cloud:#E8EAED;--graphite:#3A4450}
+html{font-size:16px;background:var(--black);-webkit-font-smoothing:antialiased}
+body{font-family:'Outfit',sans-serif;color:#fff;min-height:100vh;display:flex;flex-direction:column}
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:14px 0;background:rgba(11,14,17,.96);backdrop-filter:blur(16px);border-bottom:1px solid rgba(201,169,110,.1)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between}
+.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-logo-icon{height:32px;width:32px}
+.nav-logo-text{color:#fff;font-size:14px;font-weight:300;letter-spacing:.28em;text-transform:uppercase}
+.nav-back{font-size:.78rem;color:rgba(255,255,255,.5);text-decoration:none;letter-spacing:.05em}
+.nav-back:hover{color:var(--gold)}
+main{flex:1;display:flex;align-items:flex-start;justify-content:center;padding:96px 16px 48px}
+.card{width:100%;max-width:700px;background:var(--charcoal);border:1px solid rgba(201,169,110,.18);border-top:4px solid var(--gold);border-radius:12px;padding:34px 28px 30px}
+.card .label{font-size:.62rem;font-weight:700;letter-spacing:.22em;color:var(--gold);text-transform:uppercase;margin-bottom:8px}
+.card h1{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:500;line-height:1.15;margin-bottom:8px}
+.card h1 em{color:var(--gold-light);font-style:italic}
+.card .sub{font-size:.88rem;color:rgba(255,255,255,.55);line-height:1.65;margin-bottom:24px}
+.sect{font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);border-bottom:1px solid rgba(201,169,110,.25);padding-bottom:8px;margin:26px 0 16px}
+.sect:first-of-type{margin-top:0}
+form input[type=text],form input[type=email],form input[type=tel]{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:8px;color:#fff;padding:12px 14px;font-family:'Outfit',sans-serif;font-size:16px;transition:border-color .2s}
+form input::placeholder{color:rgba(255,255,255,.35)}
+form input:focus{border-color:var(--gold);outline:none}
+form input[type=date]{color-scheme:dark}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.row>*{min-width:0}
+.row-3{display:grid;grid-template-columns:2fr 1fr 1fr;gap:12px;margin-bottom:12px}
+.row-3>*{min-width:0}
+.full{margin-bottom:12px}
+@media(max-width:600px){.row,.row-3{grid-template-columns:1fr}}
+.tier-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+@media(max-width:600px){.tier-grid{grid-template-columns:1fr}}
+.tier{position:relative}
+.tier input{position:absolute;opacity:0;pointer-events:none}
+.tier label{display:flex;justify-content:space-between;align-items:center;gap:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:8px;padding:14px;cursor:pointer;font-size:.88rem;font-weight:600;transition:border-color .2s,background .2s}
+.tier label .price{font-weight:400;font-size:.78rem;color:rgba(255,255,255,.5);white-space:nowrap}
+.tier input:checked+label{border-color:var(--gold);background:rgba(201,169,110,.12)}
+.tier input:checked+label .price{color:var(--gold-light)}
+.tier input:focus-visible+label{outline:2px solid var(--gold-dark);outline-offset:2px}
+.check-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:14px;cursor:pointer;font-size:.86rem;line-height:1.5;color:rgba(255,255,255,.75)}
+.check-row input{width:18px;height:18px;margin-top:2px;accent-color:var(--gold);cursor:pointer;flex-shrink:0}
+.pay-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+@media(max-width:600px){.pay-grid{grid-template-columns:1fr}}
+.secure-note{background:rgba(201,169,110,.08);border:1px solid rgba(201,169,110,.3);border-radius:8px;padding:14px 16px;font-size:.82rem;line-height:1.65;color:rgba(255,255,255,.7);margin-bottom:18px}
+.secure-note strong{color:var(--gold-light)}
+.btn{display:inline-block;width:100%;text-align:center;background:var(--gold);color:var(--black);font-weight:700;font-size:1rem;padding:14px 20px;border:none;border-radius:8px;cursor:pointer;font-family:'Outfit',sans-serif;letter-spacing:.02em;transition:background .2s;margin-top:6px}
+.btn:hover{background:var(--gold-light)}
+.fine{font-size:.74rem;color:rgba(255,255,255,.4);line-height:1.55;margin-top:12px;text-align:center}
+.fail{display:none;background:rgba(192,57,43,.15);border-left:3px solid #c0392b;padding:12px 14px;border-radius:6px;font-size:.82rem;line-height:1.6;margin-top:12px}
+.fail a{color:var(--gold-light)}
+#done{display:none;text-align:center;padding:14px 0 6px}
+#done .check{width:64px;height:64px;border-radius:50%;background:rgba(201,169,110,.15);border:2px solid var(--gold);color:var(--gold);font-size:2rem;line-height:60px;margin:0 auto 16px}
+#done h2{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:500;margin-bottom:10px}
+#done p{font-size:.88rem;color:rgba(255,255,255,.55);line-height:1.7;max-width:440px;margin:0 auto 10px}
+footer{padding:18px 16px;text-align:center;font-size:.72rem;color:rgba(255,255,255,.35)}
+@media(max-width:768px){input:not([type=checkbox]):not([type=radio]),select,textarea{font-size:16px}}
+</style>
+<script>(function(){if(location.hostname!=='revelanceoh.com'&&location.hostname!=='www.revelanceoh.com')return;var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-V2N2YENTZE';document.head.appendChild(s);})();</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-V2N2YENTZE');</script>
+<script type="text/javascript">if(location.hostname==='revelanceoh.com'||location.hostname==='www.revelanceoh.com')(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","vw2yag9k4k");</script>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="../" class="nav-brand">
+      <img src="../images/logo-r-icon.png" class="nav-logo-icon" alt="R">
+      <span class="nav-logo-text">Revelance</span>
+    </a>
+    <a href="../" class="nav-back">revelanceoh.com</a>
+  </div>
+</nav>
+<main id="main-content">
+  <div class="card">
+    <div id="formWrap">
+      <div class="label">&mdash; New Member Form</div>
+      <h1>Welcome to <em>Revelance</em></h1>
+      <p class="sub">Complete the information below and our team will activate your membership. Fields marked with an asterisk are required.</p>
+      <form name="new-member" id="newMemberForm" method="POST" data-netlify="true">
+        <input type="hidden" name="form-name" value="new-member">
+        <input type="hidden" name="inquiry-type" value="&#127942; New Member Application">
+
+        <div class="sect">1 &middot; Member Information</div>
+        <div class="full"><input type="text" name="company-name" placeholder="Company name *" required aria-label="Company name" autocomplete="organization"></div>
+        <div class="row">
+          <input type="text" name="company-website" placeholder="Company website" aria-label="Company website" autocomplete="url" inputmode="url">
+          <input type="text" name="industry" placeholder="Industry" aria-label="Industry">
+        </div>
+        <div class="row">
+          <input type="text" name="name" id="nmName" placeholder="Primary contact name *" required aria-label="Primary contact name" autocomplete="name">
+          <input type="text" name="title" placeholder="Title / role" aria-label="Title or role" autocomplete="organization-title">
+        </div>
+        <div class="row">
+          <input type="email" name="email" id="nmEmail" placeholder="Email *" required aria-label="Email" autocomplete="email">
+          <input type="tel" name="phone" id="nmPhone" placeholder="Phone *" required aria-label="Phone" autocomplete="tel">
+        </div>
+        <div class="full"><input type="text" name="mailing-address" id="nmAddress" placeholder="Mailing address *" required aria-label="Mailing address" autocomplete="street-address"></div>
+        <div class="row-3">
+          <input type="text" name="city" id="nmCity" placeholder="City *" required aria-label="City" autocomplete="address-level2">
+          <input type="text" name="state" id="nmState" placeholder="State *" required aria-label="State" autocomplete="address-level1" maxlength="20">
+          <input type="text" name="zip" id="nmZip" placeholder="ZIP code *" required aria-label="ZIP code" autocomplete="postal-code" inputmode="numeric" maxlength="10">
+        </div>
+        <div class="row">
+          <input type="text" name="date-of-birth" placeholder="Date of birth (MM/DD/YYYY)" aria-label="Date of birth" inputmode="numeric" maxlength="10">
+          <span></span>
+        </div>
+
+        <div class="sect">2 &middot; Membership Selection</div>
+        <div class="tier-grid" role="radiogroup" aria-label="Membership selection">
+          <div class="tier"><input type="radio" name="membership" value="Co-Revel — $179/month" id="tCoRevel" required><label for="tCoRevel">Co-Revel <span class="price">$179/month</span></label></div>
+          <div class="tier"><input type="radio" name="membership" value="Dedicated Desk — $449/month" id="tDesk"><label for="tDesk">Dedicated Desk <span class="price">$449/month</span></label></div>
+          <div class="tier"><input type="radio" name="membership" value="Executive Office — $1,599/month" id="tOffice"><label for="tOffice">Executive Office <span class="price">$1,599/month</span></label></div>
+          <div class="tier"><input type="radio" name="membership" value="Corporate Account — Custom" id="tCorp"><label for="tCorp">Corporate Account <span class="price">Custom</span></label></div>
+        </div>
+        <div class="row">
+          <div style="position:relative"><input type="text" readonly tabindex="-1" id="nmStartDisplay" placeholder="Membership start date * — tap to pick" aria-label="Requested membership start date" style="cursor:pointer;caret-color:transparent;width:100%"><input type="hidden" name="start-date" id="nmStart"><input type="date" id="nmStartN" disabled aria-label="Choose a start date" style="position:absolute;left:0;top:0;width:100%;height:100%;opacity:0;margin:0;padding:0;border:0;pointer-events:none;-webkit-appearance:none"></div>
+          <input type="text" name="office-number" placeholder="Office number (if applicable)" aria-label="Office number (if applicable)">
+        </div>
+        <p style="font-size:.74rem;color:rgba(255,255,255,.4);margin:-2px 0 4px;line-height:1.5">Ask the Revelance team about additional options or customized membership packages.</p>
+
+        <div class="sect">3 &middot; Billing Information</div>
+        <label class="check-row" for="sameBilling"><input type="checkbox" id="sameBilling" name="billing-same" value="Yes" checked> Billing information is the same as the member information above</label>
+        <div id="billingFields" style="display:none">
+          <div class="full"><input type="text" name="billing-name" placeholder="Company or individual name *" aria-label="Billing company or individual name"></div>
+          <div class="row">
+            <input type="text" name="billing-contact" placeholder="Primary billing contact *" aria-label="Primary billing contact">
+            <input type="email" name="billing-email" placeholder="Billing email *" aria-label="Billing email">
+          </div>
+          <div class="row">
+            <input type="tel" name="billing-phone" placeholder="Billing phone" aria-label="Billing phone">
+            <input type="text" name="billing-address" placeholder="Billing address *" aria-label="Billing address">
+          </div>
+          <div class="row-3">
+            <input type="text" name="billing-city" placeholder="City *" aria-label="Billing city">
+            <input type="text" name="billing-state" placeholder="State *" aria-label="Billing state" maxlength="20">
+            <input type="text" name="billing-zip" placeholder="ZIP code *" aria-label="Billing ZIP code" inputmode="numeric" maxlength="10">
+          </div>
+        </div>
+
+        <div class="sect">4 &middot; Payment Setup</div>
+        <div class="pay-grid" role="radiogroup" aria-label="Preferred payment method">
+          <div class="tier"><input type="radio" name="payment-method" value="Credit card" id="pCredit" required><label for="pCredit">Credit card</label></div>
+          <div class="tier"><input type="radio" name="payment-method" value="Debit card" id="pDebit"><label for="pDebit">Debit card</label></div>
+          <div class="tier"><input type="radio" name="payment-method" value="Direct ACH" id="pACH"><label for="pACH">Direct ACH</label></div>
+          <div class="tier"><input type="radio" name="payment-method" value="Set up in member portal" id="pLater"><label for="pLater">I&#8217;ll decide in the portal</label></div>
+        </div>
+        <div class="secure-note"><strong>For your security, we never collect card or bank numbers on this page.</strong> Once your membership is activated, you&#8217;ll receive your member portal invitation &mdash; add your payment details there in about a minute, entered directly into our billing system, fully encrypted.</div>
+
+        <button type="submit" class="btn" id="nmBtn">Submit My Membership Form &rarr;</button>
+        <p class="fine">Questions? Call <a href="tel:5137945070" style="color:var(--gold-light)">513-794-5070</a> or email <a href="mailto:info@revelanceoh.com" style="color:var(--gold-light)">info@revelanceoh.com</a>.</p>
+        <div class="fail" id="failNote"><strong>Hmm, that didn&#8217;t go through.</strong> Please call <a href="tel:5137945070">513-794-5070</a> or email <a href="mailto:info@revelanceoh.com">info@revelanceoh.com</a> and we&#8217;ll take care of it.</div>
+      </form>
+    </div>
+    <div id="done">
+      <div class="check">&#10003;</div>
+      <h2>Welcome to Revelance&#33;</h2>
+      <p>Your membership form is in. Our team will activate your membership and you&#8217;ll receive your member portal invitation by email &mdash; that&#8217;s where you&#8217;ll securely add your payment details.</p>
+      <p>A confirmation is on its way to your inbox. We can&#8217;t wait to have you in the building.</p>
+    </div>
+  </div>
+</main>
+<footer>&copy; <span id="fy">2026</span> Revelance &middot; 8460 Duke Blvd, Mason, OH 45040</footer>
+<script>
+(function(){var e=document.getElementById("fy");if(e)e.textContent=new Date().getFullYear();})();
+(function(){
+  // Start-date proxy: picker opens only on a deliberate tap (iOS auto-advances
+  // focus into bare date inputs). Earliest pickable day is today (Eastern).
+  var h = document.getElementById('nmStart'), n = document.getElementById('nmStartN'),
+      disp = document.getElementById('nmStartDisplay');
+  n.min = new Intl.DateTimeFormat('en-CA',{timeZone:'America/New_York'}).format(new Date());
+  disp.addEventListener('click', function(){
+    n.disabled = false; n.style.pointerEvents = 'auto'; n.focus();
+    if (n.showPicker) { try { n.showPicker(); } catch(e) {} }
+  });
+  n.addEventListener('change', function(){
+    h.value = n.value;
+    if (!n.value) { disp.value=''; return; }
+    var p = n.value.split('-');
+    disp.value = new Date(+p[0], +p[1]-1, +p[2], 12, 0, 0).toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'});
+    disp.style.borderColor = '';
+  });
+  n.addEventListener('blur', function(){ n.disabled = true; n.style.pointerEvents = 'none'; });
+})();
+(function(){
+  // Billing "same as member" toggle: hidden fields are never required.
+  var cb = document.getElementById('sameBilling'),
+      wrap = document.getElementById('billingFields'),
+      req = ['billing-name','billing-contact','billing-email','billing-address','billing-city','billing-state','billing-zip'];
+  function apply(){
+    wrap.style.display = cb.checked ? 'none' : 'block';
+    for (var i=0;i<req.length;i++){
+      var el = document.getElementsByName(req[i])[0];
+      if (el) el.required = !cb.checked;
+    }
+  }
+  cb.addEventListener('change', apply);
+  apply();
+})();
+document.getElementById('newMemberForm').addEventListener('submit', function(ev){
+  ev.preventDefault();
+  var form = ev.target;
+  var btn = document.getElementById('nmBtn');
+  if (!form.elements['start-date'].value) {
+    var disp = document.getElementById('nmStartDisplay');
+    disp.style.borderColor = '#c0392b';
+    disp.placeholder = 'Pick a start date — tap here';
+    disp.scrollIntoView({block:'center'});
+    return;
+  }
+  // Copy member info into billing fields when "same as member" is checked
+  if (document.getElementById('sameBilling').checked) {
+    var map = {'billing-name':'company-name','billing-contact':'name','billing-email':'email','billing-phone':'phone','billing-address':'mailing-address','billing-city':'city','billing-state':'state','billing-zip':'zip'};
+    for (var k in map) {
+      var dst = form.elements[k], src = form.elements[map[k]];
+      if (dst && src) dst.value = src.value;
+    }
+  }
+  btn.disabled = true; btn.textContent = 'One moment…';
+  var data = new FormData(form);
+  fetch('/', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    body: new URLSearchParams(data).toString()
+  }).then(function(r){
+    if (r.ok) {
+      if (typeof gtag === 'function') { try { gtag('event','new_member_form'); } catch(e){} }
+      document.getElementById('formWrap').style.display = 'none';
+      document.getElementById('done').style.display = 'block';
+      window.scrollTo({top:0});
+    } else { throw new Error('status ' + r.status); }
+  }).catch(function(err){
+    console.error('new-member submit failed:', err);
+    btn.disabled = false; btn.textContent = 'Submit My Membership Form →';
+    document.getElementById('failNote').style.display = 'block';
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Note: /thank-you/, /events/rsvp/, /check-in/, and /availability/ carry
+# noindex meta tags — they are utility pages with no SEO value.
+
+Sitemap: https://revelanceoh.com/sitemap.xml

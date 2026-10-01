@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Pick Your Day | Revelance</title>
+<meta name="description" content="Pick or change the day for your Revelance day pass.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://revelanceoh.com/pick-a-day/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Pick Your Day | Revelance">
+<meta property="og:description" content="Pick or change the day for your Revelance day pass.">
+<meta property="og:url" content="https://revelanceoh.com/pick-a-day/">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Outfit:wght@300;400;500;600;700&display=swap"></noscript>
+<style>
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--gold-dark);outline-offset:2px}
+.skip-link{position:absolute;left:-9999px;top:0;z-index:2000;background:var(--gold);color:var(--black);padding:10px 18px;font-weight:700;border-radius:0 0 6px 0;text-decoration:none}.skip-link:focus{left:0}
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--gold:#C9A96E;--gold-light:#D4BA85;--gold-dark:#B08C4A;--charcoal:#151A20;--black:#0B0E11;--pearl:#F4F5F6;--ash:#5A6572;--cloud:#E8EAED;--graphite:#3A4450}
+html{font-size:16px;background:var(--black);-webkit-font-smoothing:antialiased}
+body{font-family:'Outfit',sans-serif;color:#fff;min-height:100vh;display:flex;flex-direction:column}
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:14px 0;background:rgba(11,14,17,.96);backdrop-filter:blur(16px);border-bottom:1px solid rgba(201,169,110,.1)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between}
+.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-logo-icon{height:32px;width:32px}
+.nav-logo-text{color:#fff;font-size:14px;font-weight:300;letter-spacing:.28em;text-transform:uppercase}
+.nav-back{font-size:.78rem;color:rgba(255,255,255,.5);text-decoration:none;letter-spacing:.05em}
+.nav-back:hover{color:var(--gold)}
+main{flex:1;display:flex;align-items:flex-start;justify-content:center;padding:96px 16px 40px}
+.card{width:100%;max-width:480px;background:var(--charcoal);border:1px solid rgba(201,169,110,.18);border-top:4px solid var(--gold);border-radius:12px;padding:30px 24px 26px}
+.card .label{font-size:.62rem;font-weight:700;letter-spacing:.22em;color:var(--gold);text-transform:uppercase;margin-bottom:8px}
+.card h1{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:500;line-height:1.15;margin-bottom:8px}
+.card h1 em{color:var(--gold-light);font-style:italic}
+.card .sub{font-size:.86rem;color:rgba(255,255,255,.5);line-height:1.6;margin-bottom:20px}
+form input{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:8px;color:#fff;padding:12px 14px;font-family:'Outfit',sans-serif;font-size:16px;margin-bottom:12px;transition:border-color .2s}
+form input::placeholder{color:rgba(255,255,255,.35)}
+form input:focus{border-color:var(--gold);outline:none}
+form input[type=date]{color-scheme:dark}
+form label{display:block;font-size:.74rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--gold-light);margin:2px 0 6px}
+.btn{display:inline-block;width:100%;text-align:center;background:var(--gold);color:var(--black);font-weight:700;font-size:1rem;padding:14px 20px;border:none;border-radius:8px;cursor:pointer;font-family:'Outfit',sans-serif;letter-spacing:.02em;transition:background .2s}
+.btn:hover{background:var(--gold-light)}
+.fail{display:none;background:rgba(192,57,43,.15);border-left:3px solid #c0392b;padding:12px 14px;border-radius:6px;font-size:.82rem;line-height:1.6;margin-top:12px}
+.fail a{color:var(--gold-light)}
+#done{display:none;text-align:center;padding:14px 0 6px}
+#done .check{width:64px;height:64px;border-radius:50%;background:rgba(201,169,110,.15);border:2px solid var(--gold);color:var(--gold);font-size:2rem;line-height:60px;margin:0 auto 16px}
+#done h2{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:500;margin-bottom:8px}
+#done p{font-size:.88rem;color:rgba(255,255,255,.55);line-height:1.7}
+footer{padding:18px 16px;text-align:center;font-size:.72rem;color:rgba(255,255,255,.35)}
+@media(max-width:768px){input:not([type=checkbox]):not([type=radio]),select,textarea{font-size:16px}}
+</style>
+<script>(function(){if(location.hostname!=='revelanceoh.com'&&location.hostname!=='www.revelanceoh.com')return;var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-V2N2YENTZE';document.head.appendChild(s);})();</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-V2N2YENTZE');</script>
+<script type="text/javascript">if(location.hostname==='revelanceoh.com'||location.hostname==='www.revelanceoh.com')(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","vw2yag9k4k");</script>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="../" class="nav-brand">
+      <img src="../images/logo-r-icon.png" class="nav-logo-icon" alt="R">
+      <span class="nav-logo-text">Revelance</span>
+    </a>
+    <a href="../" class="nav-back">revelanceoh.com</a>
+  </div>
+</nav>
+<main id="main-content">
+  <div class="card">
+    <div id="formWrap">
+      <div class="label">— Your Free Day Pass</div>
+      <h1>Pick <em>your day</em></h1>
+      <p class="sub">Tell us when you&#8217;re coming and we&#8217;ll have everything ready &mdash; you&#8217;ll get a reminder that morning with your pass code and check-in link. Plans change? Come back here anytime.</p>
+      <form name="pick-a-day" id="pickDayForm" method="POST" data-netlify="true">
+        <input type="hidden" name="form-name" value="pick-a-day">
+        <input type="hidden" name="inquiry-type" value="&#128197; Day Pass — Visit Date">
+        <input type="hidden" name="pass-code" id="pdPassCode" value="">
+        <input type="text" name="name" id="pdName" placeholder="Your name" aria-label="Your name" autocomplete="name">
+        <input type="email" name="email" id="pdEmail" placeholder="Email you signed up with" required aria-label="Email you signed up with" autocomplete="email">
+        <label for="pdDate">Which day works for you?</label>
+        <div style="position:relative"><input type="text" readonly tabindex="-1" id="pdDateDisplay" placeholder="Tap to choose your day" aria-label="Which day works for you?" style="cursor:pointer;caret-color:transparent;width:100%"><input type="hidden" name="visit-date" id="pdDate"><input type="date" id="pdDateN" disabled aria-label="Choose a date" style="position:absolute;left:0;top:0;width:100%;height:100%;opacity:0;margin:0;padding:0;border:0;pointer-events:none;-webkit-appearance:none"></div>
+        <p style="font-size:.74rem;color:rgba(255,255,255,.4);margin:-4px 0 14px;line-height:1.5">Picking a day past your pass&#8217;s expiration automatically extends it &mdash; no need to re-sign up.</p>
+        <button type="submit" class="btn" id="pdBtn">Lock In My Day &rarr;</button>
+        <div class="fail" id="failNote"><strong>Hmm, that didn&#8217;t go through.</strong> Reply to any of our emails with the day you want, or call <a href="tel:5137945070">513-794-5070</a>.</div>
+      </form>
+    </div>
+    <div id="done">
+      <div class="check">&#10003;</div>
+      <h2>You&#8217;re on the calendar&#33;</h2>
+      <p id="doneMsg">We&#8217;ll send a confirmation now and a reminder with your pass code the morning of your visit. See you soon&#33;</p>
+    </div>
+  </div>
+</main>
+<footer>&copy; <span id="fy">2026</span> Revelance &middot; 8460 Duke Blvd, Mason, OH 45040</footer>
+<script>
+(function(){var e=document.getElementById("fy");if(e)e.textContent=new Date().getFullYear();})();
+(function(){
+  // Pre-fill from email links: /pick-a-day/?code=REV-XXXXX&email=...&name=...
+  try {
+    var p = new URLSearchParams(location.search);
+    if (p.get('code')) document.getElementById('pdPassCode').value = p.get('code');
+    if (p.get('email')) document.getElementById('pdEmail').value = p.get('email');
+    if (p.get('name')) document.getElementById('pdName').value = p.get('name');
+  } catch (e) {}
+  // Earliest pickable day is today (Eastern). Proxy field opens the picker
+  // only on a deliberate tap (iOS auto-advances focus into bare date inputs).
+  var h = document.getElementById('pdDate'), n = document.getElementById('pdDateN'),
+      disp = document.getElementById('pdDateDisplay');
+  n.min = new Intl.DateTimeFormat('en-CA',{timeZone:'America/New_York'}).format(new Date());
+  disp.addEventListener('click', function(){
+    n.disabled = false; n.style.pointerEvents = 'auto'; n.focus();
+    if (n.showPicker) { try { n.showPicker(); } catch(e) {} }
+  });
+  n.addEventListener('change', function(){
+    h.value = n.value;
+    if (!n.value) { disp.value=''; return; }
+    var p = n.value.split('-');
+    disp.value = new Date(+p[0], +p[1]-1, +p[2], 12, 0, 0).toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'});
+    disp.style.borderColor = '';
+  });
+  n.addEventListener('blur', function(){ n.disabled = true; n.style.pointerEvents = 'none'; });
+})();
+document.getElementById('pickDayForm').addEventListener('submit', function(ev){
+  ev.preventDefault();
+  var form = ev.target;
+  var btn = document.getElementById('pdBtn');
+  if (!form.elements['visit-date'].value) {
+    var disp = document.getElementById('pdDateDisplay');
+    disp.style.borderColor = '#c0392b';
+    disp.placeholder = 'Pick a day first — tap here';
+    return;
+  }
+  btn.disabled = true; btn.textContent = 'One moment…';
+  var data = new FormData(form);
+  fetch('/', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    body: new URLSearchParams(data).toString()
+  }).then(function(r){
+    if (r.ok) {
+      document.getElementById('formWrap').style.display = 'none';
+      document.getElementById('done').style.display = 'block';
+      try {
+        var d = form.elements['visit-date'].value.split('-');
+        var dt = new Date(+d[0], +d[1]-1, +d[2], 12, 0, 0);
+        var todayStr = new Intl.DateTimeFormat('en-CA',{timeZone:'America/New_York'}).format(new Date());
+        var pretty = dt.toLocaleDateString('en-US',{weekday:'long', month:'long', day:'numeric'});
+        document.getElementById('doneMsg').textContent = (form.elements['visit-date'].value === todayStr)
+          ? 'Today it is — everything you need is on its way to your inbox right now. See you soon!'
+          : 'We’ve got you down for ' + pretty + '. A confirmation is on its way, and a reminder with your pass code lands that morning.';
+      } catch (e) {}
+    } else { throw new Error('status ' + r.status); }
+  }).catch(function(err){
+    console.error('pick-a-day submit failed:', err);
+    btn.disabled = false; btn.textContent = 'Lock In My Day →';
+    document.getElementById('failNote').style.display = 'block';
+  });
+});
+</script>
+</body>
+</html>

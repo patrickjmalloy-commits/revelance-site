@@ -1,0 +1,411 @@
+# ============================================
+# Revelance — Netlify Configuration
+# Drop this file in the root of your site folder
+# ============================================
+
+# --- Build settings ---
+[build]
+  publish = "."
+
+[build.environment]
+  SECRETS_SCAN_ENABLED = "false"
+  SECRETS_SCAN_OMIT_PATHS = "netlify/functions/calendar.js"
+  NODE_VERSION = "18"
+
+# --- Edge function: rich social share previews for events ---
+[[edge_functions]]
+  path = "/events/"
+  function = "event-og"
+
+# --- Edge function: 301 /blog/*.html → extensionless canonical (v6_183) ---
+[[edge_functions]]
+  path = "/blog/*"
+  function = "blog-html-301"
+
+# --- Redirect www to non-www (pick one canonical domain for SEO) ---
+[[redirects]]
+  from = "/blog/workspace-and-event-"
+  to = "/blog/workspace-and-event-venue-same-building"
+  status = 301
+
+[[redirects]]
+  from = "/blog/*"
+  to = "/blog/:splat.html"
+  status = 200
+
+[[redirects]]
+  from = "/taproom"
+  to = "/taphouse/"
+  status = 301
+
+[[redirects]]
+  from = "/taproom/*"
+  to = "/taphouse/"
+  status = 301
+
+[[redirects]]
+  from = "/contact/community/"
+  to = "/community/"
+  status = 301
+
+[[redirects]]
+  from = "https://www.revelanceoh.com/*"
+  to = "https://revelanceoh.com/:splat"
+  status = 301
+  force = true
+
+# --- Force HTTPS ---
+[[redirects]]
+  from = "http://revelanceoh.com/*"
+  to = "https://revelanceoh.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.revelanceoh.com/*"
+  to = "https://revelanceoh.com/:splat"
+  status = 301
+  force = true
+
+# --- Wix URL redirects (old site → new site) ---
+
+[[redirects]]
+  from = "/the-lounge-membership"
+  to = "/memberships/"
+  status = 301
+# These ensure anyone with a bookmarked or indexed Wix page lands in the right spot
+# Updated to current page structure (old anchors like /#venues no longer exist)
+
+# Venue pages
+[[redirects]]
+  from = "/taphouse"
+  to = "/taphouse/"
+  status = 301
+
+[[redirects]]
+  from = "/revel-room"
+  to = "/revel-room/"
+  status = 301
+
+[[redirects]]
+  from = "/venues"
+  to = "/host-an-event/"
+  status = 301
+
+[[redirects]]
+  from = "/amenities"
+  to = "/host-an-event/"
+  status = 301
+
+[[redirects]]
+  from = "/event-space"
+  to = "/host-an-event/"
+  status = 301
+
+[[redirects]]
+  from = "/event-spaces"
+  to = "/host-an-event/"
+  status = 301
+
+[[redirects]]
+  from = "/e9"
+  to = "/e9/"
+  status = 301
+
+[[redirects]]
+  from = "/golf-simulator"
+  to = "/e9/"
+  status = 301
+
+[[redirects]]
+  from = "/emergency-9"
+  to = "/e9/"
+  status = 301
+
+[[redirects]]
+  from = "/emergency-9-simulator"
+  to = "/e9/"
+  status = 301
+
+[[redirects]]
+  from = "/boardrooms"
+  to = "/boardrooms/"
+  status = 301
+
+[[redirects]]
+  from = "/boardroom"
+  to = "/boardrooms/"
+  status = 301
+
+[[redirects]]
+  from = "/c-suite"
+  to = "/c-suite/"
+  status = 301
+
+[[redirects]]
+  from = "/csuite"
+  to = "/c-suite/"
+  status = 301
+
+[[redirects]]
+  from = "/culinary-lab"
+  to = "/culinary-lab/"
+  status = 301
+
+[[redirects]]
+  from = "/kitchen"
+  to = "/culinary-lab/"
+  status = 301
+
+# Membership pages
+[[redirects]]
+  from = "/memberships"
+  to = "/memberships/"
+  status = 301
+
+[[redirects]]
+  from = "/membership-1"
+  to = "/memberships/"
+  status = 301
+
+[[redirects]]
+  from = "/coworking"
+  to = "/coworking/"
+  status = 301
+
+[[redirects]]
+  from = "/dedicated-desk"
+  to = "/coworking/"
+  status = 301
+
+[[redirects]]
+  from = "/private-office"
+  to = "/coworking/"
+  status = 301
+
+[[redirects]]
+  from = "/executive-office"
+  to = "/coworking/"
+  status = 301
+
+[[redirects]]
+  from = "/day-pass"
+  to = "/coworking/"
+  status = 301
+
+[[redirects]]
+  from = "/corportate-membership"
+  to = "/corporate/"
+  status = 301
+
+[[redirects]]
+  from = "/corporate-membership"
+  to = "/corporate/"
+  status = 301
+
+[[redirects]]
+  from = "/corporate"
+  to = "/corporate/"
+  status = 301
+
+[[redirects]]
+  from = "/pricing-plans/list"
+  to = "/memberships/"
+  status = 301
+
+[[redirects]]
+  from = "/pricing-plans/*"
+  to = "/memberships/"
+  status = 301
+
+# Booking / events
+[[redirects]]
+  from = "/book-online-1"
+  to = "/plan-your-event/"
+  status = 301
+
+[[redirects]]
+  from = "/book-online"
+  to = "/plan-your-event/"
+  status = 301
+
+[[redirects]]
+  from = "/book"
+  to = "/plan-your-event/"
+  status = 301
+
+[[redirects]]
+  from = "/host-an-event"
+  to = "/host-an-event/"
+  status = 301
+
+[[redirects]]
+  from = "/plan-your-event"
+  to = "/plan-your-event/"
+  status = 301
+
+[[redirects]]
+  from = "/events-ede"
+  to = "/events/"
+  status = 301
+
+[[redirects]]
+  from = "/events"
+  to = "/events/"
+  status = 301
+
+# About / contact
+[[redirects]]
+  from = "/about-1"
+  to = "/about/"
+  status = 301
+
+[[redirects]]
+  from = "/about"
+  to = "/about/"
+  status = 301
+
+[[redirects]]
+  from = "/contact-3"
+  to = "/#contact"
+  status = 301
+
+[[redirects]]
+  from = "/contact"
+  to = "/contact/"
+  status = 301
+
+[[redirects]]
+  from = "/community"
+  to = "/community/"
+  status = 301
+
+[[redirects]]
+  from = "/partners"
+  to = "/partners/"
+  status = 301
+
+[[redirects]]
+  from = "/blog"
+  to = "/blog/"
+  status = 301
+
+
+# --- Noindex headers for utility pages (belt-and-suspenders with robots.txt) ---
+[[headers]]
+  for = "/thank-you/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+[[headers]]
+  for = "/events/rsvp/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+# --- Cache headers for images (30 days) ---
+[[headers]]
+  for = "/images/*.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000, immutable"
+
+[[headers]]
+  for = "/images/*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000, immutable"
+
+[[headers]]
+  for = "/images/*.webp"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000, immutable"
+
+# --- Cache headers for videos (30 days) ---
+[[headers]]
+  for = "/images/*.mp4"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000, immutable"
+
+# --- Cache headers for event images (30 days) ---
+[[headers]]
+  for = "/events/images/*.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000, immutable"
+
+# --- Favicons (7 days — shorter in case you update branding) ---
+[[headers]]
+  for = "/images/favicon*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+# --- HTML pages (no cache, always fresh) ---
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# --- Security headers (all pages) ---
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    X-XSS-Protection = "1; mode=block"
+
+# --- Font cache (1 year — fonts rarely change) ---
+[[headers]]
+  for = "/*.woff2"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# --- Web manifest ---
+[[headers]]
+  for = "/site.webmanifest"
+  [headers.values]
+    Content-Type = "application/manifest+json"
+    Cache-Control = "public, max-age=604800"
+
+# --- AI & LLM Discovery ---
+[[headers]]
+  for = "/llms.txt"
+  [headers.values]
+    Content-Type = "text/plain; charset=utf-8"
+    Cache-Control = "public, max-age=86400"
+    X-Robots-Tag = "all"
+
+# --- Performance: Link preload hints for homepage ---
+[[headers]]
+  for = "/"
+  [headers.values]
+    Link = "</images/logo-r-icon.png>; rel=preload; as=image"
+
+# --- Content-Security-Policy (report-only first, upgrade later) ---
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://www.clarity.ms https://*.clarity.ms; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; media-src 'self'; connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://www.googletagmanager.com https://*.g.doubleclick.net https://www.google.com https://*.clarity.ms https://c.bing.com https://script.google.com https://script.googleusercontent.com; frame-src 'none'; base-uri 'self'; form-action 'self' https://app.netlify.com"
+
+# --- Cache HTML subpages (revalidate) ---
+[[headers]]
+  for = "/blog/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, must-revalidate"
+
+# --- Cache sitemap and robots ---
+[[headers]]
+  for = "/sitemap.xml"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+    Content-Type = "application/xml; charset=utf-8"
+
+[[headers]]
+  for = "/robots.txt"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+    Content-Type = "text/plain; charset=utf-8"

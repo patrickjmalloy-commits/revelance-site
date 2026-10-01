@@ -1,0 +1,13 @@
+{
+  "name": "Revelance — Private Business Club",
+  "short_name": "Revelance",
+  "description": "Mason, Ohio's private business club — coworking, events, and taphouse.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0B0E11",
+  "theme_color": "#0B0E11",
+  "icons": [
+    {"src": "/images/favicon.png", "sizes": "180x180", "type": "image/png"},
+    {"src": "/images/favicon-32.png", "sizes": "32x32", "type": "image/png"}
+  ]
+}

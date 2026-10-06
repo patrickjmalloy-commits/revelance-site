@@ -439,4 +439,10 @@
 <priority>0.8</priority>
 </url>
 <url><loc>https://revelanceoh.com/blog/event-planner-luncheon-recap-mason-ohio</loc><lastmod>2026-10-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url>
+    <loc>https://revelanceoh.com/explore/</loc>
+    <lastmod>2026-10-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>

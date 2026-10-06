@@ -162,6 +162,9 @@ html{font-size:17px.footer .container{max-width:1600px;padding:0 48px}.footer-gr
 .xp-map svg{display:block;width:100%;height:auto}
 .xp-map svg[hidden]{display:none!important}
 .xp-hint{position:absolute;top:20px;left:22px;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:#8a93a0;background:rgba(255,255,255,.88);padding:5px 10px;border-radius:6px;pointer-events:none}
+.xp-lab{pointer-events:none;font-family:'Outfit',sans-serif;text-transform:uppercase}
+.xp-lab text{text-anchor:middle;font-weight:600;letter-spacing:.18em;fill:#2A3240}
+.xp-lab text.aux{fill:#8A939E;font-weight:500}
 .xp-room{fill:rgba(201,169,110,0);stroke:rgba(176,140,74,0);stroke-width:5;cursor:pointer;transition:fill .18s,stroke .18s}
 .xp-room:hover{fill:rgba(201,169,110,.32);stroke:rgba(176,140,74,.9)}
 .xp-room.sel{fill:rgba(201,169,110,.42);stroke:#B08C4A;stroke-width:6}
@@ -171,9 +174,10 @@ html{font-size:17px.footer .container{max-width:1600px;padding:0 48px}.footer-gr
 .xp-media img,.xp-media video{display:block;width:100%;height:100%;object-fit:cover;max-width:100%}
 .xp-card .xp-suite{font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-dark,#B08C4A);font-weight:600;margin:20px 24px 8px}
 .xp-card h3{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:600;margin:0 24px 14px}
-.xp-chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 24px 16px}
-.xp-chip{font-size:.88rem;font-weight:500;padding:7px 13px;border-radius:999px;border:1px solid var(--cloud,#E8EAED);color:var(--charcoal,#151A20)}
-.xp-chip.k{border-color:var(--gold,#C9A96E);background:rgba(201,169,110,.12);color:var(--gold-dark,#B08C4A);font-weight:600}
+.xp-details{margin:0 24px 18px;border-top:1px solid var(--cloud,#E8EAED)}
+.xp-row{display:grid;grid-template-columns:96px 1fr;gap:14px;padding:10px 0;border-bottom:1px solid var(--cloud,#E8EAED)}
+.xp-row dt{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-dark,#B08C4A);font-weight:700;margin:0;padding-top:2px}
+.xp-row dd{font-size:.95rem;color:var(--charcoal,#151A20);margin:0;line-height:1.5}
 .xp-desc{color:var(--ash,#5A6572);line-height:1.7;margin:0 24px 20px;font-size:1.02rem}
 .xp-card .btn{margin:0 24px}
 @media(max-width:768px){.xp-fbtn{font-size:16px}}
@@ -231,9 +235,22 @@ html{font-size:17px.footer .container{max-width:1600px;padding:0 48px}.footer-gr
       <image href="../images/map-floor1.webp" width="2300" height="1650"/>
         <polygon class="xp-room" data-id="taproom" points="1096,236 1400,236 1400,630 1576,630 1576,956 1096,956"><title>The Taproom</title></polygon>
         <polygon class="xp-room" data-id="culinary" points="1410,224 2036,224 2036,680 1720,680 1720,624 1410,624"><title>Culinary Lab</title></polygon>
-        <polygon class="xp-room" data-id="e9" points="696,520 1106,520 1106,1024 696,1024"><title>Emergency 9</title></polygon>
+        <polygon class="xp-room" data-id="e9" points="696,670 1106,670 1106,1024 696,1024"><title>Emergency 9</title></polygon>
         <polygon class="xp-room" data-id="foundation" points="696,1040 956,1040 956,1280 696,1280"><title>Foundation Boardroom</title></polygon>
         <polygon class="xp-room" data-id="revel" points="1310,1156 2040,1156 2040,1576 1310,1576"><title>Revel Room</title></polygon>
+    <g class="xp-lab" aria-hidden="true">
+<text x="1330" y="780" font-size="34">The Taproom</text>
+<text x="1676" y="1372" font-size="34">Revel Room</text>
+<text x="900" y="880" font-size="32">E9 Golf Simulator</text>
+<text x="1724" y="442" font-size="32">Culinary Lab</text>
+<text x="826" y="1156" font-size="25">Foundation</text>
+<text x="826" y="1196" font-size="19">Boardroom</text>
+<text x="286" y="392" font-size="23" class="aux">Arthrex</text>
+<text x="880" y="364" font-size="23" class="aux">Sonder</text>
+<text x="340" y="1262" font-size="23" class="aux">Fortegic</text>
+<text x="592" y="854" font-size="17" class="aux">Podcast</text>
+<text x="1932" y="856" font-size="17" class="aux">Restrooms</text>
+</g>
     </svg>
     <svg id="xpSvg2" viewBox="0 0 2300 1500" role="img" aria-label="Second floor plan of Revelance" hidden>
       <image href="../images/map-floor2.webp" width="2300" height="1500"/>
@@ -242,13 +259,26 @@ html{font-size:17px.footer .container{max-width:1600px;padding:0 48px}.footer-gr
         <polygon class="xp-room" data-id="horizon" points="456,864 664,864 664,1036 456,1036"><title>Horizon Boardroom</title></polygon>
         <polygon class="xp-room" data-id="overlook" points="1016,486 1226,486 1226,676 1016,676"><title>Overlook Boardroom</title></polygon>
         <polygon class="xp-room" data-id="csuite" points="1430,490 1660,490 1660,860 1430,860"><title>C-Suite Lounge</title></polygon>
+    <g class="xp-lab" aria-hidden="true">
+<text x="510" y="1186" font-size="34">Co-Revel</text>
+<text x="1546" y="662" font-size="26">C-Suite</text>
+<text x="1546" y="700" font-size="19">Lounge</text>
+<text x="170" y="186" font-size="22">Cornerstone</text>
+<text x="170" y="222" font-size="17">Boardroom</text>
+<text x="560" y="940" font-size="22">Horizon</text>
+<text x="560" y="974" font-size="17">Boardroom</text>
+<text x="1120" y="576" font-size="22">Overlook</text>
+<text x="1120" y="610" font-size="17">Boardroom</text>
+<text x="1484" y="306" font-size="23" class="aux">Arthrex</text>
+<text x="1986" y="684" font-size="17" class="aux">Restrooms</text>
+</g>
     </svg>
   </div>
   <aside class="xp-card" aria-live="polite">
     <div class="xp-media"><img id="xpPhoto" src="../images/revel-banquet-sunset.webp" alt="Banquet setup in the Revel Room at sunset" width="640" height="400"></div>
     <p class="xp-suite" id="xpSuite">Event Center</p>
     <h3 id="xpName">Revel Room</h3>
-    <div class="xp-chips" id="xpChips"></div>
+    <dl class="xp-details" id="xpDetails"><div class="xp-row"><dt>Capacity</dt><dd>125 banquet · 225 reception</dd></div><div class="xp-row"><dt>Features</dt><dd>25-ft ceilings · 12×10 ft video wall</dd></div><div class="xp-row"><dt>Best for</dt><dd>Weddings, galas, corporate events</dd></div><div class="xp-row"><dt>Booking</dt><dd>Start with the event wizard</dd></div></dl>
     <p class="xp-desc" id="xpDesc"></p>
     <a class="btn btn-gold" id="xpLink" href="../revel-room/">Explore the Space</a>
   </aside>
@@ -266,7 +296,7 @@ html{font-size:17px.footer .container{max-width:1600px;padding:0 48px}.footer-gr
 </section>
 
 <script>
-var XP_ROOMS = {"revel": {"floor": 1, "name": "Revel Room", "label": "Event Center", "stats": ["125 banquet", "225 combined reception", "25-ft ceilings", "12x10 ft video wall"], "desc": "The event center. Weddings, galas, corporate events - with a built-in stage wall for presentations and celebrations alike.", "url": "../revel-room/", "img": "../images/revel-banquet-sunset.webp", "alt": "Banquet setup in the Revel Room at sunset", "video": null}, "taproom": {"floor": 1, "name": "The Taproom", "label": "First Floor", "stats": ["50 standing", "Craft beer by Sonder Brewing", "Bartender included with events"], "desc": "Craft beer next door to everything. Cocktail hours flow straight from here into the Revel Room.", "url": "../taphouse/", "img": "../images/taphouse-overlook.webp", "alt": "Looking down into a full Taproom from the overlook", "video": null}, "e9": {"floor": 1, "name": "Emergency 9", "label": "Golf Simulator", "stats": ["25-40 people", "ProTee VX simulator", "10x16 ft impact screen"], "desc": "Golf simulator lounge for practice, play, and client entertainment.", "url": "../e9/", "img": "../images/e9-golf-simulator.webp", "alt": "The Emergency 9 golf simulator", "video": null}, "culinary": {"floor": 1, "name": "Culinary Lab", "label": "Zink Foodservice", "stats": ["400 sq ft", "Commercial kitchen", "USDA-compliant"], "desc": "Official Zink Culinary Center - classes, tastings, and the kitchen behind catered events.", "url": "../culinary-lab/", "img": "../images/culinary-lab.webp", "alt": "The Culinary Lab commercial kitchen", "video": null}, "foundation": {"floor": 1, "name": "Foundation Boardroom", "label": "First Floor", "stats": ["Seats 10", "Bookable in the Revelance App"], "desc": "The first-floor meeting room - steps from the Taproom and the event spaces.", "url": "../boardrooms/", "img": "../images/foundation-boardroom.webp", "alt": "The Foundation Boardroom", "video": null}, "corevel": {"floor": 2, "name": "Co-Revel Coworking", "label": "Members' Floor", "stats": ["Dedicated 2nd floor", "Open seating, dedicated desks, private offices", "Never displaced by events"], "desc": "The members' floor - set apart from events below, so your workday never gets bumped by a banquet.", "url": "../coworking/", "img": "../images/cowork-community.webp", "alt": "The Co-Revel coworking floor", "video": null}, "csuite": {"floor": 2, "name": "C-Suite Lounge", "label": "Members' Floor", "stats": ["50 personal bourbon lockers", "65\u2033 TV"], "desc": "The private lounge. Your bottle, your locker, your client's favorite pour already waiting.", "url": "../c-suite/", "img": "../images/csuite-lifestyle-lounge.webp", "alt": "The C-Suite Lounge", "video": null}, "cornerstone": {"floor": 2, "name": "Cornerstone Boardroom", "label": "Second Floor", "stats": ["Dedicated Desk members & above"], "desc": "The members-only boardroom, reserved for Dedicated Desk tiers and up.", "url": "../boardrooms/", "img": "../images/cornerstone-boardroom.webp", "alt": "The Cornerstone Boardroom", "video": null}, "horizon": {"floor": 2, "name": "Horizon Boardroom", "label": "Second Floor", "stats": ["Seats 12", "Executive boardroom"], "desc": "The executive boardroom - the big table for the big meeting.", "url": "../boardrooms/", "img": "../images/horizon-boardroom.webp", "alt": "The Horizon Boardroom", "video": null}, "overlook": {"floor": 2, "name": "Overlook Boardroom", "label": "Second Floor", "stats": ["Seats 6", "Panoramic views"], "desc": "The small room with the big windows - built for focused sessions.", "url": "../boardrooms/", "img": "../images/overlook-boardroom.webp", "alt": "The Overlook Boardroom", "video": null}};
+var XP_ROOMS = {"revel": {"floor": 1, "name": "Revel Room", "label": "Event Center", "desc": "The event center. Weddings, galas, corporate events - with a built-in stage wall for presentations and celebrations alike.", "url": "../revel-room/", "img": "../images/revel-banquet-sunset.webp", "alt": "Banquet setup in the Revel Room at sunset", "video": null, "rows": [["Capacity", "125 banquet \u00b7 225 reception"], ["Features", "25-ft ceilings \u00b7 12\u00d710 ft video wall"], ["Best for", "Weddings, galas, corporate events"], ["Booking", "Start with the event wizard"]]}, "taproom": {"floor": 1, "name": "The Taproom", "label": "First Floor", "desc": "Craft beer next door to everything. Cocktail hours flow straight from here into the Revel Room.", "url": "../taphouse/", "img": "../images/taphouse-overlook.webp", "alt": "Looking down into a full Taproom from the overlook", "video": null, "rows": [["Capacity", "50 standing"], ["Features", "Craft beer by Sonder Brewing \u00b7 bartender included with events"], ["Best for", "Happy hours, cocktail receptions"], ["Booking", "Book with your event"]]}, "e9": {"floor": 1, "name": "Emergency 9", "label": "Golf Simulator", "desc": "Golf simulator lounge for practice, play, and client entertainment.", "url": "../e9/", "img": "../images/e9-golf-simulator.webp", "alt": "The Emergency 9 golf simulator", "video": null, "rows": [["Capacity", "25\u201340 guests"], ["Features", "ProTee VX simulator \u00b7 10\u00d716 ft impact screen"], ["Best for", "Client entertainment, team events"], ["Booking", "Start with the event wizard"]]}, "culinary": {"floor": 1, "name": "Culinary Lab", "label": "Zink Foodservice", "desc": "Official Zink Culinary Center - classes, tastings, and the kitchen behind catered events.", "url": "../culinary-lab/", "img": "../images/culinary-lab.webp", "alt": "The Culinary Lab commercial kitchen", "video": null, "rows": [["Size", "400 sq ft commercial kitchen"], ["Features", "USDA-compliant \u00b7 official Zink Culinary Center"], ["Best for", "Classes, tastings, catered events"], ["Booking", "Start with the event wizard"]]}, "foundation": {"floor": 1, "name": "Foundation Boardroom", "label": "First Floor", "desc": "The first-floor meeting room - steps from the Taproom and the event spaces.", "url": "../boardrooms/", "img": "../images/foundation-boardroom.webp", "alt": "The Foundation Boardroom", "video": null, "rows": [["Capacity", "Seats 10"], ["Features", "First-floor meeting room"], ["Best for", "Meetings, workshops"], ["Booking", "Bookable in the Revelance App"]]}, "corevel": {"floor": 2, "name": "Co-Revel Coworking", "label": "Members' Floor", "desc": "The members' floor - set apart from events below, so your workday never gets bumped by a banquet.", "url": "../coworking/", "img": "../images/cowork-community.webp", "alt": "The Co-Revel coworking floor", "video": null, "rows": [["Floor", "Dedicated 2nd floor \u00b7 never displaced by events"], ["Features", "Open seating, dedicated desks, private offices"], ["Best for", "Daily work, teams, day passes"], ["Booking", "Included with membership"]]}, "csuite": {"floor": 2, "name": "C-Suite Lounge", "label": "Members' Floor", "desc": "The private lounge. Your bottle, your locker, your client's favorite pour already waiting.", "url": "../c-suite/", "img": "../images/csuite-lifestyle-lounge.webp", "alt": "The C-Suite Lounge", "video": null, "rows": [["Features", "50 personal bourbon lockers \u00b7 65\u2033 TV"], ["Best for", "Client entertainment, unwinding after hours"], ["Booking", "Members\u2019 lounge"]]}, "cornerstone": {"floor": 2, "name": "Cornerstone Boardroom", "label": "Second Floor", "desc": "The members-only boardroom, reserved for Dedicated Desk tiers and up.", "url": "../boardrooms/", "img": "../images/cornerstone-boardroom.webp", "alt": "The Cornerstone Boardroom", "video": null, "rows": [["Access", "Dedicated Desk members & above"], ["Best for", "Team meetings"], ["Booking", "Bookable in the Revelance App"]]}, "horizon": {"floor": 2, "name": "Horizon Boardroom", "label": "Second Floor", "desc": "The executive boardroom - the big table for the big meeting.", "url": "../boardrooms/", "img": "../images/horizon-boardroom.webp", "alt": "The Horizon Boardroom", "video": null, "rows": [["Capacity", "Seats 12"], ["Features", "Executive boardroom"], ["Best for", "Board meetings, presentations"], ["Booking", "Bookable in the Revelance App"]]}, "overlook": {"floor": 2, "name": "Overlook Boardroom", "label": "Second Floor", "desc": "The small room with the big windows - built for focused sessions.", "url": "../boardrooms/", "img": "../images/overlook-boardroom.webp", "alt": "The Overlook Boardroom", "video": null, "rows": [["Capacity", "Seats 6"], ["Features", "Panoramic views"], ["Best for", "Focused sessions, 1-on-1s"], ["Booking", "Bookable in the Revelance App"]]}};
 function xpPick(id){
   var r = XP_ROOMS[id];
   document.querySelectorAll('.xp-room').forEach(function(p){ p.classList.toggle('sel', p.dataset.id === id); });
@@ -275,8 +305,8 @@ function xpPick(id){
   document.getElementById('xpName').textContent = r.name;
   document.getElementById('xpDesc').textContent = r.desc;
   document.getElementById('xpLink').href = r.url;
-  var ch = document.getElementById('xpChips'); ch.innerHTML = '';
-  r.stats.forEach(function(s,i){ var c = document.createElement('span'); c.className = 'xp-chip' + (i===0 ? ' k' : ''); c.textContent = s; ch.appendChild(c); });
+  var dl = document.getElementById('xpDetails'); dl.innerHTML = '';
+  r.rows.forEach(function(row){ var d = document.createElement('div'); d.className = 'xp-row'; var dt = document.createElement('dt'); dt.textContent = row[0]; var dd = document.createElement('dd'); dd.textContent = row[1]; d.appendChild(dt); d.appendChild(dd); dl.appendChild(d); });
   if (typeof gtag !== 'undefined') gtag('event','explore_space_view',{event_category:'explore_map',event_label:id});
 }
 function xpFloor(n){

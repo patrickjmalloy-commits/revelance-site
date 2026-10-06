@@ -1,3 +1,8 @@
+# Every push to `staging` runs QA against the Netlify staging deploy, then
+# waits for a human to approve the "production" environment in GitHub.
+# Only after that click is `main` fast-forwarded to the exact commit that
+# passed QA. Nothing reaches `main` without the approval.
+name: Promote staging to production
 
 on:
   push:

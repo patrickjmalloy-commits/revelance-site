@@ -162,9 +162,11 @@ html{font-size:17px.footer .container{max-width:1600px;padding:0 48px}.footer-gr
 .xp-map svg{display:block;width:100%;height:auto}
 .xp-map svg[hidden]{display:none!important}
 .xp-hint{position:absolute;top:20px;left:22px;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:#8a93a0;background:rgba(255,255,255,.88);padding:5px 10px;border-radius:6px;pointer-events:none}
-.xp-lab{pointer-events:none;font-family:'Outfit',sans-serif;text-transform:uppercase}
-.xp-lab text{text-anchor:middle;font-weight:600;letter-spacing:.18em;fill:#2A3240}
-.xp-lab text.aux{fill:#8A939E;font-weight:500}
+.xp-lab,.xp-rg{font-family:'Outfit',sans-serif;text-transform:uppercase}
+.xp-lab{pointer-events:none}
+.xp-lab text,.xp-rg text{text-anchor:middle;font-weight:600;letter-spacing:.18em;fill:#232A33;paint-order:stroke;stroke:#FFFFFF;stroke-width:5px;stroke-linejoin:round;pointer-events:none;transition:fill .18s,stroke-width .18s}
+.xp-lab text{fill:#8A939E;font-weight:500}
+.xp-rg:hover text,.xp-rg.sel text{fill:#B08C4A;stroke-width:8px;font-weight:700}
 .xp-room{fill:rgba(201,169,110,0);stroke:rgba(176,140,74,0);stroke-width:5;cursor:pointer;transition:fill .18s,stroke .18s}
 .xp-room:hover{fill:rgba(201,169,110,.32);stroke:rgba(176,140,74,.9)}
 .xp-room.sel{fill:rgba(201,169,110,.42);stroke:#B08C4A;stroke-width:6}
@@ -233,45 +235,21 @@ html{font-size:17px.footer .container{max-width:1600px;padding:0 48px}.footer-gr
     <span class="xp-hint">Tap a space</span>
     <svg id="xpSvg1" viewBox="0 0 2300 1650" role="img" aria-label="First floor plan of Revelance">
       <image href="../images/map-floor1.webp" width="2300" height="1650"/>
-        <polygon class="xp-room" data-id="taproom" points="1096,236 1400,236 1400,630 1576,630 1576,956 1096,956"><title>The Taproom</title></polygon>
-        <polygon class="xp-room" data-id="culinary" points="1410,224 2036,224 2036,680 1720,680 1720,624 1410,624"><title>Culinary Lab</title></polygon>
-        <polygon class="xp-room" data-id="e9" points="696,670 1106,670 1106,1024 696,1024"><title>Emergency 9</title></polygon>
-        <polygon class="xp-room" data-id="foundation" points="696,1040 956,1040 956,1280 696,1280"><title>Foundation Boardroom</title></polygon>
-        <polygon class="xp-room" data-id="revel" points="1310,1156 2040,1156 2040,1576 1310,1576"><title>Revel Room</title></polygon>
-    <g class="xp-lab" aria-hidden="true">
-<text x="1330" y="780" font-size="34">The Taproom</text>
-<text x="1676" y="1372" font-size="34">Revel Room</text>
-<text x="900" y="880" font-size="32">E9 Golf Simulator</text>
-<text x="1724" y="442" font-size="32">Culinary Lab</text>
-<text x="826" y="1156" font-size="25">Foundation</text>
-<text x="826" y="1196" font-size="19">Boardroom</text>
-<text x="286" y="392" font-size="23" class="aux">Arthrex</text>
-<text x="880" y="364" font-size="23" class="aux">Sonder</text>
-<text x="340" y="1262" font-size="23" class="aux">Fortegic</text>
-<text x="592" y="854" font-size="17" class="aux">Podcast</text>
-<text x="1932" y="856" font-size="17" class="aux">Restrooms</text>
-</g>
+        <g class="xp-rg" data-id="taproom"><polygon class="xp-room" data-id="taproom" points="1096,236 1400,236 1400,630 1576,630 1576,956 1096,956"><title>The Taproom</title></polygon><text x="1330" y="780" font-size="34">The Taproom</text></g>
+        <g class="xp-rg" data-id="culinary"><polygon class="xp-room" data-id="culinary" points="1410,224 2036,224 2036,680 1720,680 1720,624 1410,624"><title>Culinary Lab</title></polygon><text x="1724" y="442" font-size="32">Culinary Lab</text></g>
+        <g class="xp-rg" data-id="e9"><polygon class="xp-room" data-id="e9" points="696,670 1106,670 1106,1024 696,1024"><title>Emergency 9</title></polygon><text x="901" y="824" font-size="24">E9 Golf</text><text x="901" y="864" font-size="24">Simulator</text></g>
+        <g class="xp-rg" data-id="foundation"><polygon class="xp-room" data-id="foundation" points="696,1040 956,1040 956,1280 696,1280"><title>Foundation Boardroom</title></polygon><text x="826" y="1156" font-size="24">Foundation</text><text x="826" y="1194" font-size="18">Boardroom</text></g>
+        <g class="xp-rg" data-id="revel"><polygon class="xp-room" data-id="revel" points="1310,1156 2040,1156 2040,1576 1310,1576"><title>Revel Room</title></polygon><text x="1676" y="1372" font-size="34">Revel Room</text></g>
+        <g class="xp-lab" aria-hidden="true"><text x="286" y="392" font-size="23">Arthrex</text><text x="880" y="364" font-size="23">Sonder</text><text x="340" y="1262" font-size="23">Fortegic</text><text x="592" y="854" font-size="17">Podcast</text><text x="1932" y="856" font-size="17">Restrooms</text></g>
     </svg>
     <svg id="xpSvg2" viewBox="0 0 2300 1500" role="img" aria-label="Second floor plan of Revelance" hidden>
       <image href="../images/map-floor2.webp" width="2300" height="1500"/>
-        <polygon class="xp-room" data-id="corevel" points="40,60 860,60 860,470 980,470 980,1420 40,1420"><title>Co-Revel Coworking</title></polygon>
-        <polygon class="xp-room" data-id="cornerstone" points="50,60 290,60 290,330 50,330"><title>Cornerstone Boardroom</title></polygon>
-        <polygon class="xp-room" data-id="horizon" points="456,864 664,864 664,1036 456,1036"><title>Horizon Boardroom</title></polygon>
-        <polygon class="xp-room" data-id="overlook" points="1016,486 1226,486 1226,676 1016,676"><title>Overlook Boardroom</title></polygon>
-        <polygon class="xp-room" data-id="csuite" points="1430,490 1660,490 1660,860 1430,860"><title>C-Suite Lounge</title></polygon>
-    <g class="xp-lab" aria-hidden="true">
-<text x="510" y="1186" font-size="34">Co-Revel</text>
-<text x="1546" y="662" font-size="26">C-Suite</text>
-<text x="1546" y="700" font-size="19">Lounge</text>
-<text x="170" y="186" font-size="22">Cornerstone</text>
-<text x="170" y="222" font-size="17">Boardroom</text>
-<text x="560" y="940" font-size="22">Horizon</text>
-<text x="560" y="974" font-size="17">Boardroom</text>
-<text x="1120" y="576" font-size="22">Overlook</text>
-<text x="1120" y="610" font-size="17">Boardroom</text>
-<text x="1484" y="306" font-size="23" class="aux">Arthrex</text>
-<text x="1986" y="684" font-size="17" class="aux">Restrooms</text>
-</g>
+        <g class="xp-rg" data-id="corevel"><polygon class="xp-room" data-id="corevel" points="40,60 860,60 860,470 980,470 980,1420 40,1420"><title>Co-Revel Coworking</title></polygon><text x="510" y="1186" font-size="34">Co-Revel</text></g>
+        <g class="xp-rg" data-id="cornerstone"><polygon class="xp-room" data-id="cornerstone" points="50,60 290,60 290,330 50,330"><title>Cornerstone Boardroom</title></polygon><text x="170" y="186" font-size="21">Cornerstone</text><text x="170" y="222" font-size="16">Boardroom</text></g>
+        <g class="xp-rg" data-id="horizon"><polygon class="xp-room" data-id="horizon" points="456,864 664,864 664,1036 456,1036"><title>Horizon Boardroom</title></polygon><text x="560" y="940" font-size="22">Horizon</text><text x="560" y="974" font-size="17">Boardroom</text></g>
+        <g class="xp-rg" data-id="overlook"><polygon class="xp-room" data-id="overlook" points="1016,486 1226,486 1226,676 1016,676"><title>Overlook Boardroom</title></polygon><text x="1120" y="576" font-size="22">Overlook</text><text x="1120" y="610" font-size="17">Boardroom</text></g>
+        <g class="xp-rg" data-id="csuite"><polygon class="xp-room" data-id="csuite" points="1430,490 1660,490 1660,860 1430,860"><title>C-Suite Lounge</title></polygon><text x="1546" y="662" font-size="26">C-Suite</text><text x="1546" y="700" font-size="19">Lounge</text></g>
+        <g class="xp-lab" aria-hidden="true"><text x="1484" y="306" font-size="23">Arthrex</text><text x="1986" y="684" font-size="17">Restrooms</text></g>
     </svg>
   </div>
   <aside class="xp-card" aria-live="polite">
@@ -300,6 +278,7 @@ var XP_ROOMS = {"revel": {"floor": 1, "name": "Revel Room", "label": "Event Cent
 function xpPick(id){
   var r = XP_ROOMS[id];
   document.querySelectorAll('.xp-room').forEach(function(p){ p.classList.toggle('sel', p.dataset.id === id); });
+  document.querySelectorAll('.xp-rg').forEach(function(g){ g.classList.toggle('sel', g.dataset.id === id); });
   var ph = document.getElementById('xpPhoto'); ph.src = r.img; ph.alt = r.alt;
   document.getElementById('xpSuite').textContent = r.label;
   document.getElementById('xpName').textContent = r.name;

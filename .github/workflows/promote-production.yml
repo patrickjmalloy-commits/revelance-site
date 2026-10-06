@@ -1,0 +1,127 @@
+
+on:
+  push:
+    branches: [staging]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+# A newer staging push replaces an older run still waiting for approval,
+# so the approval request is always for the latest staging commit.
+concurrency:
+  group: promote-production
+  cancel-in-progress: true
+
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    outputs:
+      sha: ${{ steps.meta.outputs.sha }}
+      pending: ${{ steps.meta.outputs.pending }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: staging
+          fetch-depth: 0
+
+      - name: Work out what would go live
+        id: meta
+        run: |
+          set -e
+          sha=$(git rev-parse HEAD)
+          echo "sha=$sha" >> "$GITHUB_OUTPUT"
+          git fetch -q origin main
+          if [ "$(git rev-parse origin/main)" = "$sha" ]; then
+            echo "main already matches staging; nothing to promote"
+            echo "pending=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git merge-base --is-ancestor origin/main "$sha" \
+            || { echo "staging is not a fast-forward of main; resolve by hand"; exit 1; }
+          git diff --name-only origin/main "$sha" > /tmp/changed.txt
+          echo "pending=true" >> "$GITHUB_OUTPUT"
+          {
+            echo "### Files that will go live on approval"
+            echo
+            echo "Commit \`${sha:0:7}\`: $(git log -1 --format=%s "$sha")"
+            echo
+            sed 's/^/- /' /tmp/changed.txt
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: QA — wait for Netlify staging to serve this commit, then smoke-test
+        if: steps.meta.outputs.pending == 'true'
+        env:
+          S: https://revelancestaging.netlify.app
+        run: |
+          set -e
+          # Netlify rewrites <form>/<input> markup and may inject <script> tags,
+          # so HTML is compared with those removed; other files byte-for-byte.
+          cat > /tmp/fp.py <<'PY'
+          import re, sys, hashlib
+          d = open(sys.argv[1], 'rb').read().decode('utf-8', 'replace')
+          d = re.sub(r'(?is)<script\b.*?</script>', '', d)
+          d = re.sub(r'(?i)</?(form|input)\b[^>]*>', '', d)
+          d = re.sub(r'\s+', ' ', d)
+          print(hashlib.md5(d.encode()).hexdigest())
+          PY
+          fp() { case "$1" in *.html) python3 /tmp/fp.py "$2";; *) md5sum "$2" | cut -d' ' -f1;; esac; }
+          url() { case "$1" in index.html) echo "$S/";; */index.html) echo "$S/${1%index.html}";; *) echo "$S/$1";; esac; }
+
+          # Check up to 5 changed site files (skip repo-only files).
+          grep -Ev '^(\.github/|netlify/|netlify\.toml$|README\.md$|.*\.md$)' /tmp/changed.txt | head -5 > /tmp/check.txt || true
+          while read -r f; do
+            [ -f "$f" ] || continue
+            want=$(fp "$f" "$f"); ok=0
+            for i in $(seq 1 40); do
+              code=$(curl -s -o /tmp/live -w '%{http_code}' "$(url "$f")" || true)
+              if [ "$code" = "200" ] && [ "$(fp "$f" /tmp/live)" = "$want" ]; then ok=1; break; fi
+              sleep 15
+            done
+            [ "$ok" = 1 ] || { echo "QA FAIL: staging never served the new $f (last HTTP $code)"; exit 1; }
+            echo "served: $f"
+          done < /tmp/check.txt
+
+          for p in / /explore/ /host-an-event/ /about/ /plan-your-event/; do
+            code=$(curl -s -o /tmp/p.html -w '%{http_code}' "$S$p")
+            [ "$code" = "200" ] || { echo "QA FAIL: $p returned $code"; exit 1; }
+            grep -q '</html>' /tmp/p.html || { echo "QA FAIL: $p truncated"; exit 1; }
+          done
+          echo "QA PASS"
+
+  # Refuse to promote unless "production" exists AND requires a reviewer.
+  # (A job that names a missing environment would silently create it with no
+  # protection, so this check runs first, outside the environment.)
+  environment-guard:
+    needs: qa
+    if: needs.qa.outputs.pending == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -e
+          r=$(curl -fsS -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${{ github.repository }}/environments/production") \
+            || { echo "The 'production' environment does not exist yet; refusing to promote."; exit 1; }
+          echo "$r" | python3 -c 'import json,sys; e=json.load(sys.stdin); ok=any(p.get("type")=="required_reviewers" and p.get("reviewers") for p in e.get("protection_rules",[])); sys.exit(0 if ok else 1)' \
+            || { echo "'production' has no required reviewers; refusing to promote."; exit 1; }
+          echo "production requires reviewer approval"
+
+  promote:
+    needs: [qa, environment-guard]
+    if: needs.qa.outputs.pending == 'true'
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://revelanceoh.com
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.qa.outputs.sha }}
+          fetch-depth: 0
+      - name: Fast-forward main to the approved commit
+        run: |
+          # Non-force push: fails if main moved since QA, never rewrites history.
+          git push origin "${{ needs.qa.outputs.sha }}:refs/heads/main"

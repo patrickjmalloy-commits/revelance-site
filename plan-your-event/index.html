@@ -1182,7 +1182,7 @@ function submitEvent() {
   // Submit to Netlify — surface failures instead of silently dropping the lead
   const form = document.getElementById('eventForm');window.revFillGclid(form);
   fetch('/', {method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body: new URLSearchParams(new FormData(form)).toString()})
-    .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); })
+    .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); if(window.clarity)clarity("event","wizard_submitted"); })
     .catch(function(err){
       console.error('Event form submission failed:', err);
       var res = document.querySelector('.step.active') || document.body;
@@ -2420,6 +2420,7 @@ function submitSoftAsk() {
   if (typeof gtag !== 'undefined') {
     gtag('event','soft_ask_submitted',{event_category:'event_planner_wizard',event_label:'email_only'});
   }
+  if(window.clarity)clarity("event","soft_ask_submitted");
   form.style.display = 'none';
   document.getElementById('softAskConfirm').style.display = 'block';
 }

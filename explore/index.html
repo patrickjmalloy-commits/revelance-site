@@ -29,7 +29,7 @@
 <meta name="theme-color" content="#0B0E11">
 <style>a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--gold-dark);outline-offset:2px}.skip-link{position:absolute;left:-9999px;top:0;z-index:2000;background:var(--gold);color:var(--black);padding:10px 18px;font-weight:700;border-radius:0 0 6px 0;text-decoration:none}.skip-link:focus{left:0}
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--black:#0B0E11;--charcoal:#151A20;--slate:#1E252E;--steel:#2A333E;--graphite:#3A4450;--ash:#5A6572;--silver:#8A929A;--mist:#B8BEC4;--cloud:#E8EAED;--pearl:#F4F5F6;--white:#FDFEFE;--gold:#C9A96E;--gold-dark:#B8944A;--gold-light:#D4BA82;--sans:'Outfit',-apple-system,sans-serif;--serif:'Playfair Display',Georgia,serif;--ease:cubic-bezier(.4,0,.2,1)}
+:root{--black:#0B0E11;--charcoal:#151A20;--slate:#1E252E;--steel:#2A333E;--graphite:#3A4450;--ash:#5A6572;--silver:#8A929A;--mist:#B8BEC4;--cloud:#E8EAED;--pearl:#F4F5F6;--white:#FDFEFE;--gold:#C9A96E;--gold-dark:#B08C4A;--gold-light:#D4BA85;--sans:'Outfit',-apple-system,sans-serif;--serif:'Playfair Display',Georgia,serif;--ease:cubic-bezier(.4,0,.2,1)}
 /* NAV */
 .nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:14px 0;transition:background .4s ease,box-shadow .4s ease}.nav.no-transition{transition:none!important}.nav.scrolled{background:rgba(11,14,17,.96);backdrop-filter:blur(16px);padding:14px 0;box-shadow:0 1px 30px rgba(0,0,0,.2)}.nav-inner{max-width:1200px;margin:0 auto;padding:0 28px;display:flex;align-items:center;justify-content:space-between}
 .nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none}.nav-logo-icon{height:36px;width:36px;transition:height .3s,width .3s}@media(min-width:1101px){.nav.scrolled .nav-logo-icon{height:36px;width:36px}}.nav-logo-text{color:#fff;font-size:15px;font-weight:300;letter-spacing:.28em;text-transform:uppercase;transition:font-size .3s}@media(min-width:1101px){.nav.scrolled .nav-logo-text{font-size:15px}}
@@ -63,7 +63,8 @@ a{color:var(--gold-dark);text-decoration:none}a:hover{color:var(--gold)}
 .section{padding:70px 0}
 .label{font-size:.7rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;display:inline-flex;align-items:center;gap:14px}
 .label::before{content:'';width:32px;height:1px;background:var(--gold)}
-h2{font-size:1.7rem;font-weight:800;margin-bottom:12px;line-height:1.25}
+h2{font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.6rem);font-weight:500;line-height:1.15;margin-bottom:16px}
+h2 em{font-style:italic;color:var(--gold-dark)}
 h2 em{font-style:italic;font-weight:400}
 .sub{color:var(--ash);font-size:1rem;max-width:650px;margin-bottom:40px}
 
@@ -104,7 +105,7 @@ a.audience-card:hover{border-color:var(--gold);transform:translateY(-3px);box-sh
 .mobile-contact a:hover{background:rgba(255,255,255,.06)}
 .mobile-contact .mc-ico{font-size:1.1rem}
 @media(max-width:600px){.mobile-contact{display:block}.footer-grid{grid-template-columns:1fr}.footer{padding-bottom:calc(110px + env(safe-area-inset-bottom,0px))!important}.footer-social{justify-content:center}}
-@media(max-width:600px){.hero h1{font-size:1.6rem}h2{font-size:1.3rem}}
+@media(max-width:600px){.hero h1{font-size:1.9rem}}
 .btn{display:inline-flex;align-items:center;gap:10px;padding:15px 30px;border-radius:6px;font-family:var(--sans);font-size:.9rem;font-weight:600;letter-spacing:.02em;text-decoration:none;transition:all .35s var(--ease);cursor:pointer;border:none}
 .btn-gold{background:var(--gold);color:var(--black)}
 .btn-gold:hover{background:var(--gold-dark);transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,169,110,.3)}
@@ -158,7 +159,8 @@ html{font-size:17px.footer .container{max-width:1600px;padding:0 48px}.footer-gr
 .xp-sub{font-size:.9rem;color:var(--ash,#5A6572);margin:0 0 18px}
 .xp-stage{display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:26px;align-items:stretch;max-width:1240px;margin:0 auto}
 @media(max-width:900px){.xp-stage{grid-template-columns:1fr}}
-.xp-map{background:#fff;border:1px solid var(--cloud,#E8EAED);border-radius:14px;padding:12px;position:relative;display:flex;flex-direction:column;justify-content:center}
+.xp-left{min-width:0;display:flex;flex-direction:column}
+.xp-map{flex:1;background:#fff;border:1px solid var(--cloud,#E8EAED);border-radius:14px;padding:12px;position:relative;display:flex;flex-direction:column;justify-content:center}
 .xp-map svg{display:block;width:100%;height:auto}
 .xp-map svg[hidden]{display:none!important}
 .xp-hint{position:absolute;top:20px;left:22px;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:#8a93a0;background:rgba(255,255,255,.88);padding:5px 10px;border-radius:6px;pointer-events:none}
@@ -241,6 +243,7 @@ html{font-size:17px.footer .container{max-width:1600px;padding:0 48px}.footer-gr
 </div>
 <p class="xp-sub" id="xpSub">Events, entertainment, the Culinary Lab, and the Taproom - all on one level.</p>
 <div class="xp-stage">
+  <div class="xp-left">
   <div class="xp-map">
     <span class="xp-hint">Tap a space</span>
     <svg id="xpSvg1" viewBox="0 0 2300 1650" role="img" aria-label="First floor plan of Revelance">
@@ -270,6 +273,7 @@ html{font-size:17px.footer .container{max-width:1600px;padding:0 48px}.footer-gr
     <span><svg width="15" height="15" viewBox="-10 -10 20 20" aria-hidden="true"><circle r="9" fill="#fff" stroke="#D7DCE2"/><path d="M0,4 v-8 m0,0 l-3,3 m3,-3 l3,3" stroke="#6B7682" fill="none" stroke-width="1.6" stroke-linecap="round"/></svg>Amenities &amp; wayfinding</span>
   </div>
   <div class="xp-visit"><strong>First visit?</strong> Come in through the front double doors on the left &mdash; RoboJo coffee is just inside on your left, and the front desk is staffed Mon&ndash;Fri 8am&ndash;6pm. Free parking sits to the left of the building, with EV chargers beside the Culinary Lab. Upstairs, the Revel Caf&eacute; and FreshBlends are on the west wall of Co-Revel.</div>
+  </div>
   <aside class="xp-card" aria-live="polite">
     <div class="xp-media"><img id="xpPhoto" src="../images/revel-banquet-sunset.webp" alt="Banquet setup in the Revel Room at sunset" width="640" height="400"></div>
     <p class="xp-suite" id="xpSuite">Event Center</p>

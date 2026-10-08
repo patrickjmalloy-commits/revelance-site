@@ -397,6 +397,29 @@ async function postToSheet(body) {
   }
 }
 
+// -- "Website Inquiries" tab: every non-day-pass form lands there --
+function inquiryDetails(d) {
+  const skip = ['name','email','phone','company','bot-field','form-name','g-recaptcha-response'];
+  const parts = [];
+  Object.keys(d || {}).forEach(function (k) {
+    if (skip.indexOf(k) !== -1) return;
+    const v = String(d[k] == null ? '' : d[k]).trim();
+    if (v) parts.push(k + ': ' + v);
+  });
+  return parts.join(' | ');
+}
+async function logInquiry(formName, d) {
+  try {
+    await postToSheet({
+      action: 'inquiry',
+      timestamp: new Date().toLocaleString('en-US', { timeZone: 'America/New_York' }),
+      form: formName, name: d.name || '', email: d.email || '',
+      phone: d.phone || '', company: d.company || '',
+      details: inquiryDetails(d),
+    });
+  } catch (e) { console.error('inquiry log failed:', e && e.message); }
+}
+
 /* ─────────────────────── PERFECT VENUE LEAD BRIDGE ───────────────────────
    Re-sends qualifying event-inquiry submissions (event-planner, event-related
    contact, corporate-package, culinary-lab-inquiry) to the same endpoint
@@ -759,6 +782,10 @@ exports.handler = async function (event) {
   try {
     const payload = JSON.parse(event.body || '{}').payload || {};
     const formName = payload.form_name;
+    // Every non-day-pass form also lands on the "Website Inquiries" sheet tab.
+    if (formName && formName !== 'free-day-pass' && formName !== 'check-in' && formName !== 'pick-a-day') {
+      await logInquiry(formName, payload.data || {});
+    }
     // ── New-member application: branded confirmation (team is BCC'd) ──────
     if (formName === 'new-member') {
       const nd = payload.data || {};

@@ -783,7 +783,7 @@ exports.handler = async function (event) {
     const payload = JSON.parse(event.body || '{}').payload || {};
     const formName = payload.form_name;
     // Every non-day-pass form also lands on the "Website Inquiries" sheet tab.
-    if (formName && formName !== 'free-day-pass' && formName !== 'check-in' && formName !== 'pick-a-day') {
+    if (formName && formName !== 'free-day-pass' && formName !== 'check-in' && formName !== 'pick-a-day' && formName !== 'new-member') {
       await logInquiry(formName, payload.data || {});
     }
     // ── New-member application: branded confirmation (team is BCC'd) ──────

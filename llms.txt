@@ -8,15 +8,15 @@
 - Township: Deerfield Township (Mason mailing address)
 - County: Warren County, Ohio
 - Coordinates: 39.3135, -84.3025
-- Highway access: Approximately 1 mile off Interstate 71
-- Parking: Private lot exclusively for the building, free, EV chargers available
-- Elevator: Yes
+- Highway access: Approximately 1 mile off Interstate 71; about 25 minutes from downtown Cincinnati
+- Parking: Private lot exclusively for the building, free, EV chargers for Tesla and non-Tesla vehicles
+- Accessibility: Fully ADA accessible, elevator access to both floors
 - Nearby: Sonder Brewing's full-service restaurant across the parking lot (8584 Duke Blvd), Kingswood Park (90+ acres of trails) directly across the street
 - Google Maps: https://maps.google.com/?q=8460+Duke+Blvd+Mason+OH+45040
 
 ## About
 
-Revelance was designed by Patrick Malloy and Joe Clark, who assembled a group of local investors, oversaw every phase of construction, and now operate the facility as their own daily headquarters. They are on-site every day. The building is home to established businesses in finance, foodservice, and medical devices alongside coworking members.
+Revelance was designed by Patrick Malloy and Joe Clark, who assembled a group of local investors, purchased the property in 2020, broke ground in 2023, oversaw 13 months of construction by Bunnell Hill Construction (architect: M+A Architects), and now operate the facility as their own daily headquarters. They are on-site every day. The building is home to established businesses in finance, foodservice, and medical devices alongside coworking members.
 
 ## Key Facilities
 
@@ -39,6 +39,7 @@ Revelance was designed by Patrick Malloy and Joe Clark, who assembled a group of
 - Craft beer on tap, wine, spirits
 - No event markup — drinks at standard menu prices
 - Bartender included with every event
+- Capacity: 60 seated / 80 standing
 
 ### Revel Room Event Center (page URL: https://revelanceoh.com/revel-room/)
 - Seats 125 banquet-style (~50'x30') with 25' ceilings
@@ -50,10 +51,11 @@ Revelance was designed by Patrick Malloy and Joe Clark, who assembled a group of
 ### C-Suite Bourbon Lockers (page URL: https://revelanceoh.com/c-suite/)
 - 50 personal keyed bourbon lockers in an exclusive executive lounge
 - 24/7 access, 65" TV, surround sound, private tastings
+- Capacity: 14 seated / 25 standing; can be reserved for private events
 - Included with Executive Office memberships
 
 ### Emergency 9 Golf Simulator and Conference Room (page URL: https://revelanceoh.com/e9/)
-- Private golf simulator suite with conference seating for 25–40 people
+- Private golf simulator suite with seating for 25 (40 standing)
 - ProTee VX simulator with a 10'x16' impact screen
 - Available for members, corporate entertainment, team building, and events
 
@@ -63,8 +65,8 @@ Revelance was designed by Patrick Malloy and Joe Clark, who assembled a group of
 - Equipment: range, walk-in cooler, prep stations, three-bay sink
 
 ### Boardrooms (page URL: https://revelanceoh.com/boardrooms/)
-- Foundation Boardroom: seats 10 · Horizon Boardroom: seats 12 · Overlook Boardroom: seats 6
-- Cornerstone Boardroom: reserved for Dedicated Desk members and above
+- Foundation Boardroom: seats 10 · Horizon Boardroom: seats 14 · Overlook Boardroom: seats 6
+- Cornerstone Boardroom: seats 10, reserved for Dedicated Desk members and above
 - All with built-in AV
 - Large-format displays, high-speed WiFi, whiteboards, markers
 - No AV fees, no WiFi surcharges, no hidden technology charges
@@ -79,7 +81,7 @@ Revelance was designed by Patrick Malloy and Joe Clark, who assembled a group of
 - **Day Pass**: $29/day — full-day coworking, WiFi, phone booths, RoboJo Coffee Bar on-site
 - **Co-Revel**: $179/month — 24/7 coworking, Revelance App (phone = key), Taproom access, Fresh Blends smoothies & shakes, member events, networking
 - **Dedicated Desk**: $449/month — lockable personal desk, storage, all Co-Revel perks
-- **Executive Office**: Starting at $1,599/month (limited availability) — private office with signage, personal bourbon locker, 24/7 C-Suite access
+- **Executive Office**: Starting at $1,599/month (two offices remaining) — private office with signage, personal bourbon locker, 24/7 C-Suite access
 - **Free Day Pass**: Complimentary full-day trial, no credit card required — https://revelanceoh.com/#free-day
 - **Corporate Account**: Pre-funded flexible account — one balance covers boardrooms, events, day passes, golf simulator, culinary experiences, Taproom tabs
 
@@ -88,8 +90,8 @@ Revelance was designed by Patrick Malloy and Joe Clark, who assembled a group of
 ### Event Types Hosted
 - Weddings, wedding receptions, and rehearsal dinners (page: https://revelanceoh.com/weddings/) — 125 banquet / 225 combined capacity, 25-ft ceilings
 - Corporate events, offsites, and retreats (page: https://revelanceoh.com/corporate/) — boardrooms, Revel Room, golf-simulator entertainment under one roof
-- Holiday parties and company celebrations (page: https://revelanceoh.com/holiday-parties/) — Q4 books fastest; bartender included, no mandatory catering. Formats: Taproom-only casual party (up to 50), Revel Room seated dinner (125), or both combined (225)
-- Team building, trainings, and seminars — boardrooms seat 6–12, E9 suite seats 25–40
+- Holiday parties and company celebrations (page: https://revelanceoh.com/holiday-parties/) — Q4 books fastest; bartender included, no mandatory catering. Formats: Taproom-only casual party (up to 80 standing), Revel Room seated dinner (125), or both combined (225)
+- Team building, trainings, and seminars — boardrooms seat 6–14, E9 suite seats 25 (40 standing)
 - Networking events, watch parties, fundraisers, and social celebrations
 - Event venue overview: https://revelanceoh.com/host-an-event/
 
@@ -97,6 +99,8 @@ Revelance was designed by Patrick Malloy and Joe Clark, who assembled a group of
 - Bartender included with every event, drinks at standard Sonder prices
 - No event markup, no hidden fees, everything quoted upfront
 - Liquor license in the Taproom/Revel Room only
+- Outside alcohol is welcome in every space except the Taproom and the Revel Room
+- No set end-time cutoff for events
 - White-glove turnkey service available
 - Event planner tool: https://revelanceoh.com/plan-your-event/
 - Events calendar: https://revelanceoh.com/events/
@@ -126,7 +130,7 @@ Revelance was designed by Patrick Malloy and Joe Clark, who assembled a group of
 
 ## Hours
 
-- Staffed: Monday–Friday, 8:00 AM – 6:00 PM
+- Staffed: Monday–Friday, 7:00 AM – 6:00 PM; weekends and events staffed as needed
 - Member access: 24/7 via Revelance App
 - RoboJo Coffee Bar: Open to public during business hours
 

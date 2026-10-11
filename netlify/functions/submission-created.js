@@ -188,8 +188,8 @@ function passEmail(name, code, isColleague, inviterName, visitPretty, expiresPre
   const fwd = isColleague ? '' : '<p style="font-size:14px;color:#3A4450;line-height:1.7;margin:16px 0 0;"><strong>First days are better with company.</strong> Forward this to a colleague — they can claim their own free pass at <a href="https://revelanceoh.com/#free-day" style="color:#B08C4A;">revelanceoh.com</a>.</p>';
   const remind = withReminder ? ' We’ll send a reminder with everything that morning.' : '';
   const whenRow = visitPretty
-    ? '<tr><td style="padding:4px 0;"><strong>Your day:</strong> ' + visitPretty + ' — we’re staffed 8am–6pm, arrive whenever suits you.' + remind + ' <a href="' + pdUrl + '" style="color:#B08C4A;">Plans change? Pick a new day</a>.</td></tr>'
-    : '<tr><td style="padding:4px 0;"><strong>When to come:</strong> Any staffed weekday, Mon–Fri 8am–6pm. <a href="' + pdUrl + '" style="color:#B08C4A;font-weight:bold;">Pick your day</a> and we’ll send a reminder that morning with everything you need.</td></tr>';
+    ? '<tr><td style="padding:4px 0;"><strong>Your day:</strong> ' + visitPretty + ' — we’re staffed 7am–6pm, arrive whenever suits you.' + remind + ' <a href="' + pdUrl + '" style="color:#B08C4A;">Plans change? Pick a new day</a>.</td></tr>'
+    : '<tr><td style="padding:4px 0;"><strong>When to come:</strong> Any staffed weekday, Mon–Fri 7am–6pm. <a href="' + pdUrl + '" style="color:#B08C4A;font-weight:bold;">Pick your day</a> and we’ll send a reminder that morning with everything you need.</td></tr>';
   const expRow = expiresPretty
     ? '<tr><td style="padding:4px 0;"><strong>Good through:</strong> ' + expiresPretty + ' — use it any day before then. Picking a day past that date automatically extends your pass.</td></tr>' : '';
   const inner = `${intro}
@@ -227,7 +227,7 @@ function morningEmail(name, code, email) {
     <table style="width:100%;font-size:14px;color:#3A4450;line-height:1.75;" cellpadding="0" cellspacing="0">
       <tr><td style="padding:4px 0;">📍 <strong>Find us:</strong> <a href="https://maps.google.com/?q=8460+Duke+Blvd+Mason+OH+45040" style="color:#B08C4A;">8460 Duke Blvd, Mason, OH 45040</a> — about a mile off I-71</td></tr>
       <tr><td style="padding:4px 0;">🚗 <strong>Park free</strong> in our private lot (EV chargers available), then come in the main entrance</td></tr>
-      <tr><td style="padding:4px 0;">🕒 <strong>We’re staffed 8am–6pm</strong> — arrive whenever suits your day</td></tr>
+      <tr><td style="padding:4px 0;">🕒 <strong>We’re staffed 7am–6pm</strong> — arrive whenever suits your day</td></tr>
       <tr><td style="padding:4px 0;">☕ <strong>Start with a coffee</strong> — the RoboJo robotic coffee bar is pouring in the lobby</td></tr>
       <tr><td style="padding:4px 0;">💻 <strong>Work anywhere</strong> on the Co-Revel floor — desks, phone booths, and the café are all yours today</td></tr>
     </table>
@@ -350,7 +350,7 @@ function guestFollowUpEmail(name) {
   const first = firstName(name);
   const inner = `<p style="margin:0 0 18px;font-size:15px;line-height:1.75;color:#3A4450;">You were in the building this week for a meeting — here’s an open invitation to try it as your own office.</p>
     <div style="background:#F4F5F6;border:1px solid #E8EAED;border-left:3px solid #C9A96E;border-radius:8px;padding:16px 18px;margin:0 0 22px;">
-      <p style="margin:0 0 10px;font-size:15px;color:#3A4450;line-height:1.7;"><strong>A free work week at Revelance</strong> — Monday through Friday, 8 AM–6 PM. The Co-Revel floor, RoboJo coffee, phone booths, all of it. No card, no strings.</p>
+      <p style="margin:0 0 10px;font-size:15px;color:#3A4450;line-height:1.7;"><strong>A free work week at Revelance</strong> — Monday through Friday, 7 AM–6 PM. The Co-Revel floor, RoboJo coffee, phone booths, all of it. No card, no strings.</p>
       <p style="margin:0;font-size:14px;color:#3A4450;line-height:1.7;">\ud83d\udcc5 Reply with the Monday you’d like to start — <strong>any Monday in the next 30 days</strong> — and the team will confirm and have everything ready. We’ll let you in each morning; no key needed.</p>
     </div>
     <div style="margin:0 0 22px;">${btn('https://revelanceoh.com/coworking/', 'See the Co-Revel Floor')}</div>
@@ -386,7 +386,7 @@ function followUpEmail(name, interest) {
     <div style="background:#F4F5F6;border:1px solid #E8EAED;border-left:3px solid #C9A96E;border-radius:8px;padding:16px 18px;margin:0 0 22px;">
       <p style="margin:0 0 10px;font-size:14px;color:#3A4450;line-height:1.7;"><strong>Not ready to decide? Two easy options:</strong></p>
       <p style="margin:0 0 8px;font-size:14px;color:#3A4450;line-height:1.7;">☕ Reply <strong>“coffee”</strong> and come back for a RoboJo on us — no agenda, we’ll walk through the options together.</p>
-      <p style="margin:0;font-size:14px;color:#3A4450;line-height:1.7;">📅 Reply <strong>“free week”</strong> and we’ll set you up with a full work week — <strong>Monday through Friday, 8 AM–6 PM</strong>, completely free. Pick any Monday in the next 30 days and the team will confirm and let you in each morning.</p>
+      <p style="margin:0;font-size:14px;color:#3A4450;line-height:1.7;">📅 Reply <strong>“free week”</strong> and we’ll set you up with a full work week — <strong>Monday through Friday, 7 AM–6 PM</strong>, completely free. Pick any Monday in the next 30 days and the team will confirm and let you in each morning.</p>
     </div>
     ${eventsBlock()}
     <p style="font-size:14px;color:#3A4450;line-height:1.7;margin:22px 0 0;">Questions — or just want another look around? Reply to this email or call <a href="tel:5137945070" style="color:#B08C4A;">513-794-5070</a>. We’d love to have you back.</p>`;

@@ -1,0 +1,48 @@
+name: Monthly site health report
+
+# Checks the live site once a month and files the result as a GitHub issue
+# (GitHub emails it to watchers of this repo). The previous month's report
+# is closed so only the latest stays open. Read-only against the site:
+# it never submits forms.
+#
+# Scheduled workflows run from the default branch (main), so the schedule
+# starts once this file is live; "Run workflow" works any time.
+
+on:
+  schedule:
+    - cron: '17 13 1 * *'   # 1st of each month, 9:17 AM Eastern (13:17 UTC; 8:17 in winter)
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: site-health
+  cancel-in-progress: false
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: .github/scripts
+
+      - name: Check the live site
+        run: python3 .github/scripts/site_health.py https://revelanceoh.com report.md
+
+      - name: File the report as an issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -e
+          gh label create site-health --color C9A96E --description "Monthly site health report" --force >/dev/null
+          for n in $(gh issue list --label site-health --state open --json number --jq '.[].number'); do
+            gh issue close "$n" --comment "Superseded by this month's report." >/dev/null
+          done
+          title="Site health report — $(date -u +'%B %Y')"
+          if grep -q 'All checks passed' report.md; then title="$title: all clear"; else title="$title: needs attention"; fi
+          gh issue create --title "$title" --label site-health --body-file report.md

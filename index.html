@@ -11,8 +11,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="dns-prefetch" href="https://www.googletagmanager.com">
 <link rel="dns-prefetch" href="https://www.google-analytics.com">
-<link rel="preload" as="image" type="image/webp" href="images/building-aerial-800.webp" media="(max-width:768px)">
-<link rel="preload" as="image" type="image/webp" href="images/building-aerial.webp" media="(min-width:769px)">
+<link rel="preload" as="image" type="image/webp" href="images/building-aerial-800.webp" media="(max-width:768px)" fetchpriority="high">
+<link rel="preload" as="image" type="image/webp" href="images/building-aerial.webp" media="(min-width:769px)" fetchpriority="high">
 
 <!-- Favicon & App Icons -->
 <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
@@ -535,7 +535,7 @@
 
 <!-- NAV -->
 <nav class="nav" id="nav"><div class="nav-inner">
-<a href="#top" class="nav-brand"><img src="images/logo-r-icon.png" class="nav-logo-icon" alt="R" fetchpriority="high"><span class="nav-logo-text">Revelance</span></a>
+<a href="#top" class="nav-brand"><img src="images/logo-r-icon.png" class="nav-logo-icon" alt="R"><span class="nav-logo-text">Revelance</span></a>
 <ul class="nav-links" id="navLinks">
 <li class="nav-item"><a href="host-an-event/">Events</a><button class="nav-caret" type="button" aria-label="Toggle Events submenu" aria-expanded="false">▾</button><div class="nav-dropdown"><div class="nav-dropdown-inner"><a href="revel-room/">Revel Room</a><a href="taphouse/">The Taproom</a><a href="e9/">Emergency 9</a><a href="boardrooms/">Boardrooms</a><a href="c-suite/">C-Suite Lounge</a><a href="culinary-lab/">Culinary Lab</a><hr><a href="plan-your-event/">Plan Your Event</a><a href="events/#upcoming">Attend an Event</a></div></div></li>
 
@@ -553,14 +553,14 @@
 <div class="hero-slides">
 <div class="hero-slide active"><picture><source media="(max-width:768px)" srcset="images/building-aerial-800.webp" type="image/webp"><source media="(max-width:768px)" srcset="images/building-aerial-800.jpg"><source srcset="images/building-aerial.webp" type="image/webp"><img src="images/building-aerial.jpg" alt="Revelance two-story atrium with modern chandelier and executive offices" fetchpriority="high" width="1400" height="786"></picture></div>
 <div class="hero-slide hero-slide-desktop"><picture><source srcset="images/building-exterior.webp" type="image/webp"><img src="images/building-exterior.jpg" alt="Revelance private business club exterior in Mason Ohio" loading="lazy"></picture></div>
-<div class="hero-slide"><picture><source srcset="images/revel-banquet-sunset.webp" type="image/webp"><img src="images/revel-banquet-sunset.jpg" alt="Revel Room event space set for a banquet at sunset" loading="lazy"></picture></div>
-<div class="hero-slide"><picture><source srcset="images/csuite-lifestyle-lounge.webp" type="image/webp"><img src="images/csuite-lifestyle-lounge.jpg" alt="C-Suite bourbon locker lounge at Revelance" loading="lazy"></picture></div>
-<div class="hero-slide"><picture><source srcset="images/taphouse-bartender-pour.webp" type="image/webp"><img src="images/taphouse-bartender-pour.jpg" alt="The Taproom featuring Sonder Brewing at Revelance" loading="lazy"></picture></div>
-<div class="hero-slide"><picture><source srcset="images/e9-golf-simulator.webp" type="image/webp"><img src="images/e9-golf-simulator.jpg" alt="Emergency 9 golf simulator at Revelance Mason Ohio" loading="lazy"></picture></div>
-<div class="hero-slide"><picture><source srcset="images/cowork-dining-community.webp" type="image/webp"><img src="images/cowork-dining-community.png" alt="Members dining and connecting in the Co-Revel community at Revelance" loading="lazy"></picture></div>
-<div class="hero-slide"><picture><source srcset="images/horizon-boardroom.webp" type="image/webp"><img src="images/horizon-boardroom.jpg" alt="Horizon executive boardroom at Revelance" loading="lazy"></picture></div>
-<div class="hero-slide"><picture><source srcset="images/culinary-lab.webp" type="image/webp"><img src="images/culinary-lab.jpg" alt="Commercial culinary lab kitchen at Revelance" loading="lazy"></picture></div>
-<div class="hero-slide"><picture><source srcset="images/overlook-boardroom.webp" type="image/webp"><img src="images/overlook-boardroom.jpg" alt="Overlook boardroom with panoramic views at Revelance" loading="lazy"></picture></div>
+<div class="hero-slide"><picture><source data-srcset="images/revel-banquet-sunset.webp" type="image/webp"><img data-src="images/revel-banquet-sunset.jpg" alt="Revel Room event space set for a banquet at sunset"></picture></div>
+<div class="hero-slide"><picture><source data-srcset="images/csuite-lifestyle-lounge.webp" type="image/webp"><img data-src="images/csuite-lifestyle-lounge.jpg" alt="C-Suite bourbon locker lounge at Revelance"></picture></div>
+<div class="hero-slide"><picture><source data-srcset="images/taphouse-bartender-pour.webp" type="image/webp"><img data-src="images/taphouse-bartender-pour.jpg" alt="The Taproom featuring Sonder Brewing at Revelance"></picture></div>
+<div class="hero-slide"><picture><source data-srcset="images/e9-golf-simulator.webp" type="image/webp"><img data-src="images/e9-golf-simulator.jpg" alt="Emergency 9 golf simulator at Revelance Mason Ohio"></picture></div>
+<div class="hero-slide"><picture><source data-srcset="images/cowork-dining-community.webp" type="image/webp"><img data-src="images/cowork-dining-community.png" alt="Members dining and connecting in the Co-Revel community at Revelance"></picture></div>
+<div class="hero-slide"><picture><source data-srcset="images/horizon-boardroom.webp" type="image/webp"><img data-src="images/horizon-boardroom.jpg" alt="Horizon executive boardroom at Revelance"></picture></div>
+<div class="hero-slide"><picture><source data-srcset="images/culinary-lab.webp" type="image/webp"><img data-src="images/culinary-lab.jpg" alt="Commercial culinary lab kitchen at Revelance"></picture></div>
+<div class="hero-slide"><picture><source data-srcset="images/overlook-boardroom.webp" type="image/webp"><img data-src="images/overlook-boardroom.jpg" alt="Overlook boardroom with panoramic views at Revelance"></picture></div>
 </div>
 <div class="hero-overlay"></div>
 <div class="hero-grain"></div>
@@ -750,14 +750,14 @@ setTimeout(function(){g.style.opacity="1";},100);
 <section class="robojo-section" id="coffee">
 <div class="robojo-inner">
 <div class="robojo-video">
-<video class="lazy-video" autoplay muted loop playsinline preload="none" poster="images/lobby-grand.jpg" style="width:100%;height:100%;object-fit:cover;display:block"><source data-src="images/robojo-highlight.mp4" type="video/mp4"></video>
+<video class="lazy-video" autoplay muted loop playsinline preload="none" poster="images/lobby-grand.webp" style="width:100%;height:100%;object-fit:cover;display:block"><source data-src="images/robojo-highlight.mp4" type="video/mp4"></video>
 <div class="robojo-video-overlay"></div>
 </div>
 <div class="robojo-content">
 <div class="robojo-badge">☕ Open to the Public · No Membership Required</div>
 <h2>Meet <em>RoboJo.</em><br>Mason's most talked-about cup of coffee.</h2>
 <div class="robojo-video-mobile">
-<video class="lazy-video" autoplay muted loop playsinline preload="none" poster="images/lobby-grand.jpg" style="width:100%;height:260px;object-fit:cover;display:block;border-radius:10px"><source data-src="images/robojo-highlight.mp4" type="video/mp4"></video>
+<video class="lazy-video" autoplay muted loop playsinline preload="none" poster="images/lobby-grand.webp" style="width:100%;height:260px;object-fit:cover;display:block;border-radius:10px"><source data-src="images/robojo-highlight.mp4" type="video/mp4"></video>
 </div>
 <p>A fully automated robotic barista in our lobby featuring <a href="https://script-coffee.com/" target="_blank" rel="noopener" style="color:var(--gold-light);font-weight:600">Script Coffee</a>, a local roaster — making 250+ drinks in under 60 seconds. Walk in, watch the robot work, and grab the best latte in the building. Pre-order from the app, print custom latte art from your camera roll, and earn loyalty rewards on every purchase.</p>
 <div class="robojo-apps">
@@ -1289,10 +1289,20 @@ setTimeout(()=>{const t=document.querySelector(hash);if(t){window.scrollTo({top:
     return !(isMobile && s.classList.contains('hero-slide-desktop'));
   });
   var current = 0;
+  // Slides 3+ ship without src (data-src) so the page doesn't download all
+  // twelve photos up front. Load each one a slide ahead of when it's shown.
+  // Phones only ever show the first slide, so they never load the rest.
+  function hydrate(slide){
+    if (!slide || isMobile) return;
+    slide.querySelectorAll('source[data-srcset]').forEach(function(el){ el.srcset = el.getAttribute('data-srcset'); el.removeAttribute('data-srcset'); });
+    slide.querySelectorAll('img[data-src]').forEach(function(el){ el.src = el.getAttribute('data-src'); el.removeAttribute('data-src'); });
+  }
+  hydrate(slides[1]); hydrate(slides[2]);
   setInterval(function(){
     slides[current].classList.remove('active');
     current = (current + 1) % slides.length;
     slides[current].classList.add('active');
+    hydrate(slides[(current + 1) % slides.length]);
   }, 3000);
 })();
 </script>

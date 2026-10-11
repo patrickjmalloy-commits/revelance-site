@@ -302,33 +302,38 @@
   [headers.values]
     X-Robots-Tag = "noindex, nofollow"
 
-# --- Cache headers for images (30 days) ---
+# --- Cache headers for media (7 days, refreshed in the background) ---
+# Not "immutable": filenames don't change when an image is replaced, so a
+# long immutable cache would keep showing visitors the old file.
 [[headers]]
   for = "/images/*.jpg"
   [headers.values]
-    Cache-Control = "public, max-age=2592000, immutable"
+    Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"
 
 [[headers]]
   for = "/images/*.png"
   [headers.values]
-    Cache-Control = "public, max-age=2592000, immutable"
+    Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"
 
 [[headers]]
   for = "/images/*.webp"
   [headers.values]
-    Cache-Control = "public, max-age=2592000, immutable"
+    Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"
 
-# --- Cache headers for videos (30 days) ---
 [[headers]]
   for = "/images/*.mp4"
   [headers.values]
-    Cache-Control = "public, max-age=2592000, immutable"
+    Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"
 
-# --- Cache headers for event images (30 days) ---
 [[headers]]
-  for = "/events/images/*.jpg"
+  for = "/videos/*"
   [headers.values]
-    Cache-Control = "public, max-age=2592000, immutable"
+    Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"
+
+[[headers]]
+  for = "/events/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"
 
 # --- Favicons (7 days — shorter in case you update branding) ---
 [[headers]]
@@ -378,12 +383,6 @@
     Content-Type = "text/plain; charset=utf-8"
     Cache-Control = "public, max-age=86400"
     X-Robots-Tag = "all"
-
-# --- Performance: Link preload hints for homepage ---
-[[headers]]
-  for = "/"
-  [headers.values]
-    Link = "</images/logo-r-icon.png>; rel=preload; as=image"
 
 # --- Content-Security-Policy (report-only first, upgrade later) ---
 [[headers]]

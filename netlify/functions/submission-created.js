@@ -33,7 +33,9 @@ function firstName(name) {
   return esc(String(name || 'there').trim().split(/\s+/)[0].slice(0, 40) || 'there');
 }
 function validEmail(v) {
-  return /^[^\s@<>"']{1,64}@[^\s@<>"']{1,190}\.[A-Za-z]{2,24}$/.test(String(v || '').trim());
+  // Apostrophes are legal in the local part (o'brien@...); the address only
+  // ever appears URL-encoded inside double-quoted hrefs.
+  return /^[^\s@<>"]{1,64}@[^\s@<>"']{1,190}\.[A-Za-z]{2,24}$/.test(String(v || '').trim());
 }
 function validCode(v) {
   return /^REV-[A-Z0-9]{4,8}$/.test(String(v || '').trim());
@@ -925,7 +927,8 @@ exports.handler = async function (event) {
       const drips = [];
 
       if (KEY) {
-        if (validEmail(d.email) && validCode(d['pass-code'])) {
+        const signerOk = validEmail(d.email) && validCode(d['pass-code']);
+        if (signerOk) {
           await sendEmail(KEY, d.email, (d.name || 'Your').split(' ')[0] + ', your Revelance day pass is confirmed',
             passEmail(d.name, d['pass-code'], false, null, vPretty, expPretty, d.email, vs === 'future'));
         }
@@ -938,7 +941,7 @@ exports.handler = async function (event) {
         if (vs === 'future') {
           // Morning-of reminders on the chosen day (7:30 AM ET).
           const when = morningOfEastern(visit);
-          if (d.email && d['pass-code']) {
+          if (signerOk) {
             const id = await sendEmail(KEY, d.email, 'See you today at Revelance, ' + (d.name || 'there').split(' ')[0],
               morningEmail(d.name, d['pass-code'], d.email), when);
             if (id) drips.push(id);
@@ -948,7 +951,7 @@ exports.handler = async function (event) {
               morningEmail(d['colleague-name'], d['colleague-pass-code'], d['colleague-email']), when);
             if (id) drips.push(id);
           }
-        } else if (!vs && d.email && d['pass-code']) {
+        } else if (!vs && signerOk) {
           // No date picked: 3-email drip at 9 AM ET on days 7, 16, and 27.
           const first = (d.name || 'there').split(' ')[0];
           const plan = [

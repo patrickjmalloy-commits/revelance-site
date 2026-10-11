@@ -2595,26 +2595,38 @@ window.wzUpdateSpecificTime = function(space, which, val) {
    and announces their selected state. Re-applied whenever the wizard re-renders. */
 (function(){
   var DATE_FMT = { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' };
+  var SEL = '.opt, .multi-opt, .space-card, [onclick^="wzSelectDate"]', lastLabel = null;
   function label(el){
-    if (el.classList.contains('opt')) {
-      var l = el.querySelector('.opt-label');
+    if (el.classList.contains('opt') || el.classList.contains('multi-opt') || el.classList.contains('space-card')) {
+      var l = el.querySelector('.opt-label, .multi-label, .sc-name');
       return ((l && l.textContent) || el.getAttribute('data-value') || el.textContent || '').replace(/\s+/g, ' ').trim();
     }
     var m = /wzSelectDate\('(\d{4})-(\d{2})-(\d{2})'\)/.exec(el.getAttribute('onclick') || '');
     return m ? new Date(+m[1], +m[2] - 1, +m[3]).toLocaleDateString('en-US', DATE_FMT) : '';
   }
   function enhance(){
-    document.querySelectorAll('.opt, [onclick^="wzSelectDate"]').forEach(function(el){
-      if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '0');
+    document.querySelectorAll(SEL).forEach(function(el){
+      // Options the wizard has switched off (pointer-events:none / not selectable) stay out of the tab order.
+      var off = el.style.pointerEvents === 'none' || (el.classList.contains('space-card') && el.dataset.selectable !== 'true');
+      el.setAttribute('tabindex', off ? '-1' : '0');
+      if (off) el.setAttribute('aria-disabled', 'true'); else el.removeAttribute('aria-disabled');
       if (!el.hasAttribute('role')) el.setAttribute('role', 'button');
       if (!el.hasAttribute('aria-label')) { var t = label(el); if (t) el.setAttribute('aria-label', t); }
-      if (el.classList.contains('opt')) el.setAttribute('aria-pressed', el.classList.contains('selected') ? 'true' : 'false');
+      if (!el.matches('[onclick^="wzSelectDate"]')) el.setAttribute('aria-pressed', el.classList.contains('selected') ? 'true' : 'false');
     });
+    // A keyboard choice can re-render the step; put focus back instead of losing it to the page.
+    if (lastLabel && (!document.activeElement || document.activeElement === document.body)) {
+      var step = document.querySelector('.step.active') || document;
+      var back = [].find.call(step.querySelectorAll('[aria-label]'), function(x){ return x.getAttribute('aria-label') === lastLabel && x.offsetParent; })
+        || step.querySelector('[tabindex="0"], button:not([disabled]), input, select, textarea');
+      if (back) back.focus();
+    }
+    lastLabel = null;
   }
   document.addEventListener('keydown', function(e){
     if (e.key !== 'Enter' && e.key !== ' ' && e.key !== 'Spacebar') return;
     var el = e.target;
-    if (el && el.matches && el.matches('.opt, [onclick^="wzSelectDate"]')) { e.preventDefault(); el.click(); }
+    if (el && el.matches && el.matches(SEL) && el.getAttribute('aria-disabled') !== 'true') { e.preventDefault(); lastLabel = el.getAttribute('aria-label'); el.click(); }
   });
   var queued = false;
   new MutationObserver(function(){

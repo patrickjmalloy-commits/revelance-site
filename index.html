@@ -1294,7 +1294,7 @@ setTimeout(()=>{const t=document.querySelector(hash);if(t){window.scrollTo({top:
   // twelve photos up front. Load each one a slide ahead of when it's shown.
   // Phones only ever show the first slide, so they never load the rest.
   function hydrate(slide){
-    if (!slide || isMobile) return;
+    if (!slide || window.innerWidth <= 768) return; // checked live, so widening/rotating still loads them
     slide.querySelectorAll('source[data-srcset]').forEach(function(el){ el.srcset = el.getAttribute('data-srcset'); el.removeAttribute('data-srcset'); });
     slide.querySelectorAll('img[data-src]').forEach(function(el){ el.src = el.getAttribute('data-src'); el.removeAttribute('data-src'); });
   }
@@ -1302,6 +1302,7 @@ setTimeout(()=>{const t=document.querySelector(hash);if(t){window.scrollTo({top:
   setInterval(function(){
     slides[current].classList.remove('active');
     current = (current + 1) % slides.length;
+    hydrate(slides[current]);
     slides[current].classList.add('active');
     hydrate(slides[(current + 1) % slides.length]);
   }, 3000);

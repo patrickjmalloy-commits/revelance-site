@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<script>/* Keep personal details out of analytics: read email/name/pass code from the link, then strip them from the address bar before GA4/Clarity load. */(function(){try{var K=["email","name","code","ccode","cname"],q=new URLSearchParams(location.search),orig=location.search,hit=K.some(function(k){return q.has(k)});if(hit){try{sessionStorage.setItem("rv_qs:"+location.pathname,orig)}catch(e){}K.forEach(function(k){q.delete(k)});var s=q.toString();history.replaceState(history.state,"",location.pathname+(s?"?"+s:"")+location.hash);window.__rvQS=new URLSearchParams(orig);}else{var all=new URLSearchParams(location.search),saved=null;try{saved=sessionStorage.getItem("rv_qs:"+location.pathname)}catch(e){}if(saved){new URLSearchParams(saved).forEach(function(v,k){if(K.indexOf(k)>-1&&!all.has(k))all.set(k,v)})}window.__rvQS=all;}}catch(e){}})();</script>
 <meta name="theme-color" content="#0B0E11">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Thank You | Revelance — Mason, Ohio</title>
@@ -259,7 +260,7 @@ html{background:#0B0E11;font-size:17px;overflow-y:scroll;-webkit-font-smoothing:
 
 
 <script>
-const params = new URLSearchParams(window.location.search);
+const params = window.__rvQS || new URLSearchParams(window.location.search);
 const form = params.get('form');
 
 const messages = {

@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<script>/* Keep personal details out of analytics: read email/name/pass code from the link, then strip them from the address bar before GA4/Clarity load. */(function(){try{var K=["email","name","code","ccode","cname"],q=new URLSearchParams(location.search),orig=location.search,hit=K.some(function(k){return q.has(k)});if(hit){try{sessionStorage.setItem("rv_qs:"+location.pathname,orig)}catch(e){}K.forEach(function(k){q.delete(k)});var s=q.toString();history.replaceState(history.state,"",location.pathname+(s?"?"+s:"")+location.hash);window.__rvQS=new URLSearchParams(orig);}else{var all=new URLSearchParams(location.search),saved=null;try{saved=sessionStorage.getItem("rv_qs:"+location.pathname)}catch(e){}if(saved){new URLSearchParams(saved).forEach(function(v,k){if(K.indexOf(k)>-1&&!all.has(k))all.set(k,v)})}window.__rvQS=all;}}catch(e){}})();</script>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Check In | Revelance</title>
 <meta name="description" content="Welcome to Revelance — complete your check-in.">
@@ -88,7 +89,7 @@ footer{padding:18px 16px;text-align:center;font-size:.72rem;color:rgba(255,255,2
         <button type="button" class="btn" id="lookupBtn" style="font-size:.9rem;padding:11px 16px">Find My Pass</button>
         <p id="lookupMsg" style="display:none;font-size:.78rem;margin-top:10px;line-height:1.5"></p>
       </div>
-      <form data-clarity-mask="True" name="check-in" id="checkInForm" method="POST" data-netlify="true">
+      <form data-clarity-mask="True" name="check-in" id="checkInForm" method="POST" data-netlify="true" netlify-honeypot="bot-field"><p style="display:none" aria-hidden="true"><label>Leave this field empty<input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
         <input type="hidden" name="form-name" value="check-in">
         <input type="hidden" name="inquiry-type" value="&#127970; Front Desk Check-In">
         <input type="hidden" name="visitor-type" id="vtField" value="Day Pass">
@@ -203,7 +204,7 @@ var LOOKUP_URL = 'https://script.google.com/macros/s/AKfycbxrUHNdk2TxAvNe3U56LBp
   btn.addEventListener('click', function(){ runLookup(document.getElementById('lookupQ').value.trim()); });
   // Arriving from the welcome email: /check-in/?code=REV-XXXXX pre-fills automatically.
   try {
-    var p = new URLSearchParams(location.search);
+    var p = window.__rvQS || new URLSearchParams(location.search);
     var auto = (p.get('code') || '').trim();
     if (auto) { document.getElementById('lookupQ').value = auto; runLookup(auto); }
   } catch (e) {}

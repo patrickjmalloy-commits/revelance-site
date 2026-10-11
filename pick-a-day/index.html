@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<script>/* Keep personal details out of analytics: read email/name/pass code from the link, then strip them from the address bar before GA4/Clarity load. */(function(){try{var K=["email","name","code","ccode","cname"],q=new URLSearchParams(location.search),orig=location.search,hit=K.some(function(k){return q.has(k)});if(hit){try{sessionStorage.setItem("rv_qs:"+location.pathname,orig)}catch(e){}K.forEach(function(k){q.delete(k)});var s=q.toString();history.replaceState(history.state,"",location.pathname+(s?"?"+s:"")+location.hash);window.__rvQS=new URLSearchParams(orig);}else{var all=new URLSearchParams(location.search),saved=null;try{saved=sessionStorage.getItem("rv_qs:"+location.pathname)}catch(e){}if(saved){new URLSearchParams(saved).forEach(function(v,k){if(K.indexOf(k)>-1&&!all.has(k))all.set(k,v)})}window.__rvQS=all;}}catch(e){}})();</script>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Pick Your Day | Revelance</title>
 <meta name="description" content="Pick or change the day for your Revelance day pass.">
@@ -70,7 +71,7 @@ footer{padding:18px 16px;text-align:center;font-size:.72rem;color:rgba(255,255,2
       <div class="label">— Your Free Day Pass</div>
       <h1>Pick <em>your day</em></h1>
       <p class="sub">Tell us when you&#8217;re coming and we&#8217;ll have everything ready &mdash; you&#8217;ll get a reminder that morning with your pass code and check-in link. Plans change? Come back here anytime.</p>
-      <form data-clarity-mask="True" name="pick-a-day" id="pickDayForm" method="POST" data-netlify="true">
+      <form data-clarity-mask="True" name="pick-a-day" id="pickDayForm" method="POST" data-netlify="true" netlify-honeypot="bot-field"><p style="display:none" aria-hidden="true"><label>Leave this field empty<input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
         <input type="hidden" name="form-name" value="pick-a-day">
         <input type="hidden" name="inquiry-type" value="&#128197; Day Pass — Visit Date">
         <input type="hidden" name="pass-code" id="pdPassCode" value="">
@@ -96,7 +97,7 @@ footer{padding:18px 16px;text-align:center;font-size:.72rem;color:rgba(255,255,2
 (function(){
   // Pre-fill from email links: /pick-a-day/?code=REV-XXXXX&email=...&name=...
   try {
-    var p = new URLSearchParams(location.search);
+    var p = window.__rvQS || new URLSearchParams(location.search);
     if (p.get('code')) document.getElementById('pdPassCode').value = p.get('code');
     if (p.get('email')) document.getElementById('pdEmail').value = p.get('email');
     if (p.get('name')) document.getElementById('pdName').value = p.get('name');

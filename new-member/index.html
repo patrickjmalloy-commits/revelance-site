@@ -97,7 +97,7 @@ footer{padding:18px 16px;text-align:center;font-size:.72rem;color:rgba(255,255,2
       <div class="label">&mdash; New Member Form</div>
       <h1>Welcome to <em>Revelance</em></h1>
       <p class="sub">Complete the information below and our team will activate your membership. Fields marked with an asterisk are required.</p>
-      <form data-clarity-mask="True" name="new-member" id="newMemberForm" method="POST" data-netlify="true">
+      <form data-clarity-mask="True" name="new-member" id="newMemberForm" method="POST" data-netlify="true" netlify-honeypot="bot-field"><p style="display:none" aria-hidden="true"><label>Leave this field empty<input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
         <input type="hidden" name="form-name" value="new-member">
         <input type="hidden" name="inquiry-type" value="&#127942; New Member Application">
 

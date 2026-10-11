@@ -384,12 +384,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-  <url>
-    <loc>https://revelanceoh.com/availability/</loc>
-    <lastmod>2026-06-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
 <url>
 <loc>https://revelanceoh.com/weddings/</loc>
 <lastmod>2026-09-08</lastmod>

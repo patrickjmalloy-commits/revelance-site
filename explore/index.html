@@ -244,7 +244,7 @@ html{font-size:17px.footer .container{max-width:1600px;padding:0 48px}.footer-gr
 <div class="container">
 <span class="label">Building Map</span>
 <h2>Two floors. <em>Every space.</em></h2>
-<div class="xp-floors" role="tablist" aria-label="Choose a floor">
+<div class="xp-floors" role="group" aria-label="Choose a floor">
   <button class="xp-fbtn on" id="xpF1" type="button">Floor 1 &middot; Events</button>
   <button class="xp-fbtn" id="xpF2" type="button">Floor 2 &middot; Members</button>
 </div>
@@ -253,7 +253,7 @@ html{font-size:17px.footer .container{max-width:1600px;padding:0 48px}.footer-gr
   <div class="xp-left">
   <div class="xp-map">
     <span class="xp-hint">Tap a space</span>
-    <svg id="xpSvg1" viewBox="0 0 2300 1650" role="img" aria-label="First floor plan of Revelance">
+    <svg id="xpSvg1" viewBox="0 0 2300 1650" role="group" aria-label="First floor plan of Revelance">
       <image href="../images/map-floor1.webp" width="2300" height="1650"/>
         <g class="xp-rg" data-id="taproom"><polygon class="xp-room" data-id="taproom" points="1096,236 1400,236 1400,630 1576,630 1576,956 1096,956"><title>The Taproom</title></polygon><text x="1330" y="780" font-size="34">The Taproom</text></g>
         <g class="xp-rg" data-id="culinary"><polygon class="xp-room" data-id="culinary" points="1410,224 2036,224 2036,680 1720,680 1720,624 1410,624"><title>Culinary Lab</title></polygon><text x="1724" y="442" font-size="32">Culinary Lab</text></g>
@@ -265,7 +265,7 @@ html{font-size:17px.footer .container{max-width:1600px;padding:0 48px}.footer-gr
     <g class="xp-rg xp-poi" data-id="robojo"><circle class="xp-room" data-id="robojo" cx="880" cy="1452" r="38"><title>RoboJo Coffee</title></circle><path class="poig" transform="translate(880,1452) scale(1.6)" d="M-8,-6 h12 v10 a4,4 0 0 1 -4,4 h-4 a4,4 0 0 1 -4,-4 z M4,-4 h3 a3,3 0 0 1 0,6 h-3"/><text x="880" y="1394" font-size="21">RoboJo</text></g>
     <g class="xp-rg xp-poi" data-id="podcast"><circle class="xp-room" data-id="podcast" cx="592" cy="854" r="38"><title>Podcast Studio</title></circle><path class="poig" transform="translate(592,854) scale(1.6)" d="M0,-10 a4.5,4.5 0 0 1 4.5,4.5 v5 a4.5,4.5 0 0 1 -9,0 v-5 a4.5,4.5 0 0 1 4.5,-4.5 z M-8,-0.5 a8,8 0 0 0 16,0 M0,7.5 v4 M-5,11.5 h10"/><text x="592" y="786" font-size="21">Podcast</text></g>
     </svg>
-    <svg id="xpSvg2" viewBox="0 0 2300 1500" role="img" aria-label="Second floor plan of Revelance" hidden>
+    <svg id="xpSvg2" viewBox="0 0 2300 1500" role="group" aria-label="Second floor plan of Revelance" hidden>
       <image href="../images/map-floor2.webp" width="2300" height="1500"/>
         <g class="xp-rg" data-id="corevel"><polygon class="xp-room" data-id="corevel" points="40,60 860,60 860,470 980,470 980,1420 40,1420"><title>Co-Revel Coworking</title></polygon><text x="510" y="1186" font-size="34">Co-Revel</text></g>
         <g class="xp-rg" data-id="cornerstone"><polygon class="xp-room" data-id="cornerstone" points="50,60 290,60 290,330 50,330"><title>Cornerstone Boardroom</title></polygon><text x="170" y="186" font-size="21">Cornerstone</text><text x="170" y="222" font-size="16">Boardroom</text></g>
@@ -680,5 +680,8 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,
 })();
 </script>
 <script id="rv-contact-clicks">/* GA4 + Clarity: count phone, email and text taps (phone_click / email_click / text_click) with where the link sits. */(function(){document.addEventListener("click",function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href^="tel:"],a[href^="mailto:"],a[href^="sms:"]');if(!a)return;var h=a.getAttribute("href")||"",k=h.slice(0,4).toLowerCase(),ev=k==="tel:"?"phone_click":k==="sms:"?"text_click":"email_click";var where=a.closest(".mobile-contact")?"mobile_bar":a.closest("footer")?"footer":a.closest("nav")?"nav":"page";try{if(typeof gtag==="function")gtag("event",ev,{link_url:h.split("?")[0],link_location:where,page_path:location.pathname,transport_type:"beacon"});}catch(_){}try{if(typeof clarity==="function")clarity("event",ev);}catch(_){}},true);})();</script>
+<script>/* Floor switcher: report which floor is selected (buttons toggle the "on" class). */
+(function(){var b=document.querySelectorAll('.xp-floors .xp-fbtn');if(!b.length)return;function sync(){b.forEach(function(x){x.setAttribute('aria-pressed',x.classList.contains('on')?'true':'false')})}
+b.forEach(function(x){new MutationObserver(sync).observe(x,{attributes:true,attributeFilter:['class']})});sync();})();</script>
 </body>
 </html>

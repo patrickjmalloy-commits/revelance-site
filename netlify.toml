@@ -393,11 +393,11 @@
     Cache-Control = "public, max-age=86400"
     X-Robots-Tag = "all"
 
-# --- Content-Security-Policy (report-only first, upgrade later) ---
+# --- Content-Security-Policy (enforced): scripts only from this site, Google Analytics/Tag Manager and Clarity ---
 [[headers]]
   for = "/*"
   [headers.values]
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://www.clarity.ms https://*.clarity.ms; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; media-src 'self'; connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://www.googletagmanager.com https://*.g.doubleclick.net https://www.google.com https://*.clarity.ms https://c.bing.com https://script.google.com https://script.googleusercontent.com; frame-src 'none'; base-uri 'self'; form-action 'self' https://app.netlify.com"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://www.clarity.ms https://*.clarity.ms; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; media-src 'self'; connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://www.googletagmanager.com https://*.g.doubleclick.net https://www.google.com https://*.clarity.ms https://c.bing.com https://script.google.com https://script.googleusercontent.com; frame-src 'none'; base-uri 'self'; form-action 'self' https://app.netlify.com; object-src 'none'; frame-ancestors 'self'; upgrade-insecure-requests"
 
 # --- Cache HTML subpages (revalidate) ---
 [[headers]]

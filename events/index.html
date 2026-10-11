@@ -1288,22 +1288,27 @@ function copyEventLink(btn){
 }
 
 // Toggle event card expand/collapse
+// The "Details" control is the keyboard button (the card holds its own links
+// and buttons, so the card itself can't be one); a mouse click anywhere on the
+// card still toggles it.
 document.querySelectorAll('.ev-card').forEach(card=>{
-  card.setAttribute('tabindex','0');
-  card.setAttribute('role','button');
-  card.setAttribute('aria-expanded',card.classList.contains('open')?'true':'false');
-  card.addEventListener('keydown',function(e){
-    if((e.key==='Enter'||e.key===' ')&&!e.target.closest('a,button')){
-      e.preventDefault();card.click();
-    }
-  });
+  const tog=card.querySelector('.ev-toggle');
+  const sync=()=>{const o=card.classList.contains('open');if(tog){tog.setAttribute('aria-expanded',o?'true':'false');tog.textContent=o?'▾ Details':'▸ Details';}};
+  if(tog){
+    tog.setAttribute('role','button');
+    tog.setAttribute('tabindex','0');
+    const t=card.querySelector('h3');
+    tog.setAttribute('aria-label','Details: '+(t?t.textContent.trim():'event'));
+    tog.addEventListener('keydown',function(e){
+      if(e.key==='Enter'||e.key===' '){e.preventDefault();card.classList.toggle('open');sync();}
+    });
+  }
   card.addEventListener('click',function(e){
     if(e.target.closest('a,button'))return;
     card.classList.toggle('open');
-    card.setAttribute('aria-expanded',card.classList.contains('open')?'true':'false');
-    const tog=card.querySelector('.ev-toggle');
-    if(tog)tog.textContent=card.classList.contains('open')?'▾ Details':'▸ Details';
+    sync();
   });
+  sync();
 });
 </script>
 <script>

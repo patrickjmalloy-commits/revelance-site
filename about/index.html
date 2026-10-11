@@ -657,5 +657,31 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,
 </script>
 <!-- ══ /EXTERNAL LINK POPUP ══════════════════════════════════════════════════ -->
 <script>(function(){var e=document.getElementById("fy");if(e)e.textContent=new Date().getFullYear();})();</script>
-<script id="navcaretjs">document.querySelectorAll(".nav-caret").forEach(function(b){b.addEventListener("click",function(e){e.preventDefault();var li=b.closest(".nav-item");var op=li.classList.toggle("open");b.setAttribute("aria-expanded",op?"true":"false");});});</script></body>
+<script id="navcaretjs">document.querySelectorAll(".nav-caret").forEach(function(b){b.addEventListener("click",function(e){e.preventDefault();var li=b.closest(".nav-item");var op=li.classList.toggle("open");b.setAttribute("aria-expanded",op?"true":"false");});});</script><script>
+/* Mobile menu accessibility: the closed drawer is taken out of the tab order
+   (inert), the toggle reports aria-expanded, focus moves into the menu when it
+   opens, and Escape closes it. Desktop (>1100px) is unaffected. */
+(function(){
+  var links = document.getElementById('navLinks'), toggle = document.getElementById('navToggle');
+  if (!links || !toggle) return;
+  var mq = window.matchMedia('(max-width:1100px)'), wasOpen = false;
+  toggle.setAttribute('aria-controls', 'navLinks');
+  function sync(){
+    var open = links.classList.contains('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    var hide = mq.matches && !open;
+    links.inert = hide;
+    if (hide) links.setAttribute('aria-hidden', 'true'); else links.removeAttribute('aria-hidden');
+    if (open && !wasOpen && mq.matches) { var first = links.querySelector('a, button'); if (first) setTimeout(function(){ first.focus(); }, 50); }
+    wasOpen = open;
+  }
+  new MutationObserver(sync).observe(links, { attributes: true, attributeFilter: ['class'] });
+  if (mq.addEventListener) mq.addEventListener('change', sync); else if (mq.addListener) mq.addListener(sync);
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && links.classList.contains('open')) { toggle.click(); toggle.focus(); }
+  });
+  sync();
+})();
+</script>
+</body>
 </html>

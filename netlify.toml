@@ -17,6 +17,15 @@
   path = "/events/"
   function = "event-og"
 
+# --- Edge function: drop past events from the JSON-LD event list ---
+[[edge_functions]]
+  path = "/"
+  function = "event-schema-prune"
+
+[[edge_functions]]
+  path = "/events/"
+  function = "event-schema-prune"
+
 # --- Edge function: 301 /blog/*.html → extensionless canonical (v6_183) ---
 [[edge_functions]]
   path = "/blog/*"

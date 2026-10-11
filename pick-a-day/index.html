@@ -119,6 +119,15 @@ footer{padding:18px 16px;text-align:center;font-size:.72rem;color:rgba(255,255,2
     h.value = n.value;
     if (!n.value) { disp.value=''; return; }
     var p = n.value.split('-');
+    // Day passes are for staffed weekdays; turn a weekend pick back into a prompt.
+    var wd = new Date(+p[0], +p[1]-1, +p[2], 12).getDay();
+    if (wd === 0 || wd === 6) {
+      n.value = ''; h.value = ''; disp.value = '';
+      disp.placeholder = 'We\u2019re staffed Mon\u2013Fri \u2014 pick a weekday';
+      disp.style.borderColor = '#c0392b';
+      return;
+    }
+    disp.placeholder = 'Tap to choose your day';
     disp.value = new Date(+p[0], +p[1]-1, +p[2], 12, 0, 0).toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'});
     disp.style.borderColor = '';
   });

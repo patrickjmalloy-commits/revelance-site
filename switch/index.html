@@ -862,15 +862,21 @@ EXECUTIVE OFFICE CARD (waitlist version):
 <script>(function(){var e=document.getElementById("fy");if(e)e.textContent=new Date().getFullYear();})();</script>
 <script id="navcaretjs">document.querySelectorAll(".nav-caret").forEach(function(b){b.addEventListener("click",function(e){e.preventDefault();var li=b.closest(".nav-item");var op=li.classList.toggle("open");b.setAttribute("aria-expanded",op?"true":"false");});});</script><script id="switchforms">
 (function(){
+  var gen=function(){var c='ABCDEFGHJKLMNPQRSTUVWXYZ23456789',s='REV-';for(var i=0;i<5;i++)s+=c[Math.floor(Math.random()*c.length)];return s;};
   function post(form, event, redirect){
     form.addEventListener('submit', function(e){
       e.preventDefault();
       if(!form.checkValidity()){form.reportValidity();return;}
       if(window.revFillGclid){window.revFillGclid(form);}
       var pc=form.querySelector('#swPassCode');
-      if(pc&&!pc.value){pc.value='REV-'+Math.random().toString(36).slice(2,7).toUpperCase();}
+      if(pc&&!pc.value){pc.value=gen();}
+    var cn=form.querySelector('[name="colleague-name"]'),cpc=form.querySelector('[name="colleague-pass-code"]');
+    if(cn&&cn.value.trim()&&cpc&&!cpc.value){cpc.value=gen();}
       var body=new URLSearchParams(new FormData(form)).toString();
-      var go=function(){window.location=redirect;};
+      var url=redirect;
+      if(pc&&pc.value){var nm=form.querySelector('[name="name"]');url+='&code='+encodeURIComponent(pc.value)+'&name='+encodeURIComponent(nm?nm.value.trim():'');
+        if(cn&&cn.value.trim()&&cpc&&cpc.value)url+='&ccode='+encodeURIComponent(cpc.value)+'&cname='+encodeURIComponent(cn.value.trim());}
+      var go=function(){window.location=url;};
       fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:body})
         .then(function(r){if(r&&r.ok&&typeof gtag==='function'){gtag('event',event);}go();})
         .catch(go);
@@ -884,7 +890,7 @@ EXECUTIVE OFFICE CARD (waitlist version):
 </script>
 <script>(function(){var t=new Intl.DateTimeFormat('en-CA',{timeZone:'America/New_York'}).format(new Date());document.querySelectorAll('input[type="hidden"][name="visit-date"]').forEach(function(h){var n=document.getElementById(h.id+'N'),disp=document.querySelector('[data-datedisplay="'+h.id+'"]');if(!n||!disp)return;n.min=t;
 disp.addEventListener('click',function(){n.disabled=false;n.style.pointerEvents='auto';n.focus();if(n.showPicker){try{n.showPicker()}catch(e){}}});
-n.addEventListener('change',function(){h.value=n.value;if(!n.value){disp.value='';return}var p=n.value.split('-');disp.value=new Date(+p[0],+p[1]-1,+p[2],12,0,0).toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'})});
+n.addEventListener('change',function(){h.value=n.value;if(!n.value){disp.value='';return}var p=n.value.split('-');var wd=new Date(+p[0],+p[1]-1,+p[2],12).getDay();if(wd===0||wd===6){n.value='';h.value='';disp.value='';disp.dataset.ph=disp.dataset.ph||disp.placeholder;disp.placeholder='We\u2019re staffed Mon\u2013Fri \u2014 pick a weekday';return}if(disp.dataset.ph)disp.placeholder=disp.dataset.ph;disp.value=new Date(+p[0],+p[1]-1,+p[2],12,0,0).toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'})});
 n.addEventListener('blur',function(){n.disabled=true;n.style.pointerEvents='none'});});})();</script>
 <script>
 /* Mobile menu accessibility: the closed drawer is taken out of the tab order
@@ -909,6 +915,22 @@ n.addEventListener('blur',function(){n.disabled=true;n.style.pointerEvents='none
   document.addEventListener('keydown', function(e){
     if (e.key === 'Escape' && links.classList.contains('open')) { toggle.click(); toggle.focus(); }
   });
+  sync();
+})();
+</script>
+<style id="rv-navclose-css">#rv-navclose{display:none}@media(max-width:1100px){#rv-navclose.show{display:inline-flex;align-items:center;justify-content:center;position:fixed;top:20px;right:18px;z-index:1002;width:32px;height:32px;padding:0;border:none;border-radius:7px;background:rgba(201,169,110,.14);color:var(--gold,#C9A96E);font-size:22px;line-height:1;cursor:pointer}}</style>
+<script>
+/* Visible close (x) for the open phone menu: the drawer covers the hamburger,
+   so this sits in the drawer's empty top corner and closes it the same way. */
+(function(){
+  var links = document.getElementById('navLinks'), toggle = document.getElementById('navToggle');
+  if (!links || !toggle) return;
+  var b = document.createElement('button');
+  b.type = 'button'; b.id = 'rv-navclose'; b.setAttribute('aria-label', 'Close menu'); b.innerHTML = '&times;';
+  b.addEventListener('click', function(){ if (links.classList.contains('open')) { toggle.click(); toggle.focus(); } });
+  document.body.appendChild(b);
+  function sync(){ b.classList.toggle('show', links.classList.contains('open')); }
+  new MutationObserver(sync).observe(links, { attributes: true, attributeFilter: ['class'] });
   sync();
 })();
 </script>

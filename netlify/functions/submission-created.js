@@ -91,6 +91,12 @@ function visitStatus(s) {
   }
   return null;
 }
+// True when a YYYY-MM-DD falls on a Saturday or Sunday (Eastern calendar day).
+function isWeekend(s) {
+  const p = visitParts(s); if (!p) return false;
+  const dow = new Date(Date.UTC(p.y, p.mo - 1, p.d, 12)).getUTCDay();
+  return dow === 0 || dow === 6;
+}
 // A YYYY-MM-DD that lands on a weekend moves to the following Monday.
 function businessDay(s) {
   const p = visitParts(s); if (!p) return s;
@@ -898,7 +904,8 @@ exports.handler = async function (event) {
         } else {
           // 'far' dates get the confirmation but no scheduled reminder
           // (beyond Resend's ~30-day window).
-          const canRemind = (vs === 'future');
+          // No morning-of reminder for a weekend pick (the pickers block these; this covers older pages).
+          const canRemind = (vs === 'future') && !isWeekend(visit);
           await sendEmail(KEY, d.email, first + ', you’re booked for ' + prettyVisit(visit),
             rescheduleConfirmEmail(name, code, d.email, prettyVisit(visit), expPretty, canRemind));
           if (canRemind) {
@@ -930,15 +937,15 @@ exports.handler = async function (event) {
         const signerOk = validEmail(d.email) && validCode(d['pass-code']);
         if (signerOk) {
           await sendEmail(KEY, d.email, (d.name || 'Your').split(' ')[0] + ', your Revelance day pass is confirmed',
-            passEmail(d.name, d['pass-code'], false, null, vPretty, expPretty, d.email, vs === 'future'));
+            passEmail(d.name, d['pass-code'], false, null, vPretty, expPretty, d.email, vs === 'future' && !isWeekend(visit)));
         }
         const colleagueOk = validEmail(d['colleague-email']) && validCode(d['colleague-pass-code']) &&
           String(d['colleague-email']).trim().toLowerCase() !== String(d.email || '').trim().toLowerCase();
         if (colleagueOk) {
           await sendEmail(KEY, d['colleague-email'], (d['colleague-name'] || 'Your').split(' ')[0] + ', your Revelance day pass is ready',
-            passEmail(d['colleague-name'], d['colleague-pass-code'], true, d.name, vPretty, expPretty, d['colleague-email'], vs === 'future'));
+            passEmail(d['colleague-name'], d['colleague-pass-code'], true, d.name, vPretty, expPretty, d['colleague-email'], vs === 'future' && !isWeekend(visit)));
         }
-        if (vs === 'future') {
+        if (vs === 'future' && !isWeekend(visit)) {
           // Morning-of reminders on the chosen day (7:30 AM ET).
           const when = morningOfEastern(visit);
           if (signerOk) {

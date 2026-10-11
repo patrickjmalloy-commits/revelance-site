@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <script>/* Keep personal details out of analytics: read email/name/pass code from the link, then strip them from the address bar before GA4/Clarity load. */(function(){try{var K=["email","name","code","ccode","cname"],q=new URLSearchParams(location.search),orig=location.search,hit=K.some(function(k){return q.has(k)});if(hit){try{sessionStorage.setItem("rv_qs:"+location.pathname,orig)}catch(e){}K.forEach(function(k){q.delete(k)});var s=q.toString();history.replaceState(history.state,"",location.pathname+(s?"?"+s:"")+location.hash);window.__rvQS=new URLSearchParams(orig);}else{var all=new URLSearchParams(location.search),saved=null;try{saved=sessionStorage.getItem("rv_qs:"+location.pathname)}catch(e){}if(saved){new URLSearchParams(saved).forEach(function(v,k){if(K.indexOf(k)>-1&&!all.has(k))all.set(k,v)})}window.__rvQS=all;}}catch(e){}})();</script>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
+<link rel="manifest" href="/site.webmanifest">
 <title>Check In | Revelance</title>
 <meta name="description" content="Welcome to Revelance — complete your check-in.">
 <meta name="robots" content="noindex">
@@ -61,13 +64,14 @@ footer{padding:18px 16px;text-align:center;font-size:.72rem;color:rgba(255,255,2
 <script>(function(){if(location.hostname!=='revelanceoh.com'&&location.hostname!=='www.revelanceoh.com')return;var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-V2N2YENTZE';document.head.appendChild(s);})();</script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-V2N2YENTZE');</script>
 <script type="text/javascript">if(location.hostname==='revelanceoh.com'||location.hostname==='www.revelanceoh.com')(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","vw2yag9k4k");</script>
+<style id="rv-rm">@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}</style>
 </head>
 <body>
-<a href="#main-content" class="skip-link">Skip to main content</a>
+<a href="#main-content" class="skip-link" onclick="var t=document.getElementById('main-content');if(t){t.setAttribute('tabindex','-1');t.style.outline='none';t.focus({preventScroll:true});}">Skip to main content</a>
 <nav class="nav">
   <div class="nav-inner">
     <a href="../" class="nav-brand">
-      <img src="../images/logo-r-icon.png" class="nav-logo-icon" alt="R">
+      <img src="../images/logo-r-icon.png" class="nav-logo-icon" alt="">
       <span class="nav-logo-text">Revelance</span>
     </a>
     <a href="../" class="nav-back">revelanceoh.com</a>

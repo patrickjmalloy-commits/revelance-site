@@ -70,7 +70,7 @@ footer{padding:18px 16px;text-align:center;font-size:.72rem;color:rgba(255,255,2
       <div class="label">— Your Free Day Pass</div>
       <h1>Pick <em>your day</em></h1>
       <p class="sub">Tell us when you&#8217;re coming and we&#8217;ll have everything ready &mdash; you&#8217;ll get a reminder that morning with your pass code and check-in link. Plans change? Come back here anytime.</p>
-      <form name="pick-a-day" id="pickDayForm" method="POST" data-netlify="true">
+      <form data-clarity-mask="True" name="pick-a-day" id="pickDayForm" method="POST" data-netlify="true">
         <input type="hidden" name="form-name" value="pick-a-day">
         <input type="hidden" name="inquiry-type" value="&#128197; Day Pass — Visit Date">
         <input type="hidden" name="pass-code" id="pdPassCode" value="">
@@ -90,7 +90,7 @@ footer{padding:18px 16px;text-align:center;font-size:.72rem;color:rgba(255,255,2
     </div>
   </div>
 </main>
-<footer>&copy; <span id="fy">2026</span> Revelance &middot; 8460 Duke Blvd, Mason, OH 45040</footer>
+<footer>&copy; <span id="fy">2026</span> Revelance &middot; 8460 Duke Blvd, Mason, OH 45040 &middot; <a href="/privacy/" style="color:inherit;text-decoration:underline">Privacy Policy</a></footer>
 <script>
 (function(){var e=document.getElementById("fy");if(e)e.textContent=new Date().getFullYear();})();
 (function(){

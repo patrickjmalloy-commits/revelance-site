@@ -84,11 +84,11 @@ footer{padding:18px 16px;text-align:center;font-size:.72rem;color:rgba(255,255,2
       </div>
       <div id="lookupWrap" style="display:none;background:rgba(201,169,110,.08);border:1px solid rgba(201,169,110,.25);border-radius:10px;padding:16px 14px;margin-bottom:18px">
         <p style="font-size:.82rem;font-weight:600;color:var(--gold-light);margin-bottom:10px">Signed up online? Pull up your pass:</p>
-        <input type="text" id="lookupQ" placeholder="Your email or pass code" aria-label="Your email or pass code" style="margin-bottom:10px" autocomplete="email">
+        <input type="text" id="lookupQ" placeholder="Your pass code (REV-XXXXX)" aria-label="Your pass code" style="margin-bottom:10px" autocomplete="off" autocapitalize="characters" spellcheck="false">
         <button type="button" class="btn" id="lookupBtn" style="font-size:.9rem;padding:11px 16px">Find My Pass</button>
         <p id="lookupMsg" style="display:none;font-size:.78rem;margin-top:10px;line-height:1.5"></p>
       </div>
-      <form name="check-in" id="checkInForm" method="POST" data-netlify="true">
+      <form data-clarity-mask="True" name="check-in" id="checkInForm" method="POST" data-netlify="true">
         <input type="hidden" name="form-name" value="check-in">
         <input type="hidden" name="inquiry-type" value="&#127970; Front Desk Check-In">
         <input type="hidden" name="visitor-type" id="vtField" value="Day Pass">
@@ -121,7 +121,7 @@ footer{padding:18px 16px;text-align:center;font-size:.72rem;color:rgba(255,255,2
     </div>
   </div>
 </main>
-<footer>&copy; <span id="fy">2026</span> Revelance &middot; 8460 Duke Blvd, Mason, OH 45040</footer>
+<footer>&copy; <span id="fy">2026</span> Revelance &middot; 8460 Duke Blvd, Mason, OH 45040 &middot; <a href="/privacy/" style="color:inherit;text-decoration:underline">Privacy Policy</a></footer>
 <script>
 (function(){var e=document.getElementById("fy");if(e)e.textContent=new Date().getFullYear();})();
 // ── Visitor-type fork: working vs. meeting a member ──────────────────────
@@ -160,11 +160,19 @@ var LOOKUP_URL = 'https://script.google.com/macros/s/AKfycbxrUHNdk2TxAvNe3U56LBp
   if (!LOOKUP_URL) return;
   document.getElementById('lookupWrap').style.display = 'block';
   var btn = document.getElementById('lookupBtn'), msg = document.getElementById('lookupMsg');
+  // Lookup is by pass code only (it's in the guest's welcome email). Email
+  // lookups were removed so nobody can pull a guest's details by email.
   function runLookup(q){
+    q = String(q || '').trim().toUpperCase();
     if (!q) return;
+    if (!/^REV-[A-Z0-9]{4,8}$/.test(q)) {
+      msg.style.display = 'block';
+      msg.style.color = 'rgba(255,255,255,.55)';
+      msg.textContent = 'Pass codes look like REV-XXXXX — or just fill in the form below.';
+      return;
+    }
     btn.disabled = true; btn.textContent = 'Looking…';
-    var isEmail = q.indexOf('@') !== -1;
-    fetch(LOOKUP_URL + '?' + (isEmail ? 'email=' : 'code=') + encodeURIComponent(q))
+    fetch(LOOKUP_URL + '?code=' + encodeURIComponent(q))
       .then(function(r){ return r.json(); })
       .then(function(d){
         btn.disabled = false; btn.textContent = 'Find My Pass';
@@ -196,7 +204,7 @@ var LOOKUP_URL = 'https://script.google.com/macros/s/AKfycbxrUHNdk2TxAvNe3U56LBp
   // Arriving from the welcome email: /check-in/?code=REV-XXXXX pre-fills automatically.
   try {
     var p = new URLSearchParams(location.search);
-    var auto = (p.get('code') || p.get('email') || '').trim();
+    var auto = (p.get('code') || '').trim();
     if (auto) { document.getElementById('lookupQ').value = auto; runLookup(auto); }
   } catch (e) {}
 })();

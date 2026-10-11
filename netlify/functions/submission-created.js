@@ -22,6 +22,23 @@ const BRAND = {
 // clients that block remote images still show the logo. 494x96 PNG, ~13KB.
 const LOGO_B64 = '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';
 
+// ── Input safety: anything a visitor typed is escaped before it goes into
+// email HTML, and addresses/codes are format-checked before we send.
+function esc(v) {
+  return String(v == null ? '' : v).replace(/[&<>"']/g, function (c) {
+    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+  });
+}
+function firstName(name) {
+  return esc(String(name || 'there').trim().split(/\s+/)[0].slice(0, 40) || 'there');
+}
+function validEmail(v) {
+  return /^[^\s@<>"']{1,64}@[^\s@<>"']{1,190}\.[A-Za-z]{2,24}$/.test(String(v || '').trim());
+}
+function validCode(v) {
+  return /^REV-[A-Z0-9]{4,8}$/.test(String(v || '').trim());
+}
+
 // ── Date helpers (all Eastern) ─────────────────────────────────────────────
 function visitParts(s) {
   const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(s || '').trim());
@@ -154,7 +171,7 @@ ${inner}
 function codeBox(code, ctaHref, ctaText, underNote) {
   return `<table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0" style="margin:0 0 22px;"><tr><td bgcolor="#F4F5F6" align="center" style="border:1px solid #E8EAED;border-radius:10px;padding:22px;">
       <div style="${LABEL}">Your Pass Code</div>
-      <div style="font-size:32px;font-weight:bold;color:#B08C4A;letter-spacing:3px;margin-top:8px;font-family:Georgia,'Times New Roman',serif;">${code}</div>
+      <div style="font-size:32px;font-weight:bold;color:#B08C4A;letter-spacing:3px;margin-top:8px;font-family:Georgia,'Times New Roman',serif;">${esc(code)}</div>
       <div style="height:14px;font-size:0;line-height:0;">&nbsp;</div>
       ${btn(ctaHref, ctaText)}
       ${underNote ? '<div style="font-size:12px;color:#5A6572;margin-top:10px;' + BODYFONT + '">' + underNote + '</div>' : ''}
@@ -163,10 +180,10 @@ function codeBox(code, ctaHref, ctaText, underNote) {
 
 // ── Welcome email ──────────────────────────────────────────────────────────
 function passEmail(name, code, isColleague, inviterName, visitPretty, expiresPretty, email, withReminder) {
-  const first = (name || 'there').split(' ')[0];
+  const first = firstName(name);
   const pdUrl = pickDayUrl(code, email, name);
   const intro = isColleague
-    ? '<p style="margin:0 0 18px;font-size:15px;line-height:1.7;color:#3A4450;">' + (inviterName || 'A colleague') + ' invited you to spend a free day at Revelance — Mason, Ohio’s private business club. Your own day pass is below.</p>'
+    ? '<p style="margin:0 0 18px;font-size:15px;line-height:1.7;color:#3A4450;">' + esc(inviterName || 'A colleague') + ' invited you to spend a free day at Revelance — Mason, Ohio’s private business club. Your own day pass is below.</p>'
     : '<p style="margin:0 0 18px;font-size:15px;line-height:1.7;color:#3A4450;">Your free day pass is confirmed. No catch, no credit card — a full day to work from the club, grab a RoboJo coffee, and see what Revelance is all about.</p>';
   const fwd = isColleague ? '' : '<p style="font-size:14px;color:#3A4450;line-height:1.7;margin:16px 0 0;"><strong>First days are better with company.</strong> Forward this to a colleague — they can claim their own free pass at <a href="https://revelanceoh.com/#free-day" style="color:#B08C4A;">revelanceoh.com</a>.</p>';
   const remind = withReminder ? ' We’ll send a reminder with everything that morning.' : '';
@@ -203,7 +220,7 @@ function passEmail(name, code, isColleague, inviterName, visitPretty, expiresPre
 
 // ── Morning-of reminder (scheduled 7:30 AM ET on the visit day) ────────────
 function morningEmail(name, code, email) {
-  const first = (name || 'there').split(' ')[0];
+  const first = firstName(name);
   const inner = `<p style="margin:0 0 18px;font-size:15px;line-height:1.75;color:#3A4450;">We’re looking forward to seeing you at the club today. Here’s everything you need — it takes about 30 seconds from the parking lot to a desk.</p>
     ${codeBox(code, SITE + '/check-in/?code=' + encodeURIComponent(code), 'Check In — Already Filled Out For You', 'Or scan the QR code at the front desk when you walk in.')}
     <div style="${LABEL} margin-bottom:10px;">What to Expect</div>
@@ -221,7 +238,7 @@ function morningEmail(name, code, email) {
 
 // ── Drip reminders when no visit date was picked ───────────────────────────
 function tickleEmail(name, code, email, stage, expiresPretty) {
-  const first = (name || 'there').split(' ')[0];
+  const first = firstName(name);
   const pdUrl = pickDayUrl(code, email, name);
   const pickBtn = '<div style="margin:0 0 22px;">' + btn(pdUrl, 'Pick My Day — 10 Seconds') + '</div>';
   let headline, pre, body;
@@ -253,7 +270,7 @@ function tickleEmail(name, code, email, stage, expiresPretty) {
 
 // ── Reschedule confirmation ────────────────────────────────────────────────
 function rescheduleConfirmEmail(name, code, email, visitPretty, expiresPretty, withReminder) {
-  const first = (name || 'there').split(' ')[0];
+  const first = firstName(name);
   const expLine = expiresPretty
     ? '<p style="margin:0 0 12px;font-size:14px;line-height:1.75;color:#3A4450;">Your pass is good through <strong>' + expiresPretty + '</strong>.</p>' : '';
   const followLine = withReminder
@@ -269,7 +286,7 @@ function rescheduleConfirmEmail(name, code, email, visitPretty, expiresPretty, w
 
 // ── Walk-in welcome: checked in at the door with no prior signup ─────────
 function walkInEmail(name) {
-  const first = (name || 'there').split(' ')[0];
+  const first = firstName(name);
   const inner = `<p style="margin:0 0 18px;font-size:15px;line-height:1.75;color:#3A4450;">You’re checked in — welcome to Mason’s private business club. The whole day is yours: find a seat anywhere on the Co-Revel floor and make yourself at home.</p>
     <div style="${LABEL} margin-bottom:12px;">Make the Most of Your Day</div>
     <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0" style="font-size:14px;color:#3A4450;line-height:1.75;">
@@ -287,8 +304,8 @@ function walkInEmail(name) {
 
 // ── New-member application received ────────────────────────────────────────
 function newMemberEmail(name, membership, startPretty) {
-  const first = (name || 'there').split(' ')[0];
-  const tierLine = membership ? `<tr><td style="padding:5px 0;">🏆 <strong>Membership:</strong> ${membership}</td></tr>` : '';
+  const first = firstName(name);
+  const tierLine = membership ? `<tr><td style="padding:5px 0;">🏆 <strong>Membership:</strong> ${esc(membership)}</td></tr>` : '';
   const startLine = startPretty ? `<tr><td style="padding:5px 0;">📅 <strong>Requested start date:</strong> ${startPretty}</td></tr>` : '';
   const inner = `<p style="margin:0 0 18px;font-size:15px;line-height:1.75;color:#3A4450;">Your membership form is in — thank you. Our team is setting up your membership now, and here’s exactly what happens next.</p>
     <div style="${LABEL} margin-bottom:12px;">What Happens Next</div>
@@ -314,7 +331,7 @@ function eventsBlock() {
 
 // ── Guest welcome: checked in to meet someone — concierge tone, no pitch ───
 function guestWelcomeEmail(name) {
-  const first = (name || 'there').split(' ')[0];
+  const first = firstName(name);
   const inner = `<p style="margin:0 0 18px;font-size:15px;line-height:1.75;color:#3A4450;">You’re checked in — welcome to Mason’s private business club. While you’re here, a few things worth knowing about the building:</p>
     <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0" style="font-size:14px;color:#3A4450;line-height:1.75;">
       <tr><td style="padding:5px 0;">☕ <strong>RoboJo Coffee Bar</strong> — our robotic barista in the lobby, featuring Script Coffee. <a href="https://revelanceoh.com/blog/robojo-coffee-app-preorder-latte-art-rewards.html" style="color:#B08C4A;">Grab the RoboJo app</a> to preorder.</td></tr>
@@ -330,7 +347,7 @@ function guestWelcomeEmail(name) {
 
 // ── Guest day-3 follow-up: free work week offer ────────────────────────────
 function guestFollowUpEmail(name) {
-  const first = (name || 'there').split(' ')[0];
+  const first = firstName(name);
   const inner = `<p style="margin:0 0 18px;font-size:15px;line-height:1.75;color:#3A4450;">You were in the building this week for a meeting — here’s an open invitation to try it as your own office.</p>
     <div style="background:#F4F5F6;border:1px solid #E8EAED;border-left:3px solid #C9A96E;border-radius:8px;padding:16px 18px;margin:0 0 22px;">
       <p style="margin:0 0 10px;font-size:15px;color:#3A4450;line-height:1.7;"><strong>A free work week at Revelance</strong> — Monday through Friday, 8 AM–6 PM. The Co-Revel floor, RoboJo coffee, phone booths, all of it. No card, no strings.</p>
@@ -345,7 +362,7 @@ function guestFollowUpEmail(name) {
 
 // ── Day-after-check-in follow-up (unchanged) ───────────────────────────────
 function followUpEmail(name, interest) {
-  const first = (name || 'there').split(' ')[0];
+  const first = firstName(name);
   const pitches = {
     'Executive Office ($1,599/mo)': {
       body: 'You mentioned the <strong>Executive Offices</strong> — fair warning, only <strong>two remain</strong>. A private office with the whole club wrapped around it: boardrooms, the Taproom, RoboJo, free parking, all of it. If yesterday felt right, it’s worth holding one before they’re gone.',
@@ -908,11 +925,13 @@ exports.handler = async function (event) {
       const drips = [];
 
       if (KEY) {
-        if (d.email && d['pass-code']) {
+        if (validEmail(d.email) && validCode(d['pass-code'])) {
           await sendEmail(KEY, d.email, (d.name || 'Your').split(' ')[0] + ', your Revelance day pass is confirmed',
             passEmail(d.name, d['pass-code'], false, null, vPretty, expPretty, d.email, vs === 'future'));
         }
-        if (d['colleague-email'] && d['colleague-pass-code']) {
+        const colleagueOk = validEmail(d['colleague-email']) && validCode(d['colleague-pass-code']) &&
+          String(d['colleague-email']).trim().toLowerCase() !== String(d.email || '').trim().toLowerCase();
+        if (colleagueOk) {
           await sendEmail(KEY, d['colleague-email'], (d['colleague-name'] || 'Your').split(' ')[0] + ', your Revelance day pass is ready',
             passEmail(d['colleague-name'], d['colleague-pass-code'], true, d.name, vPretty, expPretty, d['colleague-email'], vs === 'future'));
         }
@@ -924,7 +943,7 @@ exports.handler = async function (event) {
               morningEmail(d.name, d['pass-code'], d.email), when);
             if (id) drips.push(id);
           }
-          if (d['colleague-email'] && d['colleague-pass-code']) {
+          if (colleagueOk) {
             const id = await sendEmail(KEY, d['colleague-email'], 'See you today at Revelance, ' + (d['colleague-name'] || 'there').split(' ')[0],
               morningEmail(d['colleague-name'], d['colleague-pass-code'], d['colleague-email']), when);
             if (id) drips.push(id);

@@ -333,7 +333,7 @@ function newMemberEmail(name, membership, startPretty) {
 // ── Shared "more than coworking" block (events education) ─────────────────
 function eventsBlock() {
   return `<div style="${LABEL} margin:24px 0 12px;">More Than Coworking</div>
-    <p style="font-size:14px;color:#3A4450;line-height:1.75;margin:0 0 10px;">Revelance is also Mason’s event venue — the <strong>Revel Room</strong> hosts up to 225 for corporate parties and celebrations, the boardrooms take client meetings up a level, <strong>Emergency 9</strong> turns a team offsite into a golf outing, and the <strong>Culinary Lab</strong> hosts private chef experiences. Company retreat, client event, rehearsal dinner, shower, holiday party — if it matters, it fits here.</p>
+    <p style="font-size:14px;color:#3A4450;line-height:1.75;margin:0 0 10px;">Revelance is also Mason’s event venue — the <strong>Revel Room</strong> and its connected spaces host up to 225 for corporate parties and celebrations, the boardrooms take client meetings up a level, <strong>Emergency 9</strong> turns a team offsite into a golf outing, and the <strong>Culinary Lab</strong> hosts private chef experiences. Company retreat, client event, rehearsal dinner, shower, holiday party — if it matters, it fits here.</p>
     <p style="font-size:14px;line-height:1.7;margin:0;"><a href="https://revelanceoh.com/plan-your-event/" style="color:#B08C4A;">Plan an event at Revelance →</a></p>`;
 }
 

@@ -269,7 +269,16 @@ a.use-card:hover{border-color:var(--gold);transform:translateY(-3px);box-shadow:
 .float-bar-btn-outline{background:transparent;border:1px solid rgba(255,255,255,.25);color:#fff}
 .float-bar-close{background:none;border:none;color:rgba(255,255,255,.4);font-size:1.1rem;cursor:pointer;padding:4px 8px;margin-left:4px}
 @media(min-width:701px){.float-bar{display:block}}
-.footer-newsletter{border-top:1px solid rgba(255,255,255,.07);padding-top:22px;margin-bottom:22px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}.footer-newsletter p{margin:0;font-size:.82rem;color:rgba(255,255,255,.5);white-space:nowrap}.fn-form{display:flex;gap:8px;flex:1;min-width:240px;max-width:420px}.fn-input{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:4px;color:#fff;font-size:.82rem;padding:9px 14px;font-family:inherit;outline:none;transition:border .2s}.fn-input::placeholder{color:rgba(255,255,255,.3)}.fn-input:focus{border-color:var(--gold)}.fn-btn{background:transparent;border:1px solid var(--gold);color:var(--gold);font-size:.78rem;font-weight:700;letter-spacing:.06em;padding:9px 16px;border-radius:4px;cursor:pointer;white-space:nowrap;font-family:inherit;transition:all .3s}.fn-btn:hover{background:var(--gold);color:var(--black)}@media(max-width:700px){.footer-newsletter{flex-direction:column;align-items:flex-start;gap:12px}.fn-form{max-width:100%;width:100%}}@media(min-width:769px){html{font-size:17px}}@media(max-width:768px){input:not([type=checkbox]):not([type=radio]),select,textarea{font-size:16px}}</style><script type="application/ld+json">
+.footer-newsletter{border-top:1px solid rgba(255,255,255,.07);padding-top:22px;margin-bottom:22px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}.footer-newsletter p{margin:0;font-size:.82rem;color:rgba(255,255,255,.5);white-space:nowrap}.fn-form{display:flex;gap:8px;flex:1;min-width:240px;max-width:420px}.fn-input{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:4px;color:#fff;font-size:.82rem;padding:9px 14px;font-family:inherit;outline:none;transition:border .2s}.fn-input::placeholder{color:rgba(255,255,255,.3)}.fn-input:focus{border-color:var(--gold)}.fn-btn{background:transparent;border:1px solid var(--gold);color:var(--gold);font-size:.78rem;font-weight:700;letter-spacing:.06em;padding:9px 16px;border-radius:4px;cursor:pointer;white-space:nowrap;font-family:inherit;transition:all .3s}.fn-btn:hover{background:var(--gold);color:var(--black)}@media(max-width:700px){.footer-newsletter{flex-direction:column;align-items:flex-start;gap:12px}.fn-form{max-width:100%;width:100%}}@media(min-width:769px){html{font-size:17px}}@media(max-width:768px){input:not([type=checkbox]):not([type=radio]),select,textarea{font-size:16px}}.faq-section{margin-top:36px}
+.faq-item{border-bottom:1px solid var(--cloud)}
+.faq-q{width:100%;background:none;border:none;padding:18px 0;font-family:var(--sans);font-size:.96rem;font-weight:600;color:var(--black);text-align:left;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;transition:color .3s;line-height:1.4}
+.faq-q:hover{color:var(--gold-dark)}
+.faq-q::after{content:'+';font-size:1.2rem;font-weight:300;color:var(--gold);flex-shrink:0;transition:transform .3s}
+.faq-item.open .faq-q::after{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease,opacity .3s ease;opacity:0}
+.faq-item.open .faq-a{max-height:600px;opacity:1}
+.faq-a p{font-size:.92rem;color:var(--ash);line-height:1.7;padding-bottom:18px;margin:0}
+</style><script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Who operates the Revelance Taproom?","acceptedAnswer":{"@type":"Answer","text":"The Taproom is operated by Sonder Brewing. It is Revelance's own taproom — not a Sonder location. Sonder's full-service restaurant is across the parking lot at 8584 Duke Blvd."}},
 {"@type":"Question","name":"What beer is served at the Revelance Taproom?","acceptedAnswer":{"@type":"Answer","text":"The Taproom serves Sonder beer, staffed by Sonder bartenders, at standard bar prices with no event markup."}}]}
 </script>
@@ -452,6 +461,22 @@ a.use-card:hover{border-color:var(--gold);transform:translateY(-3px);box-shadow:
 <div class="container">
 <div style="padding-left:20px;border-left:3px solid var(--gold)">
 <p style="max-width:760px;color:var(--ash);font-size:.97rem;line-height:1.8">The Taproom at Revelance is Mason, Ohio's only exclusively private craft bar — available for <strong>private party bar rental</strong>, <strong>birthday parties</strong>, <strong>corporate happy hours</strong>, <strong>team celebrations</strong>, <strong>company holiday parties</strong>, <strong>client entertainment</strong>, and <strong>private event bar rental</strong> near Cincinnati. Unlike a restaurant private dining room, you get the entire bar exclusively — Sonder Brewing on tap, a Sonder bartender included, and no event markup on drinks. Combine with the Revel Room for a full event experience, or book the Taproom on its own for a memorable evening your group will actually talk about.</p>
+</div>
+</div>
+</section>
+<section class="section" style="background:var(--pearl)">
+<div class="container" style="max-width:860px">
+<span class="label">FAQ</span>
+<h2>Taproom <em>questions.</em></h2>
+<div class="faq-section">
+<div class="faq-item">
+<button class="faq-q">Who operates the Revelance Taproom?</button>
+<div class="faq-a"><p>The Taproom is operated by Sonder Brewing. It is Revelance's own taproom — not a Sonder location. Sonder's full-service restaurant is across the parking lot at 8584 Duke Blvd.</p></div>
+</div>
+<div class="faq-item">
+<button class="faq-q">What beer is served at the Revelance Taproom?</button>
+<div class="faq-a"><p>The Taproom serves Sonder beer, staffed by Sonder bartenders, at standard bar prices with no event markup.</p></div>
+</div>
 </div>
 </div>
 </section>
@@ -806,5 +831,9 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,
 </script>
 <!-- /LIGHTBOX v6_086 -->
 
-<script id="navcaretjs">document.querySelectorAll(".nav-caret").forEach(function(b){b.addEventListener("click",function(e){e.preventDefault();var li=b.closest(".nav-item");var op=li.classList.toggle("open");b.setAttribute("aria-expanded",op?"true":"false");});});</script></body>
+<script id="navcaretjs">document.querySelectorAll(".nav-caret").forEach(function(b){b.addEventListener("click",function(e){e.preventDefault();var li=b.closest(".nav-item");var op=li.classList.toggle("open");b.setAttribute("aria-expanded",op?"true":"false");});});</script><script>
+// FAQ accordion
+(function(){document.querySelectorAll('.faq-q').forEach(function(b){b.setAttribute('aria-expanded','false');b.addEventListener('click',function(){var it=b.parentElement,was=it.classList.contains('open');document.querySelectorAll('.faq-item').forEach(function(i){i.classList.remove('open');var q=i.querySelector('.faq-q');if(q)q.setAttribute('aria-expanded','false');});if(!was){it.classList.add('open');b.setAttribute('aria-expanded','true');}});});})();
+</script>
+</body>
 </html>

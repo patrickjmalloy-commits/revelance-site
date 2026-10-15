@@ -213,7 +213,16 @@ html{font-size:17px}.footer .container{max-width:1600px;padding:0 48px}.footer-g
 .space-blog-all{display:inline-flex;align-items:center;gap:8px;margin-top:24px;font-size:.8rem;font-weight:600;color:var(--ash);text-decoration:none;transition:color .2s}
 .space-blog-all:hover{color:var(--gold-dark)}
 @media(max-width:900px){.space-blog-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:580px){.space-blog-grid{grid-template-columns:1fr}}.footer-newsletter{border-top:1px solid rgba(255,255,255,.07);padding-top:22px;margin-bottom:22px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}.footer-newsletter p{margin:0;font-size:.82rem;color:rgba(255,255,255,.5);white-space:nowrap}.fn-form{display:flex;gap:8px;flex:1;min-width:240px;max-width:420px}.fn-input{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:4px;color:#fff;font-size:.82rem;padding:9px 14px;font-family:inherit;outline:none;transition:border .2s}.fn-input::placeholder{color:rgba(255,255,255,.3)}.fn-input:focus{border-color:var(--gold)}.fn-btn{background:transparent;border:1px solid var(--gold);color:var(--gold);font-size:.78rem;font-weight:700;letter-spacing:.06em;padding:9px 16px;border-radius:4px;cursor:pointer;white-space:nowrap;font-family:inherit;transition:all .3s}.fn-btn:hover{background:var(--gold);color:var(--black)}@media(max-width:700px){.footer-newsletter{flex-direction:column;align-items:flex-start;gap:12px}.fn-form{max-width:100%;width:100%}}@media(max-width:768px){input:not([type=checkbox]):not([type=radio]),select,textarea{font-size:16px}}</style>
+@media(max-width:580px){.space-blog-grid{grid-template-columns:1fr}}.footer-newsletter{border-top:1px solid rgba(255,255,255,.07);padding-top:22px;margin-bottom:22px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}.footer-newsletter p{margin:0;font-size:.82rem;color:rgba(255,255,255,.5);white-space:nowrap}.fn-form{display:flex;gap:8px;flex:1;min-width:240px;max-width:420px}.fn-input{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:4px;color:#fff;font-size:.82rem;padding:9px 14px;font-family:inherit;outline:none;transition:border .2s}.fn-input::placeholder{color:rgba(255,255,255,.3)}.fn-input:focus{border-color:var(--gold)}.fn-btn{background:transparent;border:1px solid var(--gold);color:var(--gold);font-size:.78rem;font-weight:700;letter-spacing:.06em;padding:9px 16px;border-radius:4px;cursor:pointer;white-space:nowrap;font-family:inherit;transition:all .3s}.fn-btn:hover{background:var(--gold);color:var(--black)}@media(max-width:700px){.footer-newsletter{flex-direction:column;align-items:flex-start;gap:12px}.fn-form{max-width:100%;width:100%}}@media(max-width:768px){input:not([type=checkbox]):not([type=radio]),select,textarea{font-size:16px}}.faq-section{margin-top:36px}
+.faq-item{border-bottom:1px solid var(--cloud)}
+.faq-q{width:100%;background:none;border:none;padding:18px 0;font-family:var(--sans);font-size:.96rem;font-weight:600;color:var(--black);text-align:left;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;transition:color .3s;line-height:1.4}
+.faq-q:hover{color:var(--gold-dark)}
+.faq-q::after{content:'+';font-size:1.2rem;font-weight:300;color:var(--gold);flex-shrink:0;transition:transform .3s}
+.faq-item.open .faq-q::after{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease,opacity .3s ease;opacity:0}
+.faq-item.open .faq-a{max-height:600px;opacity:1}
+.faq-a p{font-size:.92rem;color:var(--ash);line-height:1.7;padding-bottom:18px;margin:0}
+</style>
 <!-- Google Analytics -->
 <script>(function(){if(location.hostname!=='revelanceoh.com'&&location.hostname!=='www.revelanceoh.com')return;var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-V2N2YENTZE';document.head.appendChild(s);})();</script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-V2N2YENTZE');</script>
@@ -429,6 +438,34 @@ html{font-size:17px}.footer .container{max-width:1600px;padding:0 48px}.footer-g
 <section class="section" style="padding-top:70px;padding-bottom:48px">
 <div class="container">
 <p style="max-width:760px;color:var(--ash);font-size:.97rem;line-height:1.8">The Culinary Lab at Revelance is Mason, Ohio's only <strong>commercial kitchen rental</strong> inside a private business club — available for <strong>cooking class rentals</strong>, <strong>culinary team building events</strong>, <strong>private chef dinners</strong>, <strong>corporate tasting events</strong>, <strong>food truck commissary kitchen</strong> use, and <strong>catering prep rental</strong> near Cincinnati. Designed and equipped by Zink Foodservice Group, it's a genuine NSF-certified commercial kitchen — with full event venue infrastructure around it. Combine it with the Revel Room or C-Suite for a full private chef dining experience, or book the kitchen on its own for prep and production.</p>
+</div>
+</section>
+<section class="section" style="background:var(--pearl)">
+<div class="container" style="max-width:860px">
+<span class="label">FAQ</span>
+<h2>Culinary Lab <em>questions.</em></h2>
+<div class="faq-section">
+<div class="faq-item">
+<button class="faq-q">What is the Zink Culinary Center at Revelance?</button>
+<div class="faq-a"><p>The Zink Culinary Center is a fully equipped commercial kitchen inside Revelance, designed by Zink Foodservice Group — an Ohio-based commercial kitchen equipment rep agency. It is available for culinary events, private chef dinners, and commissary kitchen use.</p></div>
+</div>
+<div class="faq-item">
+<button class="faq-q">Can I use the Revelance Culinary Lab as a commissary kitchen?</button>
+<div class="faq-a"><p>Yes. The Culinary Lab is available for licensed commissary use for food truck operators and small culinary businesses that require a certified commercial prep facility.</p></div>
+</div>
+<div class="faq-item">
+<button class="faq-q">What types of events can be held in the Culinary Lab?</button>
+<div class="faq-a"><p>The Culinary Lab supports corporate tasting events, private chef dinners, cooking demonstrations, product showcases for foodservice equipment, and take-home meal preparation programs.</p></div>
+</div>
+<div class="faq-item">
+<button class="faq-q">Can I rent the Culinary Lab for a cooking class or team building event?</button>
+<div class="faq-a"><p>Yes. The Zink Culinary Center at Revelance is available for cooking class rentals, culinary team building events, private chef experiences, and group cooking events in Mason, Ohio. It is a fully equipped NSF-certified commercial kitchen — not a residential kitchen — which means the experience is genuine, not staged.</p></div>
+</div>
+<div class="faq-item">
+<button class="faq-q">Is there a commercial kitchen rental near Cincinnati for food trucks or catering?</button>
+<div class="faq-a"><p>Yes. The Culinary Lab at Revelance is available as a licensed commissary kitchen for food truck operators and small culinary businesses in the Mason and greater Cincinnati area. The facility is NSF-certified, fully equipped with commercial-grade appliances, and available for hourly and recurring rental.</p></div>
+</div>
+</div>
 </div>
 </section>
 <section class="space-blog">
@@ -793,5 +830,9 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,
 </script>
 <!-- /LIGHTBOX v6_086 -->
 
-<script id="navcaretjs">document.querySelectorAll(".nav-caret").forEach(function(b){b.addEventListener("click",function(e){e.preventDefault();var li=b.closest(".nav-item");var op=li.classList.toggle("open");b.setAttribute("aria-expanded",op?"true":"false");});});</script></body>
+<script id="navcaretjs">document.querySelectorAll(".nav-caret").forEach(function(b){b.addEventListener("click",function(e){e.preventDefault();var li=b.closest(".nav-item");var op=li.classList.toggle("open");b.setAttribute("aria-expanded",op?"true":"false");});});</script><script>
+// FAQ accordion
+(function(){document.querySelectorAll('.faq-q').forEach(function(b){b.setAttribute('aria-expanded','false');b.addEventListener('click',function(){var it=b.parentElement,was=it.classList.contains('open');document.querySelectorAll('.faq-item').forEach(function(i){i.classList.remove('open');var q=i.querySelector('.faq-q');if(q)q.setAttribute('aria-expanded','false');});if(!was){it.classList.add('open');b.setAttribute('aria-expanded','true');}});});})();
+</script>
+</body>
 </html>

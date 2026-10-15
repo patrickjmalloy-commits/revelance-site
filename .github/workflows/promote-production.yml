@@ -72,12 +72,22 @@ jobs:
           print(hashlib.md5(d.encode()).hexdigest())
           PY
           fp() { case "$1" in *.html) python3 /tmp/fp.py "$2";; *) md5sum "$2" | cut -d' ' -f1;; esac; }
-          url() { case "$1" in index.html) echo "$S/";; */index.html) echo "$S/${1%index.html}";; *) echo "$S/$1";; esac; }
+          # Blog posts are served without ".html" (the blog-html-301 edge
+          # function 301s the .html form), so check the extensionless URL.
+          url() { case "$1" in index.html) echo "$S/";; */index.html) echo "$S/${1%index.html}";; blog/*.html) echo "$S/${1%.html}";; *) echo "$S/$1";; esac; }
 
-          # Check up to 5 changed site files (skip repo-only files).
-          grep -Ev '^(\.github/|netlify/|netlify\.toml$|README\.md$|.*\.md$)' /tmp/changed.txt | head -5 > /tmp/check.txt || true
+          # Check up to 5 changed site files (skip repo-only files, the 404
+          # page, and pages netlify.toml redirects elsewhere).
+          grep -Ev '^(\.github/|netlify/|netlify\.toml$|README\.md$|.*\.md$|404\.html$)' /tmp/changed.txt > /tmp/cand.txt || true
+          : > /tmp/check.txt
           while read -r f; do
             [ -f "$f" ] || continue
+            u=$(url "$f"); p="${u#$S}"
+            grep -qF "from = \"$p\"" netlify.toml && continue
+            echo "$f" >> /tmp/check.txt
+            [ "$(wc -l < /tmp/check.txt)" -ge 5 ] && break
+          done < /tmp/cand.txt
+          while read -r f; do
             want=$(fp "$f" "$f"); ok=0
             for i in $(seq 1 40); do
               code=$(curl -s -o /tmp/live -w '%{http_code}' "$(url "$f")" || true)

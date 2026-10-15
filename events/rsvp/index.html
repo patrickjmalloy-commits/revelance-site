@@ -526,6 +526,7 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,
   sync();
 })();
 </script>
+<script>/* RSVP: record which event the sign-up is for (?event=Name in the link, else the page title). */(function(){var f=document.getElementById("eventField"),t=document.getElementById("eventTitle");if(!f)return;var q="";try{q=(new URLSearchParams(location.search).get("event")||"").trim().slice(0,120);}catch(_){}if(q&&t)t.textContent=q;f.value=q||(t?t.textContent.trim():"");})();</script>
 <script id="rv-contact-clicks">/* GA4 + Clarity: count phone, email and text taps (phone_click / email_click / text_click) with where the link sits. */(function(){document.addEventListener("click",function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href^="tel:"],a[href^="mailto:"],a[href^="sms:"]');if(!a)return;var h=a.getAttribute("href")||"",k=h.slice(0,4).toLowerCase(),ev=k==="tel:"?"phone_click":k==="sms:"?"text_click":"email_click";var where=a.closest(".mobile-contact")?"mobile_bar":a.closest("footer")?"footer":a.closest("nav")?"nav":"page";try{if(typeof gtag==="function")gtag("event",ev,{link_url:h.split("?")[0],link_location:where,page_path:location.pathname,transport_type:"beacon"});}catch(_){}try{if(typeof clarity==="function")clarity("event",ev);}catch(_){}},true);})();</script>
 </body>
 </html>

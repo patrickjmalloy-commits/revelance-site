@@ -831,6 +831,7 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,
 // FAQ accordion
 (function(){document.querySelectorAll('.faq-q').forEach(function(b){b.setAttribute('aria-expanded','false');b.addEventListener('click',function(){var it=b.parentElement,was=it.classList.contains('open');document.querySelectorAll('.faq-item').forEach(function(i){i.classList.remove('open');var q=i.querySelector('.faq-q');if(q)q.setAttribute('aria-expanded','false');});if(!was){it.classList.add('open');b.setAttribute('aria-expanded','true');}});});})();
 </script>
+<script>
 /* Mobile menu accessibility: the closed drawer is taken out of the tab order
    (inert), the toggle reports aria-expanded, focus moves into the menu when it
    opens, and Escape closes it. Desktop (>1100px) is unaffected. */

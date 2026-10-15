@@ -31,6 +31,19 @@
   path = "/blog/*"
   function = "blog-html-301"
 
+# --- Retired post (commissary pitch no longer offered) -> Culinary Lab ---
+[[redirects]]
+  from = "/blog/food-truck-commissary-kitchen-cincinnati"
+  to = "/culinary-lab/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/food-truck-commissary-kitchen-cincinnati.html"
+  to = "/culinary-lab/"
+  status = 301
+  force = true
+
 # --- Redirect www to non-www (pick one canonical domain for SEO) ---
 [[redirects]]
   from = "/blog/workspace-and-event-"

@@ -189,7 +189,8 @@ footer{padding:18px 16px;text-align:center;font-size:.72rem;color:rgba(255,255,2
 (function(){var e=document.getElementById("fy");if(e)e.textContent=new Date().getFullYear();})();
 (function(){
   // Start-date proxy: picker opens only on a deliberate tap (iOS auto-advances
-  // focus into bare date inputs). Earliest pickable day is today (Eastern).
+  // focus into bare date inputs). Earliest pickable day is today (Eastern);
+  // weekends are rejected.
   var h = document.getElementById('nmStart'), n = document.getElementById('nmStartN'),
       disp = document.getElementById('nmStartDisplay');
   n.min = new Intl.DateTimeFormat('en-CA',{timeZone:'America/New_York'}).format(new Date());
@@ -200,8 +201,15 @@ footer{padding:18px 16px;text-align:center;font-size:.72rem;color:rgba(255,255,2
   n.addEventListener('change', function(){
     h.value = n.value;
     if (!n.value) { disp.value=''; return; }
-    var p = n.value.split('-');
-    disp.value = new Date(+p[0], +p[1]-1, +p[2], 12, 0, 0).toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'});
+    var p = n.value.split('-'), d = new Date(+p[0], +p[1]-1, +p[2], 12, 0, 0);
+    // Memberships start on a weekday (Monday-Friday).
+    if (d.getDay() === 0 || d.getDay() === 6) {
+      n.value = ''; h.value = ''; disp.value = '';
+      disp.placeholder = 'Start dates are Monday–Friday — tap to pick';
+      disp.style.borderColor = '#c0392b';
+      return;
+    }
+    disp.value = d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'});
     disp.style.borderColor = '';
   });
   n.addEventListener('blur', function(){ n.disabled = true; n.style.pointerEvents = 'none'; });

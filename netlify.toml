@@ -31,6 +31,13 @@
   path = "/blog/*"
   function = "blog-html-301"
 
+# Repo notes for editors, not site pages
+[[redirects]]
+  from = "/CLAUDE.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
 # --- Retired post (commissary pitch no longer offered) -> Culinary Lab ---
 [[redirects]]
   from = "/blog/food-truck-commissary-kitchen-cincinnati"

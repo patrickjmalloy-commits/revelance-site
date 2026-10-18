@@ -31,6 +31,12 @@ jobs:
           ref: staging
           fetch-depth: 0
 
+      # Static page rules (no breadcrumbs, no stray JavaScript, one gold
+      # palette, analytics and tap tracking present, standard menu links).
+      # A failure here blocks the approval request; see the job log.
+      - name: Site rules
+        run: python3 .github/scripts/site_rules.py
+
       - name: Work out what would go live
         id: meta
         run: |

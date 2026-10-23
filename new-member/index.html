@@ -53,6 +53,7 @@ form input[type=date]{color-scheme:dark}
 .full{margin-bottom:12px}
 @media(max-width:600px){.row,.row-3{grid-template-columns:1fr}}
 .tier-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.tier-grid .tier:last-child:nth-child(odd){grid-column:1/-1}
 @media(max-width:600px){.tier-grid{grid-template-columns:1fr}}
 .tier{position:relative}
 .tier input{position:absolute;opacity:0;pointer-events:none}
@@ -133,7 +134,8 @@ footer{padding:18px 16px;text-align:center;font-size:.72rem;color:rgba(255,255,2
 
         <div class="sect">2 &middot; Membership Selection</div>
         <div class="tier-grid" role="radiogroup" aria-label="Membership selection">
-          <div class="tier"><input type="radio" name="membership" value="Co-Revel — $179/month" id="tCoRevel" required><label for="tCoRevel">Co-Revel <span class="price">$179/month</span></label></div>
+          <div class="tier"><input type="radio" name="membership" value="Virtual Address — $95/month" id="tVirtual" required><label for="tVirtual">Virtual Address <span class="price">$95/month</span></label></div>
+          <div class="tier"><input type="radio" name="membership" value="Co-Revel — $179/month" id="tCoRevel"><label for="tCoRevel">Co-Revel <span class="price">$179/month</span></label></div>
           <div class="tier"><input type="radio" name="membership" value="Dedicated Desk — $449/month" id="tDesk"><label for="tDesk">Dedicated Desk <span class="price">$449/month</span></label></div>
           <div class="tier"><input type="radio" name="membership" value="Executive Office — $1,599/month" id="tOffice"><label for="tOffice">Executive Office <span class="price">$1,599/month</span></label></div>
           <div class="tier"><input type="radio" name="membership" value="Corporate Account — Custom" id="tCorp"><label for="tCorp">Corporate Account <span class="price">Custom</span></label></div>

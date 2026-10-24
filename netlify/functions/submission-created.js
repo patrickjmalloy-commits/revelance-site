@@ -315,9 +315,11 @@ function newMemberEmail(name, membership, startPretty) {
   const first = firstName(name);
   const tierLine = membership ? `<tr><td style="padding:5px 0;">🏆 <strong>Membership:</strong> ${esc(membership)}</td></tr>` : '';
   const startLine = startPretty ? `<tr><td style="padding:5px 0;">📅 <strong>Requested start date:</strong> ${startPretty}</td></tr>` : '';
-  // Executive Offices are limited: the form is a request, not a reservation.
-  const eoNote = /^Executive Office/i.test(membership || '')
-    ? `<p style="margin:0 0 18px;font-size:14px;line-height:1.7;color:#3A4450;padding:12px 14px;border-left:3px solid #C9A96E;background:#FAF6EE;"><strong>About your Executive Office:</strong> offices are limited, so your form doesn’t reserve one yet. We’ll reach out to confirm availability before your membership is activated or anything is charged.</p>`
+  // Desks and offices are limited: the form is a request, not a reservation.
+  const limited = /^Executive Office/i.test(membership || '') ? ['Executive Office', 'offices']
+    : /^Dedicated Desk/i.test(membership || '') ? ['Dedicated Desk', 'desks'] : null;
+  const eoNote = limited
+    ? `<p style="margin:0 0 18px;font-size:14px;line-height:1.7;color:#3A4450;padding:12px 14px;border-left:3px solid #C9A96E;background:#FAF6EE;"><strong>About your ${limited[0]}:</strong> ${limited[1]} are limited, so your form doesn’t reserve one yet. We’ll reach out to confirm availability before your membership is activated or anything is charged.</p>`
     : '';
   const inner = `<p style="margin:0 0 18px;font-size:15px;line-height:1.75;color:#3A4450;">Your membership form is in — thank you. Our team is setting up your membership now, and here’s exactly what happens next.</p>
     ${eoNote}<div style="${LABEL} margin-bottom:12px;">What Happens Next</div>

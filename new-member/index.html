@@ -242,8 +242,14 @@ footer{padding:18px 16px;text-align:center;font-size:.72rem;color:rgba(255,255,2
 (function(){
   // Plan buttons elsewhere on the site link here as /new-member/?plan=<key>.
   var PLANS = {'virtual-monthly':'tVirtual','virtual-annual':'tVirtualYr','co-revel':'tCoRevel','dedicated-desk':'tDesk','executive-office':'tOffice','corporate':'tCorp'};
+  // Desks and offices are limited: say the form is a request, not a reservation.
   var note = document.getElementById('eoNote');
-  function sync(){ var o = document.getElementById('tOffice'); note.hidden = !(o && o.checked); }
+  var LIMITED = {tDesk:['Dedicated Desks','a desk'], tOffice:['Executive Offices','an office']};
+  function sync(){
+    var c = document.querySelector('input[name="membership"]:checked'), l = c && LIMITED[c.id];
+    note.hidden = !l;
+    if (l) note.textContent = l[0] + ' are limited. Submitting this form doesn\u2019t reserve ' + l[1] + ' or guarantee one \u2014 we\u2019ll contact you to confirm availability before your membership is activated or anything is charged.';
+  }
   var key = ''; try { key = (new URLSearchParams(location.search).get('plan') || '').toLowerCase(); } catch(e) {}
   if (PLANS[key]) { var r = document.getElementById(PLANS[key]); if (r) r.checked = true; }
   document.querySelectorAll('input[name="membership"]').forEach(function(r){ r.addEventListener('change', sync); });

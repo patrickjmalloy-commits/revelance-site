@@ -315,8 +315,12 @@ function newMemberEmail(name, membership, startPretty) {
   const first = firstName(name);
   const tierLine = membership ? `<tr><td style="padding:5px 0;">🏆 <strong>Membership:</strong> ${esc(membership)}</td></tr>` : '';
   const startLine = startPretty ? `<tr><td style="padding:5px 0;">📅 <strong>Requested start date:</strong> ${startPretty}</td></tr>` : '';
+  // Executive Offices are limited: the form is a request, not a reservation.
+  const eoNote = /^Executive Office/i.test(membership || '')
+    ? `<p style="margin:0 0 18px;font-size:14px;line-height:1.7;color:#3A4450;padding:12px 14px;border-left:3px solid #C9A96E;background:#FAF6EE;"><strong>About your Executive Office:</strong> offices are limited, so your form doesn’t reserve one yet. We’ll reach out to confirm availability before your membership is activated or anything is charged.</p>`
+    : '';
   const inner = `<p style="margin:0 0 18px;font-size:15px;line-height:1.75;color:#3A4450;">Your membership form is in — thank you. Our team is setting up your membership now, and here’s exactly what happens next.</p>
-    <div style="${LABEL} margin-bottom:12px;">What Happens Next</div>
+    ${eoNote}<div style="${LABEL} margin-bottom:12px;">What Happens Next</div>
     <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0" style="font-size:14px;color:#3A4450;line-height:1.75;">
       <tr><td style="padding:5px 0;">1&#65039;&#8419; &nbsp;The Revelance team activates your membership</td></tr>
       <tr><td style="padding:5px 0;">2&#65039;&#8419; &nbsp;You’ll receive your <strong>member portal invitation</strong> by email</td></tr>

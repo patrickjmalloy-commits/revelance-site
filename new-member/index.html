@@ -54,6 +54,8 @@ form input[type=date]{color-scheme:dark}
 @media(max-width:600px){.row,.row-3{grid-template-columns:1fr}}
 .tier-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
 .tier-grid .tier:last-child:nth-child(odd){grid-column:1/-1}
+.agree-note{font-size:.82rem;color:rgba(255,255,255,.75);line-height:1.6;margin:18px 0 14px;padding:14px 16px;border:1px solid rgba(201,169,110,.35);border-radius:10px;background:rgba(201,169,110,.06)}
+.eo-note{font-size:.8rem;color:var(--gold-light);line-height:1.55;margin:-4px 0 14px;padding:10px 14px;border-left:2px solid var(--gold);background:rgba(201,169,110,.08);border-radius:0 8px 8px 0}
 @media(max-width:600px){.tier-grid{grid-template-columns:1fr}}
 .tier{position:relative}
 .tier input{position:absolute;opacity:0;pointer-events:none}
@@ -141,6 +143,7 @@ footer{padding:18px 16px;text-align:center;font-size:.72rem;color:rgba(255,255,2
           <div class="tier"><input type="radio" name="membership" value="Executive Office — $1,599/month" id="tOffice"><label for="tOffice">Executive Office <span class="price">$1,599/month</span></label></div>
           <div class="tier"><input type="radio" name="membership" value="Corporate Account — Custom" id="tCorp"><label for="tCorp">Corporate Account <span class="price">Custom</span></label></div>
         </div>
+        <p class="eo-note" id="eoNote" role="note" hidden>Executive Offices are limited. Submitting this form doesn&#8217;t reserve an office or guarantee one &mdash; we&#8217;ll contact you to confirm availability before your membership is activated or anything is charged.</p>
         <div class="row">
           <div style="position:relative"><input type="text" readonly tabindex="-1" id="nmStartDisplay" placeholder="Membership start date * — tap to pick" aria-label="Requested membership start date" style="cursor:pointer;caret-color:transparent;width:100%"><input type="hidden" name="start-date" id="nmStart"><input type="date" id="nmStartN" disabled aria-label="Choose a start date" style="position:absolute;left:0;top:0;width:100%;height:100%;opacity:0;margin:0;padding:0;border:0;pointer-events:none;-webkit-appearance:none"></div>
           <input type="text" name="office-number" placeholder="Office number (if applicable)" aria-label="Office number (if applicable)">
@@ -175,6 +178,9 @@ footer{padding:18px 16px;text-align:center;font-size:.72rem;color:rgba(255,255,2
         </div>
         <div class="secure-note"><strong>For your security, we never collect card or bank numbers on this page.</strong> Once your membership is activated, you&#8217;ll receive your member portal invitation &mdash; add your payment details there in about a minute, entered directly into our billing system, fully encrypted.</div>
 
+        <p class="agree-note" id="agreeNote">By submitting this form, I&#8217;m requesting the membership selected above, starting on the date I chose, and I agree to pay the listed rate once Revelance activates my membership. I&#8217;ll add my payment method in the member portal before my start date.</p>
+        <input type="hidden" name="agreement" id="nmAgreement">
+        <input type="hidden" name="agreed-at" id="nmAgreedAt">
         <button type="submit" class="btn" id="nmBtn">Submit My Membership Form &rarr;</button>
         <p class="fine">Questions? Call <a href="tel:5137945070" style="color:var(--gold-light)">513-794-5070</a> or email <a href="mailto:info@revelanceoh.com" style="color:var(--gold-light)">info@revelanceoh.com</a>.</p>
         <div class="fail" id="failNote"><strong>Hmm, that didn&#8217;t go through.</strong> Please call <a href="tel:5137945070">513-794-5070</a> or email <a href="mailto:info@revelanceoh.com">info@revelanceoh.com</a> and we&#8217;ll take care of it.</div>
@@ -233,9 +239,24 @@ footer{padding:18px 16px;text-align:center;font-size:.72rem;color:rgba(255,255,2
   cb.addEventListener('change', apply);
   apply();
 })();
+(function(){
+  // Plan buttons elsewhere on the site link here as /new-member/?plan=<key>.
+  var PLANS = {'virtual-monthly':'tVirtual','virtual-annual':'tVirtualYr','co-revel':'tCoRevel','dedicated-desk':'tDesk','executive-office':'tOffice','corporate':'tCorp'};
+  var note = document.getElementById('eoNote');
+  function sync(){ var o = document.getElementById('tOffice'); note.hidden = !(o && o.checked); }
+  var key = ''; try { key = (new URLSearchParams(location.search).get('plan') || '').toLowerCase(); } catch(e) {}
+  if (PLANS[key]) { var r = document.getElementById(PLANS[key]); if (r) r.checked = true; }
+  document.querySelectorAll('input[name="membership"]').forEach(function(r){ r.addEventListener('change', sync); });
+  sync();
+})();
 document.getElementById('newMemberForm').addEventListener('submit', function(ev){
   ev.preventDefault();
   var form = ev.target;
+  // Keep a record of exactly what the member agreed to and when.
+  var agreed = document.getElementById('agreeNote').textContent.trim();
+  if (!document.getElementById('eoNote').hidden) agreed += ' ' + document.getElementById('eoNote').textContent.trim();
+  document.getElementById('nmAgreement').value = agreed;
+  document.getElementById('nmAgreedAt').value = new Date().toISOString();
   var btn = document.getElementById('nmBtn');
   if (!form.elements['start-date'].value) {
     var disp = document.getElementById('nmStartDisplay');

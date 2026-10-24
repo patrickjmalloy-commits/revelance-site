@@ -393,7 +393,7 @@ h2.light{color:#fff}h2.light em{color:var(--gold-light)}
 <style id="rv-footer">/* One footer style site-wide (main-page footer; two columns on phones) */footer.footer:not(#rv){background:var(--black,#0B0E11);color:rgba(255,255,255,.45);padding:60px 0 28px;line-height:1.7;font-size:1rem}footer.footer:not(#rv) .container{max-width:1200px;margin:0 auto;padding:0 28px}@media(min-width:1400px){footer.footer:not(#rv) .container{max-width:1600px;padding:0 48px}}footer.footer:not(#rv) .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:36px;margin-bottom:36px}footer.footer:not(#rv) .footer-brand{font-family:var(--sans,Outfit,sans-serif);letter-spacing:normal;font-size:inherit;font-weight:inherit;color:inherit}footer.footer:not(#rv) .footer-brand p{font-size:.88rem;line-height:1.7;margin-top:14px;max-width:280px;color:rgba(255,255,255,.45)}footer.footer:not(#rv) .footer-col h4{font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:18px}footer.footer:not(#rv) .footer-col a{display:block;font-size:.85rem;color:rgba(255,255,255,.65);text-decoration:none;margin-bottom:9px;transition:color .3s}footer.footer:not(#rv) .footer-col a:hover{color:var(--gold-light)}footer.footer:not(#rv) .footer-bottom{border-top:1px solid rgba(255,255,255,.07);padding-top:22px;display:flex;justify-content:space-between;align-items:center;font-size:.78rem}footer.footer:not(#rv) .footer-social{display:flex;gap:12px}footer.footer:not(#rv) .footer-social a{width:38px;height:38px;border-radius:8px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.85);text-decoration:none;transition:all .3s}footer.footer:not(#rv) .footer-social a:hover{background:var(--gold);color:var(--black)}footer.footer:not(#rv) .footer-newsletter{border-top:1px solid rgba(255,255,255,.07);padding-top:22px;margin-bottom:22px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}footer.footer:not(#rv) .footer-newsletter p{margin:0;font-size:.82rem;color:rgba(255,255,255,.5);white-space:nowrap}footer.footer:not(#rv) .fn-form{display:flex;gap:8px;flex:1;min-width:240px;max-width:420px}footer.footer:not(#rv) .fn-input{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:4px;color:#fff;font-size:.82rem;padding:9px 14px;font-family:inherit;outline:none;transition:border .2s}footer.footer:not(#rv) .fn-input::placeholder{color:rgba(255,255,255,.3)}footer.footer:not(#rv) .fn-input:focus{border-color:var(--gold)}footer.footer:not(#rv) .fn-btn{background:transparent;border:1px solid var(--gold);color:var(--gold);font-size:.78rem;font-weight:700;letter-spacing:.06em;padding:9px 16px;border-radius:4px;cursor:pointer;white-space:nowrap;font-family:inherit;transition:all .3s}footer.footer:not(#rv) .fn-btn:hover{background:var(--gold);color:var(--black)}@media(max-width:900px){footer.footer:not(#rv) .footer-grid{grid-template-columns:1fr 1fr}}@media(max-width:700px){footer.footer:not(#rv) .footer-bottom{flex-direction:column;gap:14px;text-align:center;align-items:center}footer.footer:not(#rv) .footer-social{width:100%;justify-content:center}footer.footer:not(#rv) .footer-newsletter{flex-direction:column;align-items:flex-start;gap:12px}footer.footer:not(#rv) .fn-form{max-width:100%;width:100%}}@media(max-width:600px){footer.footer:not(#rv){padding-bottom:calc(110px + env(safe-area-inset-bottom,0px))}}</style>
 <style id="rv-hier">/* Heading hierarchy: page title 58px / 35px phone, section headings 43px / 29px phone */body:not(#rv) main h2{font-size:clamp(1.8rem,3vw,2.6rem)!important;line-height:1.15!important}</style>
 <style id="rv-gold">/* Gold words in headings: light gold on dark sections, deep gold on light ones, black on gold banners */body:not(#rv) .cta-band h2 em{color:var(--black)}</style>
-<style id="rv-tiles">/* Membership tiles: three per row on desktop, same 2px border on every tile */body:not(#rv) .mem-grid .mem-card{border-width:2px;border-style:solid}body:not(#rv) .mem-grid .mem-card.dark,body:not(#rv) #corporate-account{border-color:var(--charcoal)}</style>
+<style id="rv-tiles">/* Membership tiles: three per row on desktop, same 2px border on every tile */body:not(#rv) .mem-grid .mem-card{border-width:2px;border-style:solid}body:not(#rv) .mem-grid .mem-card.dark,body:not(#rv) #corporate-account{border-color:var(--charcoal)}a.ws-img{display:block;color:inherit;text-decoration:none}body:not(#rv) .mem-grid .mem-card{scroll-margin-top:110px}</style>
 </head>
 <body>
 <a href="#main-content" class="skip-link" onclick="var t=document.getElementById('main-content');if(t){t.setAttribute('tabindex','-1');t.style.outline='none';t.focus({preventScroll:true});}">Skip to main content</a>
@@ -473,13 +473,13 @@ h2.light{color:#fff}h2.light em{color:var(--gold-light)}
     <p class="subtext" style="margin:0 auto;text-align:center">From a quick coffee-and-WiFi day to an executive office with your logo on the door. Coworking lives on a dedicated second floor — separated from events, never interrupted. Everything managed through the Revelance App.</p>
   </div>
   <div class="workspace-strip reveal">
-    <div class="ws-img"><picture><source srcset="../images/community-lounge.webp" type="image/webp"><img loading="lazy" src="../images/community-lounge.jpg" alt="Co-Revel Lounge coworking area at Revelance"></picture><div class="ws-label">Co-Revel Lounge</div></div>
-    <div class="ws-img"><picture><source srcset="../images/coworking-space.webp" type="image/webp"><img loading="lazy" src="../images/coworking-space.jpg" alt="Co-Revel Café and kitchen at Revelance"></picture><div class="ws-label">Co-Revel Café</div></div>
-    <div class="ws-img"><picture><source srcset="../images/dedicated-desk.webp" type="image/webp"><img loading="lazy" src="../images/dedicated-desk.jpg" alt="Lockable dedicated desk at Revelance"></picture><div class="ws-label">Dedicated Desk</div></div>
-    <div class="ws-img"><picture><source srcset="../images/executive-office.webp" type="image/webp"><img loading="lazy" src="../images/executive-office.jpg" alt="Private executive office at Revelance"></picture><div class="ws-label">Executive Office</div></div>
+    <a class="ws-img" href="#plan-co-revel" aria-label="Co-Revel Lounge: see the Co-Revel membership"><picture><source srcset="../images/community-lounge.webp" type="image/webp"><img loading="lazy" src="../images/community-lounge.jpg" alt="Co-Revel Lounge coworking area at Revelance"></picture><div class="ws-label">Co-Revel Lounge</div></a>
+    <a class="ws-img" href="#plan-co-revel" aria-label="Co-Revel Café: see the Co-Revel membership"><picture><source srcset="../images/coworking-space.webp" type="image/webp"><img loading="lazy" src="../images/coworking-space.jpg" alt="Co-Revel Café and kitchen at Revelance"></picture><div class="ws-label">Co-Revel Café</div></a>
+    <a class="ws-img" href="#plan-dedicated-desk" aria-label="Dedicated Desk: see the Dedicated Desk membership"><picture><source srcset="../images/dedicated-desk.webp" type="image/webp"><img loading="lazy" src="../images/dedicated-desk.jpg" alt="Lockable dedicated desk at Revelance"></picture><div class="ws-label">Dedicated Desk</div></a>
+    <a class="ws-img" href="#plan-executive-office" aria-label="Executive Office: see the Executive Office membership"><picture><source srcset="../images/executive-office.webp" type="image/webp"><img loading="lazy" src="../images/executive-office.jpg" alt="Private executive office at Revelance"></picture><div class="ws-label">Executive Office</div></a>
   </div>
   <div class="mem-grid">
-    <div class="mem-card outlined reveal">
+    <div class="mem-card outlined reveal" id="plan-day-pass">
       <h3>Day Pass</h3><p class="mem-tier">Drop in anytime</p>
       <div class="mem-price">$29</div><p class="mem-period">per day</p>
       <ul>
@@ -491,7 +491,7 @@ h2.light{color:#fff}h2.light em{color:var(--gold-light)}
       </ul>
       <a href="../?interest=Day+Pass#contact" class="btn btn-outline">Buy a Day Pass</a>
     </div>
-    <div class="mem-card outlined reveal">
+    <div class="mem-card outlined reveal" id="plan-virtual-address">
       <h3>Virtual Address</h3><p class="mem-tier">Business address only</p>
       <div class="mem-price">$95</div><p class="mem-period">per month · $950/yr</p>
       <ul>
@@ -503,7 +503,7 @@ h2.light{color:#fff}h2.light em{color:var(--gold-light)}
       </ul>
       <a href="../virtual-office/" class="btn btn-dark" style="width:100%;text-align:center;justify-content:center">Learn More</a>
     </div>
-    <div class="mem-card pop reveal">
+    <div class="mem-card pop reveal" id="plan-co-revel">
       <h3>Co-Revel</h3><p class="mem-tier">Open coworking</p>
       <div class="mem-price">$179</div><p class="mem-period">per month</p>
       <ul>
@@ -520,7 +520,7 @@ h2.light{color:#fff}h2.light em{color:var(--gold-light)}
       </ul>
       <a href="../new-member/?plan=co-revel" class="btn btn-gold">Get Started</a>
     </div>
-    <div class="mem-card outlined reveal">
+    <div class="mem-card outlined reveal" id="plan-dedicated-desk">
       <h3>Dedicated Desk</h3>
 
       <div class="mem-price">$449</div><p class="mem-period">per month</p>
@@ -538,7 +538,7 @@ h2.light{color:#fff}h2.light em{color:var(--gold-light)}
       
       <a href="../new-member/?plan=dedicated-desk" class="btn btn-dark" style="width:100%;text-align:center;justify-content:center">Get Started</a>
     </div>
-    <div class="mem-card dark reveal">
+    <div class="mem-card dark reveal" id="plan-executive-office">
       <h3>Executive Office</h3>
       <div style="display:block;text-align:center;margin-bottom:12px"><div style="display:inline-flex;align-items:center;gap:6px;font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--black);background:var(--gold);border:none;padding:4px 10px;border-radius:20px"><span style="width:6px;height:6px;border-radius:50%;background:var(--black);display:inline-block;flex-shrink:0"></span>Only 2 Available</div></div>
       <p class="mem-tier">Executive suite</p>

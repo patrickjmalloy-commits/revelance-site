@@ -9,6 +9,7 @@ approval request.
 Each rule exists because the problem reached staging at least once.
 """
 import re
+from html.parser import HTMLParser
 import subprocess
 import sys
 
@@ -18,6 +19,31 @@ APP_PAGES = {'404.html'}
 RETIRED = {'blog/food-truck-commissary-kitchen-cincinnati.html'}
 
 GOLD = {'--gold-light': '#D4BA85', '--gold-dark': '#B08C4A', '--gold': '#C9A96E'}
+
+
+class _Structure(HTMLParser):
+    TAGS = ('span', 'a', 'div', 'section', 'article', 'main', 'ul', 'ol', 'button',
+            'h1', 'h2', 'h3', 'h4', 'footer', 'nav', 'form', 'label', 'table')
+
+    def __init__(self):
+        super().__init__()
+        self.stack, self.errors = [], []
+
+    def handle_starttag(self, tag, attrs):
+        if tag in self.TAGS:
+            self.stack.append((tag, self.getpos()[0]))
+
+    def handle_endtag(self, tag):
+        if tag not in self.TAGS:
+            return
+        if self.stack and self.stack[-1][0] == tag:
+            self.stack.pop()
+            return
+        self.errors.append((tag, self.getpos()[0]))
+        for k in range(len(self.stack) - 1, -1, -1):
+            if self.stack[k][0] == tag:
+                del self.stack[k:]
+                break
 
 
 def pages():
@@ -57,6 +83,18 @@ def check(path, s, errors):
         for v in re.findall(re.escape(var) + r':\s*(#[0-9A-Fa-f]{6})', s):
             if v.upper() != want:
                 err(f'{var} is {v}; site standard is {want}')
+
+    # 3b. Page structure: every opened container closes in order. A dropped
+    #     opening tag (e.g. a lost <span>) shows as broken text, not an error.
+    p = _Structure()
+    p.feed(re.sub(r'(?s)<!--.*?-->', lambda m: '\n' * m.group(0).count('\n'),
+                  re.sub(r'(?is)<(script|style)\b.*?</\1>', lambda m: '\n' * m.group(0).count('\n'), s)))
+    p.close()
+    for tag, line in p.errors[:3]:
+        err(f'line {line}: </{tag}> does not match an open <{tag}> (missing or extra tag)')
+    if p.stack and not p.errors:
+        tag, line = p.stack[-1]
+        err(f'line {line}: <{tag}> is never closed')
 
     if path in APP_PAGES or path in RETIRED:
         return

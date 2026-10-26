@@ -18,6 +18,8 @@ request while it fails.
 - **No breadcrumbs.** No "Home → Section → Page" trails anywhere, visible or as
   BreadcrumbList structured data.
 - **No stray JavaScript.** Every script block needs its opening `<script>` tag.
+- **Clean page structure.** Every opened tag (span, div, a, section, headings…) closes in order;
+  a dropped opening tag shows up as broken text on the page, not as an error.
 - **One gold palette:** `--gold #C9A96E`, `--gold-light #D4BA85` (gold text on dark
   sections), `--gold-dark #B08C4A` (gold text on light sections). Italic words in
   headings on gold banners are black.

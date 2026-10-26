@@ -1061,10 +1061,15 @@ var posts=[
 {f:"offsite-meetings-drive-better-results",tag:"Events",t:"Why Offsite Meetings Drive Better Strategic Results",d:"Research shows offsite meetings increase idea generation, improve decision-making, and boost team alignment."},
 {f:"owner-operated-coworking-mason-ohio",tag:"The Club",t:"Why It Matters That the Owners Actually Work Here",d:"Most coworking spaces are run by property managers you\u2019ll never meet. Revelance was built by its founders \u2014 and they\u2019re here every day."},
 {f:"standalone-building-not-strip-mall-coworking",tag:"The Club",t:"Your Workspace Shouldn\u2019t Share a Parking Lot with a TJ Maxx",d:"Strip mall coworking means fighting for parking and sharing walls with retail neighbors. A standalone building changes everything."},
-{f:"workspace-and-event-venue-same-building",tag:"Events",t:"What If Your Workspace and Your Event Venue Were the Same Building?",d:"Most professionals rent an office somewhere and book events somewhere else. What if you didn\u2019t have to?"}
+{f:"workspace-and-event-venue-same-building",tag:"Events",t:"What If Your Workspace and Your Event Venue Were the Same Building?",d:"Most professionals rent an office somewhere and book events somewhere else. What if you didn\u2019t have to?"},
+{f:"ballroom-rental-north-cincinnati",tag:"Events",t:"Ballroom Rental North of Cincinnati: Meet the Revel Room",d:"125 banquet, 200+ theater, 225 across connected spaces \u2014 25-ft ceilings, your own caterer, and free parking, 25 minutes north of downtown."},
+{f:"birthday-party-venues-mason-cincinnati",tag:"Events",t:"Birthday Party Venues in Mason & Cincinnati: Where to Throw the Big One",d:"A bourbon night for 15, a golf-sim tournament for 30, a private bar for 80, or dinner for 125 \u2014 pick the room by headcount."}
 ];
+// Seasonal pin: the holiday party guide leads the grid until Dec 20.
+var pin={f:"corporate-holiday-party-venue-cincinnati-guide",tag:"Events",t:"Corporate Holiday Party Venues in Cincinnati: The 2026 Booking Guide",d:"When to book, what December really costs, and the format that fits \u2014 December dates go first.",until:"2026-12-20"};
 function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
-var picked=shuffle(posts.slice()).slice(0,4);
+var today=new Intl.DateTimeFormat("en-CA",{timeZone:"America/New_York"}).format(new Date());
+var picked=today<=pin.until?[pin].concat(shuffle(posts.slice()).slice(0,3)):shuffle(posts.slice()).slice(0,4);
 var html="";
 for(var i=0;i<picked.length;i++){
 var p=picked[i];

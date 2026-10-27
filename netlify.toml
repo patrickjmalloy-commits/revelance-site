@@ -413,6 +413,13 @@
     Cache-Control = "public, max-age=86400"
     X-Robots-Tag = "all"
 
+# Private owner pages: never indexed, never cached
+[[headers]]
+  for = "/staff/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    Cache-Control = "no-store"
+
 # --- Content-Security-Policy (enforced): scripts only from this site, Google Analytics/Tag Manager and Clarity ---
 [[headers]]
   for = "/*"

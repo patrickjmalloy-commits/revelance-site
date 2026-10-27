@@ -33,3 +33,10 @@ request while it fails.
 Bundles from the deploy-bundle artifact must be built from the current `staging`
 branch. Before applying one, compare it with staging and do not apply a bundle that
 reverts newer work.
+
+## Private pages
+
+`/staff/events/` is the owner's private event schedule. Event details come only from
+`netlify/functions/events-admin.js`, after a server-side password check against the
+`ADMIN_EVENTS_PASSWORD` environment variable. Keep it noindex, out of the sitemap and
+menus, with no analytics; never put event details in static files.

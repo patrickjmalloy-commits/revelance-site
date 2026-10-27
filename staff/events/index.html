@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Event Schedule — Revelance (Private)</title>
+<link rel="icon" href="../../favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;1,500&family=Outfit:wght@400;500;600;700&display=swap">
+<style>
+/* Private owner page: sign-in card, then a summary strip, filters and the schedule grouped by day. */
+:root{
+  --gold:#C9A96E; --gold-light:#D4BA85; --gold-dark:#B08C4A;
+  --black:#0B0E11; --charcoal:#151A20; --slate:#1E252E;
+  --bg:#F7F6F3; --panel:#FFFFFF; --ink:#151A20; --muted:#5A6572; --line:#E4E1DA;
+  --ok:#2F7A4F; --ok-bg:#E6F2EA; --warn:#94650F; --warn-bg:#F7EDD6; --bad:#B03A2E; --bad-bg:#F8E3E0;
+  --serif:'Playfair Display',Georgia,serif; --sans:'Outfit',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+@media (prefers-color-scheme: dark){:root{
+  --bg:#0F1317; --panel:#171C22; --ink:#ECE8E1; --muted:#A3AAB3; --line:#2A3038;
+  --ok:#7CC79A; --ok-bg:#1F3328; --warn:#E3B65A; --warn-bg:#3A3020; --bad:#F08A7E; --bad-bg:#3D2422; color-scheme:dark}}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--sans);-webkit-font-smoothing:antialiased}
+.bar{background:var(--charcoal);color:#fff;padding-block:16px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.bar-in{max-width:1040px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;font-size:.82rem;font-weight:500;letter-spacing:.28em;text-transform:uppercase}
+.brand img{width:28px;height:28px}
+.bar .tag{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-light)}
+.wrap{max-width:1040px;margin:0 auto;padding-block:32px 72px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:24px}
+h1{font:500 clamp(1.9rem,4vw,2.6rem)/1.1 var(--serif);margin:0;text-wrap:balance}
+h1 em{font-style:italic;color:var(--gold-dark)}
+@media (prefers-color-scheme: dark){h1 em{color:var(--gold-light)}}
+.lede{margin:6px 0 0;color:var(--muted);max-width:62ch}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px}
+.login{max-width:420px;display:flex;flex-direction:column;gap:14px}
+.login label{font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+input[type=password],input[type=search],select{width:100%;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--ink);font:1rem var(--sans);padding:11px 13px}
+.btn{border:0;border-radius:8px;background:var(--gold);color:var(--black);font:600 .92rem var(--sans);padding:12px 18px;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line);font-weight:500;padding:9px 14px}
+.btn:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.err{color:var(--bad);font-size:.9rem;margin:0}
+.summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.stat{background:var(--panel);padding:16px 18px;min-width:0;display:flex;flex-direction:column;gap:4px}
+.stat b{font:500 1.7rem/1 var(--serif);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.stat b.small{font:600 1rem/1.3 var(--sans)}
+.stat span{font-size:.78rem;color:var(--muted)}
+.controls{display:grid;grid-template-columns:repeat(4,minmax(0,1fr)) auto;gap:10px;align-items:end}
+.controls label{display:flex;flex-direction:column;gap:5px;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);min-width:0}
+.meta{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;font-size:.82rem;color:var(--muted)}
+.day{display:flex;flex-direction:column;gap:10px}
+.day h2{font:500 1.25rem var(--serif);margin:8px 0 0;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.day h2 small{font:500 .8rem var(--sans);color:var(--muted)}
+.ev{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--line);border-radius:10px;padding:16px 18px;display:grid;grid-template-columns:190px minmax(0,1fr);gap:6px 20px}
+.ev.confirmed{border-left-color:var(--ok)} .ev.tentative{border-left-color:var(--warn)} .ev.conflict{box-shadow:0 0 0 2px var(--bad) inset}
+.time{font-weight:600;font-variant-numeric:tabular-nums;min-width:0}
+.time small{display:block;font-weight:400;color:var(--muted);font-size:.8rem}
+.body{min-width:0;display:flex;flex-direction:column;gap:8px}
+.title{font:600 1.05rem/1.35 var(--sans);margin:0;overflow-wrap:anywhere}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:600 .68rem/1 var(--sans);letter-spacing:.06em;text-transform:uppercase;padding:5px 8px;border-radius:999px;background:var(--bg);color:var(--muted);border:1px solid var(--line)}
+.chip.ok{background:var(--ok-bg);color:var(--ok);border-color:transparent} .chip.warn{background:var(--warn-bg);color:var(--warn);border-color:transparent} .chip.bad{background:var(--bad-bg);color:var(--bad);border-color:transparent}
+.chip.space{background:transparent;color:var(--ink)}
+details summary{cursor:pointer;font-size:.86rem;color:var(--gold-dark);font-weight:600}
+@media (prefers-color-scheme: dark){details summary{color:var(--gold-light)}}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;font:.86rem/1.6 var(--sans);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:8px 0 0;max-height:360px;overflow:auto}
+.ev a{color:var(--gold-dark);font-size:.86rem;font-weight:600}
+@media (prefers-color-scheme: dark){.ev a{color:var(--gold-light)}}
+.empty{text-align:center;color:var(--muted);padding:36px 12px}
+.notice{border-radius:10px;padding:12px 16px;background:var(--warn-bg);color:var(--warn);font-size:.9rem}
+@media (max-width:760px){.summary{grid-template-columns:repeat(2,minmax(0,1fr))}.controls{grid-template-columns:1fr 1fr}.ev{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header class="bar"><div class="bar-in">
+  <a class="brand" href="../../"><img src="../../images/logo-r-icon.png" alt="">Revelance</a>
+  <span class="tag">Private · Owner only</span>
+</div></header>
+
+<main class="wrap" id="main-content">
+  <div>
+    <h1>Event <em>schedule</em></h1>
+    <p class="lede">Every booking on the Revelance calendars, with full details. This page is private: event details are only sent after the password is checked on the server.</p>
+  </div>
+
+  <form class="card login" id="login" autocomplete="on">
+    <label for="pw">Password</label>
+    <input type="password" id="pw" name="password" autocomplete="current-password" required>
+    <button class="btn" type="submit" id="signin">Sign in</button>
+    <p class="err" id="loginErr" hidden></p>
+  </form>
+
+  <section id="app" hidden>
+    <div class="summary" aria-label="Summary">
+      <div class="stat"><b id="sTotal">–</b><span>Events in range</span></div>
+      <div class="stat"><b id="sConfirmed">–</b><span>Confirmed</span></div>
+      <div class="stat"><b id="sTentative">–</b><span>Tentative / holds</span></div>
+      <div class="stat"><b id="sBusy" class="small">–</b><span>Busiest space</span></div>
+    </div>
+
+    <div class="card" style="display:flex;flex-direction:column;gap:14px;margin-top:20px">
+      <div class="controls">
+        <label for="range">Dates
+          <select id="range">
+            <option value="next7">Next 7 days</option>
+            <option value="next30" selected>Next 30 days</option>
+            <option value="next90">Next 90 days</option>
+            <option value="past30">Past 30 days</option>
+          </select>
+        </label>
+        <label for="space">Space
+          <select id="space"><option value="">All spaces</option></select>
+        </label>
+        <label for="status">Status
+          <select id="status">
+            <option value="">All</option>
+            <option value="confirmed">Confirmed</option>
+            <option value="tentative">Tentative / holds</option>
+          </select>
+        </label>
+        <label for="q">Search
+          <input type="search" id="q" placeholder="Client, event or notes">
+        </label>
+        <button class="btn ghost" type="button" id="refresh">Refresh</button>
+      </div>
+      <div class="meta"><span id="updated"></span><button class="btn ghost" type="button" id="signout">Sign out</button></div>
+    </div>
+
+    <div id="notices" style="display:flex;flex-direction:column;gap:8px;margin-top:16px"></div>
+    <div id="list" style="display:flex;flex-direction:column;gap:22px;margin-top:16px"></div>
+  </section>
+</main>
+
+<script>
+(function(){
+  var API = '/.netlify/functions/events-admin';
+  var KEY = 'rv_events_token';
+  var ALIASES = {'revel room':'Revel Room','e9 design simulator':'E9','e9':'E9','emergency 9':'E9','taproom/sonder':'Taproom','taproom':'Taproom','c-suite lounge':'C-Suite Lounge','c-suite':'C-Suite Lounge','c suite':'C-Suite Lounge','csuite':'C-Suite Lounge','cornerstone boardroom':'Cornerstone Boardroom','cornerstone':'Cornerstone Boardroom','foundation boardroom':'Foundation Boardroom','foundation':'Foundation Boardroom','horizon boardroom':'Horizon Boardroom','horizon':'Horizon Boardroom','overlook boardroom':'Overlook Boardroom','overlook':'Overlook Boardroom','culinary lab':'Culinary Lab'};
+  var all = [], $ = function(id){ return document.getElementById(id); };
+
+  function getToken(){ try { return sessionStorage.getItem(KEY); } catch(e){ return null; } }
+  function setToken(t){ try { t ? sessionStorage.setItem(KEY, t) : sessionStorage.removeItem(KEY); } catch(e){} }
+  function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+
+  function resolveSpace(raw){
+    var k = raw.toLowerCase().trim(); if(!k) return null;
+    if(ALIASES[k]) return ALIASES[k];
+    for(var a in ALIASES){ if(k.indexOf(a) !== -1 || a.indexOf(k) !== -1) return ALIASES[a]; }
+    return raw.trim();
+  }
+  function spacesFor(ev, cal){
+    var m = (ev.description || '').match(/(?:spaces?|rooms?|location)\s*:\s*([^\n\r<]+)/i);
+    if(m){ var s = m[1].split(',').map(resolveSpace).filter(Boolean); if(s.length) return s; }
+    if(ev.location) { var l = resolveSpace(ev.location); if(l && ALIASES[(ev.location||'').toLowerCase().trim()]) return [l]; }
+    return cal.src === 'perfectvenue' ? [] : [resolveSpace(cal.name) || cal.name];
+  }
+  function statusOf(ev){
+    var t = (ev.summary || '').toLowerCase();
+    if(t.indexOf('(confirmed)') !== -1 || (ev.status === 'confirmed' && !/\((tentative|hold|lead|inquiry|proposal)/.test(t))) return 'confirmed';
+    return 'tentative';
+  }
+  function cleanTitle(s){ return (s || '(No title)').replace(/\s*\((confirmed|tentative|hold|lead|inquiry|proposal)\)\s*/ig, ' ').trim() || '(No title)'; }
+  function descText(d){
+    return String(d || '').replace(/<br\s*\/?>/gi, '\n').replace(/<\/p>|<\/li>|<\/div>/gi, '\n').replace(/<[^>]+>/g, '').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/\n{3,}/g, '\n\n').trim();
+  }
+  function startMs(x){ return x.dateTime ? Date.parse(x.dateTime) : Date.parse(x.date + 'T00:00:00'); }
+
+  function range(){
+    var v = $('range').value, now = new Date(), d0 = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    var day = 86400000;
+    if(v === 'past30') return [new Date(d0 - 30*day), new Date(+d0 + day)];
+    var n = v === 'next7' ? 7 : v === 'next90' ? 90 : 30;
+    return [d0, new Date(+d0 + n*day)];
+  }
+
+  function showLogin(msg){
+    $('app').hidden = true; $('login').hidden = false;
+    $('loginErr').hidden = !msg; $('loginErr').textContent = msg || '';
+    $('pw').focus();
+  }
+
+  function load(){
+    var r = range(), t = getToken();
+    if(!t) return showLogin();
+    $('updated').textContent = 'Loading…';
+    fetch(API + '?timeMin=' + encodeURIComponent(r[0].toISOString()) + '&timeMax=' + encodeURIComponent(r[1].toISOString()), {headers: {Authorization: 'Bearer ' + t}})
+      .then(function(res){ return res.json().then(function(j){ return {ok: res.ok, status: res.status, j: j}; }); })
+      .then(function(x){
+        if(x.status === 401){ setToken(null); return showLogin('Your session ended. Sign in again.'); }
+        if(x.j.error === 'not_configured') return showLogin('The page password hasn’t been set up in Netlify yet.');
+        if(x.j.error === 'calendar_not_configured'){ $('updated').textContent = ''; return notices(['The calendar connection isn’t set up for this deploy (Netlify environment variables).']); }
+        if(!x.ok) throw new Error(x.j.error || ('HTTP ' + x.status));
+        all = [];
+        var warn = [];
+        (x.j.calendars || []).forEach(function(cal){
+          if(cal.error) warn.push(cal.name + ': ' + cal.error);
+          (cal.events || []).forEach(function(ev){
+            all.push({ev: ev, cal: cal, spaces: spacesFor(ev, cal), status: statusOf(ev), s: startMs(ev.start), e: startMs(ev.end)});
+          });
+        });
+        all.sort(function(a, b){ return a.s - b.s; });
+        markConflicts();
+        fillSpaces();
+        notices(warn.map(function(w){ return 'Couldn’t read ' + w; }));
+        $('updated').textContent = 'Updated ' + new Date().toLocaleTimeString([], {hour: 'numeric', minute: '2-digit'});
+        render();
+      })
+      .catch(function(e){ $('updated').textContent = ''; notices(['Couldn’t load events (' + (e && e.message || 'network error') + '). Try Refresh.']); });
+  }
+
+  function markConflicts(){
+    all.forEach(function(x){ x.conflict = false; });
+    for(var i = 0; i < all.length; i++) for(var j = i + 1; j < all.length && all[j].s < all[i].e; j++){
+      var a = all[i], b = all[j];
+      if(a.ev.start.date || b.ev.start.date) continue;
+      if(a.spaces.some(function(s){ return b.spaces.indexOf(s) !== -1; })){ a.conflict = b.conflict = true; }
+    }
+  }
+  function fillSpaces(){
+    var cur = $('space').value, set = {};
+    all.forEach(function(x){ x.spaces.forEach(function(s){ set[s] = 1; }); });
+    $('space').innerHTML = '<option value="">All spaces</option>' + Object.keys(set).sort().map(function(s){ return '<option' + (s === cur ? ' selected' : '') + '>' + esc(s) + '</option>'; }).join('');
+  }
+  function notices(list){ $('notices').innerHTML = list.map(function(m){ return '<div class="notice">' + esc(m) + '</div>'; }).join(''); }
+
+  function timeLabel(x){
+    if(x.ev.start.date) return 'All day';
+    var o = {hour: 'numeric', minute: '2-digit'};
+    return new Date(x.s).toLocaleTimeString([], o) + ' – ' + new Date(x.e).toLocaleTimeString([], o);
+  }
+  function hours(x){ if(x.ev.start.date) return ''; var h = (x.e - x.s) / 3600000; return (Math.round(h * 10) / 10) + ' hr'; }
+
+  function render(){
+    var sp = $('space').value, st = $('status').value, q = $('q').value.trim().toLowerCase();
+    var rows = all.filter(function(x){
+      if(sp && x.spaces.indexOf(sp) === -1) return false;
+      if(st && x.status !== st) return false;
+      if(q && ((x.ev.summary || '') + ' ' + descText(x.ev.description) + ' ' + x.cal.name).toLowerCase().indexOf(q) === -1) return false;
+      return true;
+    });
+    $('sTotal').textContent = rows.length;
+    $('sConfirmed').textContent = rows.filter(function(x){ return x.status === 'confirmed'; }).length;
+    $('sTentative').textContent = rows.filter(function(x){ return x.status === 'tentative'; }).length;
+    var count = {}; rows.forEach(function(x){ x.spaces.forEach(function(s){ count[s] = (count[s] || 0) + 1; }); });
+    var top = Object.keys(count).sort(function(a, b){ return count[b] - count[a]; })[0];
+    $('sBusy').textContent = top ? top + ' (' + count[top] + ')' : '—';
+
+    if(!rows.length){ $('list').innerHTML = '<p class="empty">No events match these filters.</p>'; return; }
+    var days = {}, order = [];
+    rows.forEach(function(x){ var k = new Date(x.s).toDateString(); if(!days[k]){ days[k] = []; order.push(k); } days[k].push(x); });
+    $('list').innerHTML = order.map(function(k){
+      var d = new Date(k), label = d.toLocaleDateString([], {weekday: 'long', month: 'long', day: 'numeric'});
+      return '<section class="day"><h2>' + esc(label) + ' <small>' + days[k].length + (days[k].length === 1 ? ' event' : ' events') + '</small></h2>' +
+        days[k].map(function(x){
+          var desc = descText(x.ev.description);
+          return '<article class="ev ' + x.status + (x.conflict ? ' conflict' : '') + '">' +
+            '<div class="time">' + esc(timeLabel(x)) + '<small>' + esc(hours(x)) + '</small></div>' +
+            '<div class="body"><p class="title">' + esc(cleanTitle(x.ev.summary)) + '</p>' +
+            '<div class="chips"><span class="chip ' + (x.status === 'confirmed' ? 'ok' : 'warn') + '">' + (x.status === 'confirmed' ? 'Confirmed' : 'Tentative / hold') + '</span>' +
+              (x.conflict ? '<span class="chip bad">Overlaps another booking</span>' : '') +
+              x.spaces.map(function(s){ return '<span class="chip space">' + esc(s) + '</span>'; }).join('') +
+              (x.spaces.indexOf(x.cal.name) === -1 ? '<span class="chip">' + esc(x.cal.name) + '</span>' : '') + '</div>' +
+            (x.ev.location ? '<div style="font-size:.88rem;color:var(--muted)">' + esc(x.ev.location) + '</div>' : '') +
+            (desc ? '<details><summary>Booking details</summary><pre>' + esc(desc) + '</pre></details>' : '') +
+            (x.ev.link ? '<a href="' + esc(x.ev.link) + '" target="_blank" rel="noopener">Open in Google Calendar →</a>' : '') +
+            '</div></article>';
+        }).join('') + '</section>';
+    }).join('');
+  }
+
+  $('login').addEventListener('submit', function(e){
+    e.preventDefault();
+    var btn = $('signin'); btn.disabled = true; btn.textContent = 'Checking…';
+    fetch(API, {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({password: $('pw').value})})
+      .then(function(res){ return res.json().then(function(j){ return {status: res.status, j: j}; }); })
+      .then(function(x){
+        btn.disabled = false; btn.textContent = 'Sign in';
+        if(x.status === 200 && x.j.token){ setToken(x.j.token); $('pw').value = ''; $('login').hidden = true; $('app').hidden = false; load(); }
+        else if(x.j.error === 'not_configured') showLogin('The page password hasn’t been set up in Netlify yet.');
+        else showLogin('That password didn’t work.');
+      })
+      .catch(function(){ btn.disabled = false; btn.textContent = 'Sign in'; showLogin('Couldn’t reach the server. Check your connection and try again.'); });
+  });
+  ['range'].forEach(function(id){ $(id).addEventListener('change', load); });
+  ['space', 'status'].forEach(function(id){ $(id).addEventListener('change', render); });
+  $('q').addEventListener('input', render);
+  $('refresh').addEventListener('click', load);
+  $('signout').addEventListener('click', function(){ setToken(null); all = []; $('list').innerHTML = ''; showLogin(); });
+
+  if(getToken()){ $('login').hidden = true; $('app').hidden = false; load(); } else { showLogin(); }
+})();
+</script>
+</body>
+</html>

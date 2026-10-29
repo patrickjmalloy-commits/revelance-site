@@ -428,7 +428,7 @@ async function postToSheet(body) {
   }
 }
 
-// -- "Website Inquiries" tab: every non-day-pass form lands there --
+// -- "Website Inquiries" tab: non-event forms, plus any inquiry Perfect Venue did not take --
 function inquiryDetails(d) {
   const skip = ['name','email','phone','company','bot-field','form-name','g-recaptcha-response'];
   const parts = [];
@@ -813,10 +813,7 @@ exports.handler = async function (event) {
   try {
     const payload = JSON.parse(event.body || '{}').payload || {};
     const formName = payload.form_name;
-    // Every non-day-pass form also lands on the "Website Inquiries" sheet tab.
-    if (formName && formName !== 'free-day-pass' && formName !== 'check-in' && formName !== 'pick-a-day' && formName !== 'new-member') {
-      await logInquiry(formName, payload.data || {});
-    }
+    // Sheet logging for these forms happens below, after the Perfect Venue step.
     // ── New-member application: branded confirmation (team is BCC'd) ──────
     if (formName === 'new-member') {
       const nd = payload.data || {};
@@ -833,6 +830,11 @@ exports.handler = async function (event) {
     if (formName !== 'free-day-pass' && formName !== 'check-in' && formName !== 'pick-a-day') {
       // Event-inquiry forms route to Perfect Venue; pvBridge skips the rest.
       const pv = await pvBridge(formName, payload.data || {});
+      // Event inquiries live in Perfect Venue only. Everything else, and any
+      // inquiry Perfect Venue didn't take, lands on the "Website Inquiries" tab.
+      if (formName && pv.indexOf('pv created') !== 0) {
+        await logInquiry(formName, payload.data || {});
+      }
       return { statusCode: 200, body: 'ok (' + pv + ')' };
     }
     const d = payload.data || {};

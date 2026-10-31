@@ -80,7 +80,7 @@
       "name": "Do you host weddings and large events?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes! The Revel Room seats 125 (rounds, classroom, theater, or reception flow) with a 12'×10' video wall, 25' ceilings, and a private bar featuring Sonder Brewing. 225 Max when you open up the Taproom and adjacent spaces. No mandatory catering, everything quoted upfront. Use our event planner tool to get a recommendation. Full details on our wedding venue in Mason."
+        "text": "Yes! The Revel Room seats 125 (rounds, classroom, theater, or reception flow) with a 12'×10' video wall, 25' ceilings, and a private bar featuring Sonder Brewing. 225 Max when you open up the Taproom and adjacent spaces. No mandatory catering, everything quoted upfront. Use our event planner tool to get a recommendation. Full details on our wedding venue in Mason and our corporate holiday party venue."
       }
     }
   ]
@@ -1210,7 +1210,7 @@ setTimeout(function(){document.getElementById("insightGrid").style.opacity="1";}
 <div class="faq-list" style="max-width:760px;margin:0 auto">
 <div class="faq-item reveal"><button class="faq-q">How is Revelance different from other coworking spaces?<span class="ic">+</span></button><div class="faq-a"><p>We're not a coworking space — we're a private business club. The founders built this as their own headquarters first, then opened it to the business community. That's why you'll find a craft beer taproom, 50 personal bourbon lockers, a culinary lab, and a robotic coffee bar — things you won't find at any other workspace in Ohio.</p><p style="margin-top:10px">We're a standalone 25,000+ sq ft building with our own private parking lot, not a suite in a strip mall. Our <a href="coworking/" style="color:var(--gold-dark);font-weight:600;text-decoration:underline;text-decoration-color:rgba(176,140,74,.7);text-underline-offset:2px">coworking space in Mason</a> lives on a dedicated second floor, completely separated from event spaces — so your workday is never interrupted when a private event is happening downstairs. At most coworking spaces, a paid event means you lose your common area.</p><p style="margin-top:10px">Everything runs through the Revelance App — your phone unlocks every door (no key fobs), you book boardrooms in seconds, and you connect with other members through built-in community chat and message boards. The owners work here every day. The building is home to established businesses in finance, foodservice, and medical devices — you're never walking into an empty space. <a href="blog/purpose-built-business-club-not-retrofitted-coworking" style="color:var(--gold-dark);font-weight:600">Learn why we built from the ground up →</a></p></div></div>
 <div class="faq-item reveal"><button class="faq-q">How does the corporate account work?<span class="ic">+</span></button><div class="faq-a"><p>Fund an account and draw from it however your company needs — boardrooms, events, day passes, golf simulator, culinary experiences, the private bar — all drawing from one balance. Total flexibility. When it runs low, recharge it. We also have an interactive tool that recommends a package based on your team size, usage, and priorities. <a href="build-your-package/" style="color:var(--gold-dark);font-weight:600">Build your package →</a></p></div></div>
-<div class="faq-item reveal"><button class="faq-q">Do you host weddings and large events?<span class="ic">+</span></button><div class="faq-a"><p>Yes! The Revel Room seats 125 (rounds, classroom, theater, or reception flow) with a 12'×10' video wall, 25' ceilings, and a private bar featuring Sonder Brewing. 225 Max when you open up the Taproom and adjacent spaces. No mandatory catering, everything quoted upfront. Use our <a href="plan-your-event/" style="color:var(--gold-dark);font-weight:600">event planner tool</a> to get a recommendation. Full details on our <a href="weddings/">wedding venue in Mason</a>.</p></div></div>
+<div class="faq-item reveal"><button class="faq-q">Do you host weddings and large events?<span class="ic">+</span></button><div class="faq-a"><p>Yes! The Revel Room seats 125 (rounds, classroom, theater, or reception flow) with a 12'×10' video wall, 25' ceilings, and a private bar featuring Sonder Brewing. 225 Max when you open up the Taproom and adjacent spaces. No mandatory catering, everything quoted upfront. Use our <a href="plan-your-event/" style="color:var(--gold-dark);font-weight:600">event planner tool</a> to get a recommendation. Full details on our <a href="weddings/">wedding venue in Mason</a> and our <a href="holiday-parties/">corporate holiday party venue</a>.</p></div></div>
 </div>
 <div class="reveal" style="text-align:center;margin-top:36px">
 <a href="coworking/#faq" style="font-size:.85rem;font-weight:600;color:var(--gold-dark);text-decoration:none">More coworking questions →</a>
@@ -1545,6 +1545,9 @@ revIdle(function(){
     var recapUrl  = card.getAttribute('data-recap-url')      || '';
     var cardId    = card.id || '';
     if (!date || !cardId) return;
+    // Multi-week drives (data-event-end-date) stay on the event list but don't
+    // take the banner: it promotes the next single-day event.
+    if (card.hasAttribute('data-event-end-date')) return;
 
     var dp=date.split('-'),tp=endTime.split(':');
     var endDt    = new Date(+dp[0],+dp[1]-1,+dp[2],+tp[0],+tp[1],0);

@@ -704,12 +704,25 @@ function updateProgress() {
 }
 updateProgress();
 
+// Runs fn after the browser has painted the current frame, so a tap shows
+// its result first and the follow-up work doesn't delay it (wizard INP).
+function afterPaint(fn) {
+  requestAnimationFrame(function(){ setTimeout(fn, 0); });
+}
+
 function goStep(dir) {
   document.querySelectorAll('.step')[currentStep - 1].classList.remove('active');
   currentStep += dir;
   document.querySelectorAll('.step')[currentStep - 1].classList.add('active');
   if (currentStep === 5) buildSpaceInterestList();
   updateProgress();
+  var step = currentStep;
+  afterPaint(function(){ goStepAfterPaint(step); });
+}
+
+// Scroll, history, analytics and saving: none of it changes what the new
+// step shows, so it waits until that step is on screen.
+function goStepAfterPaint(currentStep) {
   window.scrollTo({top: 0, behavior: 'smooth'});
   // Push state so browser back button steps backward through the wizard
   history.pushState({step: currentStep}, '', '');
@@ -755,7 +768,7 @@ window.addEventListener('popstate', function(e) {
     document.querySelectorAll('.step')[currentStep - 1].classList.add('active');
     if (currentStep === 5) buildSpaceInterestList();
     updateProgress();
-    window.scrollTo({top: 0, behavior: 'smooth'});
+    afterPaint(function(){ window.scrollTo({top: 0, behavior: 'smooth'}); });
   }
 });
 
@@ -2221,8 +2234,11 @@ document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',
     window.goStep=function(dir){
       origGoStep(dir);
       if(typeof currentStep!=='undefined'&&currentStep===3){
-        wzLoadMonth();
-        wzUpdateTimeQual();
+        afterPaint(function(){
+          if(currentStep!==3)return;
+          wzLoadMonth();
+          wzUpdateTimeQual();
+        });
       }
     };
   }
@@ -2606,15 +2622,23 @@ window.wzUpdateSpecificTime = function(space, which, val) {
     var m = /wzSelectDate\('(\d{4})-(\d{2})-(\d{2})'\)/.exec(el.getAttribute('onclick') || '');
     return m ? new Date(+m[1], +m[2] - 1, +m[3]).toLocaleDateString('en-US', DATE_FMT) : '';
   }
+  // Writes only real changes: rewriting unchanged attributes on every card
+  // after each tap made the browser restyle the wizard for nothing (INP).
+  function setAttr(el, name, value){
+    if (value === null) { if (el.hasAttribute(name)) el.removeAttribute(name); }
+    else if (el.getAttribute(name) !== value) el.setAttribute(name, value);
+  }
   function enhance(){
-    document.querySelectorAll(SEL).forEach(function(el){
+    // Hidden steps are done when they become active (that class change re-runs this).
+    var scope = document.querySelector('.step.active') || document;
+    scope.querySelectorAll(SEL).forEach(function(el){
       // Options the wizard has switched off (pointer-events:none / not selectable) stay out of the tab order.
       var off = el.style.pointerEvents === 'none' || (el.classList.contains('space-card') && el.dataset.selectable !== 'true');
-      el.setAttribute('tabindex', off ? '-1' : '0');
-      if (off) el.setAttribute('aria-disabled', 'true'); else el.removeAttribute('aria-disabled');
+      setAttr(el, 'tabindex', off ? '-1' : '0');
+      setAttr(el, 'aria-disabled', off ? 'true' : null);
       if (!el.hasAttribute('role')) el.setAttribute('role', 'button');
       if (!el.hasAttribute('aria-label')) { var t = label(el); if (t) el.setAttribute('aria-label', t); }
-      if (!el.matches('[onclick^="wzSelectDate"]')) el.setAttribute('aria-pressed', el.classList.contains('selected') ? 'true' : 'false');
+      if (!el.matches('[onclick^="wzSelectDate"]')) setAttr(el, 'aria-pressed', el.classList.contains('selected') ? 'true' : 'false');
     });
     // A keyboard choice can re-render the step; put focus back instead of losing it to the page.
     if (lastLabel && (!document.activeElement || document.activeElement === document.body)) {

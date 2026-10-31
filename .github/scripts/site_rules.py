@@ -8,6 +8,7 @@ approval request.
 
 Each rule exists because the problem reached staging at least once.
 """
+import json
 import re
 from html.parser import HTMLParser
 import subprocess
@@ -95,6 +96,29 @@ def check(path, s, errors):
     if p.stack and not p.errors:
         tag, line = p.stack[-1]
         err(f'line {line}: <{tag}> is never closed')
+
+    # 3c. Structured data parses, and every Event has the fields Google's
+    #     event report asks for (a missing "offers" was flagged in Search Console).
+    def events(o):
+        if isinstance(o, dict):
+            if o.get('@type') == 'Event':
+                yield o
+            for v in o.values():
+                yield from events(v)
+        elif isinstance(o, list):
+            for v in o:
+                yield from events(v)
+    for m in re.finditer(r'(?s)<script type="application/ld\+json">(.*?)</script>', s):
+        line = s.count('\n', 0, m.start()) + 1
+        try:
+            data = json.loads(m.group(1))
+        except ValueError:
+            err(f'line {line}: structured data (JSON-LD) is not valid JSON')
+            continue
+        for ev in events(data):
+            missing = [k for k in ('name', 'startDate', 'endDate', 'location', 'offers') if k not in ev]
+            if missing:
+                err(f'line {line}: Event "{ev.get("name", "?")}" is missing {", ".join(missing)}')
 
     if path in APP_PAGES or path in RETIRED:
         return

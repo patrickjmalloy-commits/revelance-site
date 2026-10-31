@@ -25,6 +25,8 @@ request while it fails.
   headings on gold banners are black.
 - **Analytics:** every page that loads GA4 also runs `gtag('config','G-V2N2YENTZE')`,
   and every page with a phone or email link includes the `rv-contact-clicks` tracker.
+- **Structured data:** every JSON-LD block is valid JSON, and every Event has name,
+  startDate, endDate, location and offers (free events use a $0 offer).
 - **Menu:** the About menu links "Explore the Building" and the Memberships menu
   links "Virtual Address".
 

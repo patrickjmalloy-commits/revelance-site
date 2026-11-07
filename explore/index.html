@@ -161,31 +161,11 @@ html{font-size:17px.footer .container{max-width:1600px;padding:0 48px}.footer-gr
 .xp-stage{display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:26px;align-items:stretch;max-width:1240px;margin:0 auto}
 @media(max-width:900px){.xp-stage{grid-template-columns:1fr}}
 .xp-left{min-width:0;display:flex;flex-direction:column}
-.xp-map{flex:1;background:#fff;border:1px solid var(--cloud,#E8EAED);border-radius:14px;padding:12px;position:relative;display:flex;flex-direction:column;justify-content:center}
-.xp-map svg{display:block;width:100%;height:auto}
-.xp-map svg[hidden]{display:none!important}
-.xp-hint{position:absolute;top:20px;left:22px;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:#8a93a0;background:rgba(255,255,255,.88);padding:5px 10px;border-radius:6px;pointer-events:none}
-.xp-lab,.xp-rg{font-family:'Outfit',sans-serif;text-transform:uppercase}
-.xp-lab{pointer-events:none}
-.xp-lab text,.xp-rg text{text-anchor:middle;font-weight:600;letter-spacing:.18em;fill:#232A33;paint-order:stroke;stroke:#FFFFFF;stroke-width:5px;stroke-linejoin:round;pointer-events:none;transition:fill .18s,stroke-width .18s}
-.xp-lab text{fill:#8A939E;font-weight:500}
-.xp-rg:hover text,.xp-rg.sel text{fill:#B08C4A;stroke-width:8px;font-weight:700}
-.xp-am{pointer-events:none}
-.xp-am .amc{fill:#3A4450;stroke:#FFFFFF;stroke-width:3}
-.xp-am .amg{stroke:#FFFFFF;stroke-width:2.6;fill:none;stroke-linecap:round;stroke-linejoin:round}
-.xp-am .amp{font-family:'Outfit',sans-serif;font-size:21px;font-weight:700;fill:#FFFFFF;text-anchor:middle;stroke:none}
-.xp-am .aml{font-family:'Outfit',sans-serif;text-transform:uppercase;letter-spacing:.14em;font-weight:600;fill:#5A6572;text-anchor:middle;paint-order:stroke;stroke:#fff;stroke-width:5px}
 .xp-legend{display:flex;gap:22px;flex-wrap:wrap;align-items:center;margin:12px 4px 0;font-size:.78rem;color:var(--ash,#5A6572)}
 .xp-legend span{display:inline-flex;align-items:center;gap:7px}
 .xp-sw{width:13px;height:13px;border-radius:3px;display:inline-block}
 .xp-visit{margin:18px 0 0;background:#fff;border:1px solid var(--cloud,#E8EAED);border-left:3px solid var(--gold,#C9A96E);border-radius:10px;padding:14px 18px;font-size:.88rem;color:var(--ash,#5A6572);line-height:1.65}
 .xp-visit strong{color:var(--charcoal,#151A20);font-weight:600}
-.xp-room{fill:rgba(201,169,110,0);stroke:rgba(176,140,74,0);stroke-width:5;cursor:pointer;transition:fill .18s,stroke .18s}
-.xp-room:hover{fill:rgba(201,169,110,.32);stroke:rgba(176,140,74,.9)}
-.xp-room.sel{fill:rgba(201,169,110,.42);stroke:#B08C4A;stroke-width:6}
-.xp-poi circle.xp-room{fill:#C9A96E;stroke:#FFFFFF;stroke-width:4;transition:fill .18s}
-.xp-poi:hover circle.xp-room,.xp-poi circle.xp-room.sel{fill:#B08C4A;stroke-width:5}
-.xp-poi .poig{stroke:#FFFFFF;stroke-width:2.6;fill:none;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
 .xp-card{background:#fff;border:1px solid var(--cloud,#E8EAED);border-radius:14px;padding:0 0 24px;position:sticky;top:90px;overflow:hidden}
 @media(max-width:900px){.xp-card{position:static}}
 .xp-media{position:relative;aspect-ratio:8/5;background:#151A20}
@@ -199,8 +179,80 @@ html{font-size:17px.footer .container{max-width:1600px;padding:0 48px}.footer-gr
 .xp-desc{color:var(--ash,#5A6572);line-height:1.7;margin:0 24px 20px;font-size:1.02rem}
 .xp-card .btn{margin:0 24px}
 @media(max-width:768px){.xp-fbtn{font-size:16px}}
+/* 3D building map */
+@property --rz{syntax:'<angle>';inherits:true;initial-value:-32deg}
+@property --tilt{syntax:'<angle>';inherits:true;initial-value:66deg}
+@property --g{syntax:'<number>';inherits:true;initial-value:0}
+/* ---------- the 3D model (all lengths in floor-plan units, 1 unit ≈ 1.3 in) ---------- */
+.x3-world{position:absolute;left:50%;top:56%;width:2007px;height:1364px;margin:-682px 0 0 -1003px;transform-style:preserve-3d;
+  transform:scale3d(var(--k),var(--k),var(--k)) rotateX(var(--tilt)) rotateZ(var(--rz));
+  transition:--rz .8s cubic-bezier(.2,.7,.2,1),--tilt .8s cubic-bezier(.2,.7,.2,1)}
+.x3-stage.x3-dragging .x3-world{transition:none}
+.x3-world *{transform-style:preserve-3d}
+.x3-floor{position:absolute;inset:0;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+.x3-plate{position:absolute;inset:0;background:#fff;overflow:hidden;box-shadow:0 0 0 6px #2A333E;transition:opacity .5s}
+.x3-plate img{position:absolute;max-width:none;pointer-events:none;-webkit-user-drag:none}
+.x3-slab{position:absolute;background:#1E252E;transition:opacity .5s}
+.x3-ext{position:absolute;background:#3A4450;transition:opacity .5s}
+.x3-room{position:absolute;left:0;top:0;cursor:pointer;transform:scale3d(1,1,var(--g));transform-origin:0 0}
+.x3-face{position:absolute;transition:opacity .5s,background-color .25s,border-color .25s}
+.x3-top{background:rgba(201,169,110,.5);border:3px solid rgba(176,140,74,.9)}
+.x3-wN,.x3-wW{background:rgba(176,140,74,.55)}
+.x3-wS{background:rgba(176,140,74,.88)}
+.x3-wE{background:rgba(150,118,58,.78)}
+.x3-room:hover .x3-top{background:rgba(201,169,110,.72)}
+.x3-room.x3-sel .x3-top{background:rgba(212,186,133,.95);border-color:#8f6f35}
+.x3-room.x3-zone .x3-top{background:rgba(201,169,110,.16);border:3px dashed rgba(176,140,74,.75)}
+.x3-room.x3-zone .x3-wN,.x3-room.x3-zone .x3-wW,.x3-room.x3-zone .x3-wS,.x3-room.x3-zone .x3-wE{background:rgba(176,140,74,.35)}
+.x3-room.x3-zone:hover .x3-top{background:rgba(201,169,110,.3)}
+.x3-room.x3-zone.x3-sel .x3-top{background:rgba(201,169,110,.42);border-style:solid}
+.x3-lbl.x3-zl{background:#FFFFFF;color:#151A20;border:1px dashed rgba(176,140,74,.8)}
+.x3-lbl.x3-zl.x3-sel{background:var(--gold-dark,#B08C4A);color:#fff;border-style:solid}
+.x3-room.x3-sel .x3-wS{background:#A9843F}.x3-room.x3-sel .x3-wE{background:#8f6f35}.x3-room.x3-sel .x3-wN,.x3-room.x3-sel .x3-wW{background:rgba(176,140,74,.8)}
+.x3-anc{position:absolute;left:0;top:0;width:1px;height:1px}
+.x3-ov{position:absolute;inset:0;pointer-events:none;z-index:1}
+.x3-lbl,.x3-pin{position:absolute;left:0;top:0;transition:opacity .4s}
+.x3-lbl{pointer-events:none;white-space:nowrap;font:600 13px/1 'Outfit',sans-serif;color:#FFFFFF;background:#151A20;padding:5px 9px;border-radius:20px;box-shadow:0 3px 10px rgba(0,0,0,.18)}
+.x3-lbl small{font-weight:400;opacity:.7;margin-left:5px}
+.x3-lbl.x3-sel{background:var(--gold-dark,#B08C4A);color:#fff}
+.x3-pin{pointer-events:auto;cursor:pointer;background:none;border:0;padding:0;display:flex;flex-direction:column;align-items:center}
+.x3-pin i{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--gold,#C9A96E);border:2.5px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.25);font-style:normal}
+.x3-pin i svg{width:56%;height:56%;fill:none;stroke:#0B0E11;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.x3-pin u{display:block;width:2px;height:12px;background:var(--gold-dark,#B08C4A)}
+.x3-pin.x3-sel i{background:var(--gold-dark,#B08C4A)}
+.x3-pin.x3-way i{background:#2A333E}.x3-pin.x3-way i svg{stroke:#FFFFFF;stroke-width:1.9}.x3-pin.x3-way u{background:#2A333E}
+.x3-pin.x3-way.x3-sel i{background:#0B0E11;box-shadow:0 0 0 3px var(--gold,#C9A96E),0 2px 8px rgba(0,0,0,.25)}
+.x3-lbl.x3-wlbl{font-size:11px;font-weight:600;padding:4px 8px;background:#FFFFFF;color:#151A20;border:1px solid #E8EAED}
+.x3-lbl.x3-wlbl.x3-sel{background:#2A333E;color:#fff;border-color:#2A333E}
+.x3-pin.x3-pulse i{animation:pulse 1.2s ease-out 2}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(201,169,110,.9)}100%{box-shadow:0 0 0 18px rgba(201,169,110,0)}}
+.x3-lbl.x3-off,.x3-pin.x3-off,.x3-lbl.x3-hid,.x3-lbl.x3-cov,.x3-pin.x3-cov{opacity:0;pointer-events:none}
+/* floors not in view */
+.x3-floor.x3-dim .x3-plate,.x3-floor.x3-dim .x3-face,.x3-floor.x3-dim .x3-slab,.x3-floor.x3-dim .x3-ext{opacity:.16}
+.x3-floor.x3-dim .x3-room{pointer-events:none}
+.x3-floor.x3-away *{opacity:0!important;pointer-events:none!important}
+
+
+.xp-tools{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
+.xp-tool{font-family:'Outfit',sans-serif;font-size:.8rem;font-weight:600;color:var(--charcoal,#151A20);background:#fff;border:1px solid var(--cloud,#E8EAED);border-radius:999px;padding:9px 14px;min-height:40px;cursor:pointer;display:inline-flex;align-items:center;gap:7px}
+.xp-tool[aria-pressed="true"]{border-color:var(--gold,#C9A96E);color:var(--gold-dark,#B08C4A)}
+.xp-tool svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.xp-tool:focus-visible,.xp-fbtn:focus-visible,.x3-lbl:focus-visible,.x3-pin:focus-visible{outline:2px solid var(--gold-dark,#B08C4A);outline-offset:2px}
+.x3-stage{position:relative;height:560px;border-radius:14px;background:radial-gradient(ellipse at 50% 42%,#FFFFFF 0%,#EEF0F2 70%);border:1px solid var(--cloud,#E8EAED);overflow:hidden;perspective:2000px;perspective-origin:50% 20%;touch-action:pan-y;cursor:grab;user-select:none;-webkit-user-select:none}
+.x3-stage.x3-dragging{cursor:grabbing}
+.x3-hint{position:absolute;left:14px;bottom:12px;font-size:.72rem;color:var(--ash,#5A6572);background:#fff;border:1px solid var(--cloud,#E8EAED);border-radius:999px;padding:5px 11px;z-index:2;pointer-events:none}
+.x3-compass{position:absolute;right:14px;bottom:12px;width:40px;height:40px;border-radius:50%;background:#fff;border:1px solid var(--cloud,#E8EAED);display:grid;place-items:center;z-index:2}
+.x3-compass i{display:block;line-height:0;color:var(--gold-dark,#B08C4A);transform:rotate(var(--rz));transition:transform .8s}
+.x3-lbl{font-family:'Outfit',sans-serif;border:0;cursor:pointer;pointer-events:auto}
+.x3-pin{font-family:'Outfit',sans-serif}
+.xp-sw.pg{border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px var(--cloud,#E8EAED)}
+.xp-sw.pw{border-radius:50%;background:#2A333E;border:2px solid #fff;box-shadow:0 0 0 1px var(--cloud,#E8EAED)}
+@media(max-width:900px){.x3-stage{height:430px}}
+@media(max-width:480px){.x3-stage{height:340px}.x3-lbl{font-size:10.5px;padding:4px 7px}.x3-lbl small{display:none}.x3-pin i{width:21px;height:21px}.x3-pin u{height:9px}}
+@media(prefers-reduced-motion:reduce){.x3-world,.x3-floor,.x3-compass i{transition:none!important}.x3-pin.x3-pulse i{animation:none}}
 </style>
 <link rel="preload" as="image" href="../images/map-floor1.webp" type="image/webp">
+<link rel="preload" as="image" href="../images/map-floor2.webp" type="image/webp">
 <!-- Google Analytics -->
 <script>(function(){if(location.hostname!=='revelanceoh.com'&&location.hostname!=='www.revelanceoh.com')return;var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-V2N2YENTZE';document.head.appendChild(s);})();</script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-V2N2YENTZE');</script>
@@ -250,48 +302,31 @@ html{font-size:17px.footer .container{max-width:1600px;padding:0 48px}.footer-gr
 <div class="xp-floors" role="group" aria-label="Choose a floor">
   <button class="xp-fbtn on" id="xpF1" type="button">Floor 1 &middot; Events</button>
   <button class="xp-fbtn" id="xpF2" type="button">Floor 2 &middot; Members</button>
+  <button class="xp-fbtn" id="xpFB" type="button">Both floors</button>
 </div>
 <p class="xp-sub" id="xpSub">Events, entertainment, the Culinary Lab, and the Taproom - all on one level.</p>
 <div class="xp-stage">
   <div class="xp-left">
-  <div class="xp-map">
-    <span class="xp-hint">Tap a space</span>
-    <svg id="xpSvg1" viewBox="0 0 2300 1650" role="group" aria-label="First floor plan of Revelance">
-      <image href="../images/map-floor1.webp" width="2300" height="1650"/>
-        <g class="xp-rg" data-id="taproom"><polygon class="xp-room" data-id="taproom" points="1096,236 1400,236 1400,630 1576,630 1576,956 1096,956"><title>The Taproom</title></polygon><text x="1330" y="780" font-size="34">The Taproom</text></g>
-        <g class="xp-rg" data-id="culinary"><polygon class="xp-room" data-id="culinary" points="1410,224 2036,224 2036,680 1720,680 1720,624 1410,624"><title>Culinary Lab</title></polygon><text x="1724" y="442" font-size="32">Culinary Lab</text></g>
-        <g class="xp-rg" data-id="e9"><polygon class="xp-room" data-id="e9" points="696,670 1106,670 1106,1024 696,1024"><title>Emergency 9</title></polygon><text x="901" y="824" font-size="24">E9 Golf</text><text x="901" y="864" font-size="24">Simulator</text></g>
-        <g class="xp-rg" data-id="foundation"><polygon class="xp-room" data-id="foundation" points="696,1040 956,1040 956,1280 696,1280"><title>Foundation Boardroom</title></polygon><text x="826" y="1156" font-size="24">Foundation</text><text x="826" y="1194" font-size="18">Boardroom</text></g>
-        <g class="xp-rg" data-id="revel"><polygon class="xp-room" data-id="revel" points="1310,1156 2040,1156 2040,1576 1310,1576"><title>Revel Room</title></polygon><text x="1676" y="1372" font-size="34">Revel Room</text></g>
-        <g class="xp-lab" aria-hidden="true"><text x="286" y="392" font-size="23">Arthrex</text><text x="880" y="364" font-size="23">Sonder</text><text x="340" y="1262" font-size="23">Fortegic</text></g>
-    <g class="xp-am" aria-hidden="true"><g transform="translate(1000,1528)"><circle r="30" class="amc"/><path class="amg" transform="scale(1.4)" d="M0,9 v-16 m0,0 l-5,5 m5,-5 l5,5 M-9,-10 h18"/></g><text class="aml" x="1000" y="1606" font-size="20">Main Entrance</text><g transform="translate(1932,812)"><circle r="30" class="amc"/><path class="amg" transform="scale(1.4)" d="M-7,-9 a3,3 0 1,0 0.1,0 M5,-9 a3,3 0 1,0 0.1,0 M-7,-3 v10 M5,-3 l-3,7 h6 l-3,-7 M-10,2 h6 M2,-3 h6"/></g><text class="aml" x="1932" y="884" font-size="20">Restrooms</text><g transform="translate(1758,700)"><circle r="30" class="amc"/><path class="amg" transform="scale(1.4)" d="M-8,-10 h16 v20 h-16 z M-4,2 v-6 m0,0 l-2.5,2.5 m2.5,-2.5 l2.5,2.5 M4,-2 v6 m0,0 l-2.5,-2.5 m2.5,2.5 l2.5,-2.5"/></g><text class="aml" x="1758" y="772" font-size="20">Elevator</text><g transform="translate(2126,932)"><circle r="30" class="amc"/><path class="amg" transform="scale(1.4)" d="M-9,8 h6 v-5 h6 v-5 h6 v-5"/></g><text class="aml" x="2126" y="1004" font-size="20">Stairs</text><g transform="translate(2172,452)"><circle r="30" class="amc"/><path class="amg" transform="scale(1.4)" d="M2,-11 l-8,12 h5 l-2,10 l8,-12 h-5 z"/></g><text class="aml" x="2172" y="524" font-size="20">EV</text><text class="aml" x="2172" y="548" font-size="20">Charging</text><g transform="translate(2172,1180)"><circle r="30" class="amc"/><text class="amp" y="7">P</text></g><text class="aml" x="2172" y="1252" font-size="20">Parking</text></g>
-    <g class="xp-rg xp-poi" data-id="robojo"><circle class="xp-room" data-id="robojo" cx="880" cy="1452" r="38"><title>RoboJo Coffee</title></circle><path class="poig" transform="translate(880,1452) scale(1.6)" d="M-8,-6 h12 v10 a4,4 0 0 1 -4,4 h-4 a4,4 0 0 1 -4,-4 z M4,-4 h3 a3,3 0 0 1 0,6 h-3"/><text x="880" y="1394" font-size="21">RoboJo</text></g>
-    <g class="xp-rg xp-poi" data-id="podcast"><circle class="xp-room" data-id="podcast" cx="592" cy="854" r="38"><title>Podcast Studio</title></circle><path class="poig" transform="translate(592,854) scale(1.6)" d="M0,-10 a4.5,4.5 0 0 1 4.5,4.5 v5 a4.5,4.5 0 0 1 -9,0 v-5 a4.5,4.5 0 0 1 4.5,-4.5 z M-8,-0.5 a8,8 0 0 0 16,0 M0,7.5 v4 M-5,11.5 h10"/><text x="592" y="786" font-size="21">Podcast</text></g>
-    </svg>
-    <svg id="xpSvg2" viewBox="0 0 2300 1500" role="group" aria-label="Second floor plan of Revelance" hidden>
-      <image href="../images/map-floor2.webp" width="2300" height="1500"/>
-        <g class="xp-rg" data-id="corevel"><polygon class="xp-room" data-id="corevel" points="48,1050 670,1050 670,1005 752,1000 915,912 972,1000 972,1415 48,1415"><title>Co-Revel Coworking</title></polygon><text x="510" y="1186" font-size="34">Co-Revel</text></g>
-        <g class="xp-rg" data-id="cornerstone"><polygon class="xp-room" data-id="cornerstone" points="50,60 290,60 290,330 50,330"><title>Cornerstone Boardroom</title></polygon><text x="170" y="186" font-size="21">Cornerstone</text><text x="170" y="222" font-size="16">Boardroom</text></g>
-        <g class="xp-rg" data-id="horizon"><polygon class="xp-room" data-id="horizon" points="456,864 664,864 664,1036 456,1036"><title>Horizon Boardroom</title></polygon><text x="560" y="940" font-size="22">Horizon</text><text x="560" y="974" font-size="17">Boardroom</text></g>
-        <g class="xp-rg" data-id="overlook"><polygon class="xp-room" data-id="overlook" points="1016,486 1226,486 1226,676 1016,676"><title>Overlook Boardroom</title></polygon><text x="1120" y="576" font-size="22">Overlook</text><text x="1120" y="610" font-size="17">Boardroom</text></g>
-        <g class="xp-rg" data-id="csuite"><polygon class="xp-room" data-id="csuite" points="1430,490 1660,490 1660,860 1430,860"><title>C-Suite Lounge</title></polygon><text x="1546" y="662" font-size="26">C-Suite</text><text x="1546" y="700" font-size="19">Lounge</text></g>
-        <g class="xp-lab" aria-hidden="true"><text x="1484" y="306" font-size="23">Arthrex</text></g>
-    <g class="xp-am" aria-hidden="true"><g transform="translate(1986,642)"><circle r="30" class="amc"/><path class="amg" transform="scale(1.4)" d="M-7,-9 a3,3 0 1,0 0.1,0 M5,-9 a3,3 0 1,0 0.1,0 M-7,-3 v10 M5,-3 l-3,7 h6 l-3,-7 M-10,2 h6 M2,-3 h6"/></g><text class="aml" x="1986" y="714" font-size="20">Restrooms</text><g transform="translate(1810,528)"><circle r="30" class="amc"/><path class="amg" transform="scale(1.4)" d="M-8,-10 h16 v20 h-16 z M-4,2 v-6 m0,0 l-2.5,2.5 m2.5,-2.5 l2.5,2.5 M4,-2 v6 m0,0 l-2.5,-2.5 m2.5,2.5 l2.5,-2.5"/></g><text class="aml" x="1810" y="600" font-size="20">Elevator</text><g transform="translate(2150,820)"><circle r="30" class="amc"/><path class="amg" transform="scale(1.4)" d="M-9,8 h6 v-5 h6 v-5 h6 v-5"/></g><text class="aml" x="2150" y="892" font-size="20">Stairs</text></g>
-    <g class="xp-rg xp-poi" data-id="cafe"><circle class="xp-room" data-id="cafe" cx="165" cy="1230" r="38"><title>Co-Revel Caf&eacute;</title></circle><path class="poig" transform="translate(165,1230) scale(1.6)" d="M-6,-3 h12 l-2,12 h-8 z M-8,-7 h16 M2.5,-7 l3,-7"/><text x="165" y="1300" font-size="21">Co-Revel</text><text x="165" y="1328" font-size="21">Caf&eacute;</text></g>
-    <g class="xp-rg xp-poi" data-id="desks"><circle class="xp-room" data-id="desks" cx="430" cy="290" r="38"><title>Dedicated Desks</title></circle><path class="poig" transform="translate(430,290) scale(1.6)" d="M-10,-4 h20 M-8,-4 v8 M8,-4 v8 M-4,-10 h8 v6 h-8 z"/><text x="430" y="370" font-size="21">Dedicated Desks</text></g>
-    <g class="xp-rg xp-poi" data-id="offices"><circle class="xp-room" data-id="offices" cx="140" cy="690" r="38"><title>Private Offices</title></circle><path class="poig" transform="translate(140,690) scale(1.6)" d="M-8,-9 h16 v18 h-16 z M4,1 h2.5 M-8,-3 h16"/><text x="140" y="760" font-size="20">Private</text><text x="140" y="786" font-size="20">Offices</text><circle class="xp-room" data-id="offices" cx="560" cy="150" r="38"/><path class="poig" transform="translate(560,150) scale(1.6)" d="M-8,-9 h16 v18 h-16 z M4,1 h2.5 M-8,-3 h16"/><text x="560" y="232" font-size="20">Private Offices</text></g>
-    <g class="xp-rg xp-poi" data-id="booths"><circle class="xp-room" data-id="booths" cx="900" cy="390" r="38"><title>Phone Booths</title></circle><path class="poig" transform="translate(900,390) scale(1.6)" d="M-8.5,-8.5 a2.5,2.5 0 0 1 3.5,-1 l2.5,3.5 a2,2 0 0 1 -0.5,2.8 l-1.8,1.3 a13,13 0 0 0 5.7,5.7 l1.3,-1.8 a2,2 0 0 1 2.8,-0.5 l3.5,2.5 a2.5,2.5 0 0 1 -1,3.5 c-2,1.5 -5.5,1 -9,-2 a24,24 0 0 1 -7,-7 c-3,-3.5 -3.5,-7 -2,-9 z"/><text x="900" y="472" font-size="21">Phone Booths</text></g>
-    </svg>
+  <div class="xp-tools">
+    <button class="xp-tool" type="button" id="xpWC"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7.5" cy="4.5" r="1.6"/><circle cx="16.5" cy="4.5" r="1.6"/><path d="M7.5 8v12M5 9h5v6H5zM12 3v18M14.5 9h4l1.5 7h-7zM16.5 16v4"/></svg>Restrooms</button>
+    <button class="xp-tool" type="button" id="xpRL" aria-label="Turn the building left">&#10226;</button>
+    <button class="xp-tool" type="button" id="xpRR" aria-label="Turn the building right">&#10227;</button>
+    <button class="xp-tool" type="button" id="xpFlat" aria-pressed="false">Flat map</button>
+  </div>
+  <div class="x3-stage" id="x3Stage" role="img" aria-label="3D model of the Revelance building: tap a space to see its details">
+    <div class="x3-world" id="x3World"></div>
+    <div class="x3-ov" id="x3Ov"></div>
+    <span class="x3-hint" id="x3Hint">Drag to turn &middot; tap a space</span>
+    <div class="x3-compass" aria-hidden="true"><i><svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 3l4 9h-8z" fill="currentColor"/><path d="M12 21l-4-9h8z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></i></div>
   </div>
   <div class="xp-legend">
     <span><span class="xp-sw" style="background:#C9A96E"></span>Bookable spaces</span>
-    <span><span class="xp-sw" style="background:#EDE2CC"></span>Members&rsquo; areas</span>
-    <span><svg width="16" height="16" viewBox="-10 -10 20 20" aria-hidden="true"><circle r="8" fill="#C9A96E" stroke="#FFFFFF" stroke-width="2"/></svg>Member amenities &mdash; tap for details</span>
-    <span><svg width="16" height="16" viewBox="-10 -10 20 20" aria-hidden="true"><circle r="8" fill="#3A4450" stroke="#FFFFFF" stroke-width="2"/></svg>Wayfinding</span>
+    <span><span class="xp-sw pg" style="background:#C9A96E"></span>Member amenities &mdash; tap for details</span>
+    <span><span class="xp-sw pw"></span>Restrooms &amp; elevator</span>
   </div>
-  <div class="xp-visit"><strong>First visit?</strong> Come in through the front double doors on the left &mdash; RoboJo coffee is just inside on your left, and the front desk is staffed Mon&ndash;Fri 7am&ndash;6pm. Free parking sits to the left of the building, with EV chargers beside the Culinary Lab. Upstairs, the Revel Caf&eacute; and FreshBlends are on the west wall of Co-Revel.</div>
+<div class="xp-visit"><strong>First visit?</strong> Come in through the front double doors on the left &mdash; RoboJo coffee is just inside on your left, and the front desk is staffed Mon&ndash;Fri 7am&ndash;6pm. Free parking sits to the left of the building, with EV chargers beside the Culinary Lab. Upstairs, the Revel Caf&eacute; and FreshBlends are on the west wall of Co-Revel.</div>
   </div>
-  <aside class="xp-card" aria-live="polite">
+<aside class="xp-card" aria-live="polite">
     <div class="xp-media"><img id="xpPhoto" src="../images/revel-banquet-sunset.webp" alt="Banquet setup in the Revel Room at sunset" width="640" height="400"></div>
     <p class="xp-suite" id="xpSuite">Event Center</p>
     <h3 id="xpName">Revel Room</h3>
@@ -313,39 +348,308 @@ html{font-size:17px.footer .container{max-width:1600px;padding:0 48px}.footer-gr
 </section>
 
 <script>
-var XP_ROOMS = {"revel": {"floor": 1, "name": "Revel Room", "label": "Event Center", "desc": "The event center. Weddings, galas, corporate events - with a built-in stage wall for presentations and celebrations alike.", "url": "../revel-room/", "img": "../images/revel-banquet-sunset.webp", "alt": "Banquet setup in the Revel Room at sunset", "video": null, "rows": [["Capacity", "125 banquet · 225 across connected spaces"], ["Features", "25-ft ceilings · 12×10 ft video wall"], ["Best for", "Weddings, galas, corporate events"], ["Booking", "Start with the event wizard"]]}, "taproom": {"floor": 1, "name": "The Taproom", "label": "First Floor", "desc": "Craft beer next door to everything. Cocktail hours flow straight from here into the Revel Room.", "url": "../taphouse/", "img": "../images/taphouse-overlook.webp", "alt": "Looking down into a full Taproom from the overlook", "video": null, "rows": [["Capacity", "60 seated · 80 standing"], ["Features", "Craft beer by Sonder Brewing · bartender included with events"], ["Best for", "Happy hours, cocktail receptions"], ["Booking", "Book with your event"]]}, "e9": {"floor": 1, "name": "Emergency 9", "label": "Golf Simulator", "desc": "Golf simulator lounge for practice, play, and client entertainment.", "url": "../e9/", "img": "../images/e9-golf-simulator.webp", "alt": "The Emergency 9 golf simulator", "video": null, "rows": [["Capacity", "25 seated · 40 standing"], ["Features", "ProTee VX simulator · 10×16 ft impact screen"], ["Best for", "Client entertainment, team events"], ["Booking", "Start with the event wizard"]]}, "culinary": {"floor": 1, "name": "Culinary Lab", "label": "Zink Foodservice", "desc": "Official Zink Culinary Center - classes, tastings, and the kitchen behind catered events.", "url": "../culinary-lab/", "img": "../images/culinary-lab.webp", "alt": "The Culinary Lab commercial kitchen", "video": null, "rows": [["Capacity", "20 seated · 30 standing"], ["Size", "400 sq ft commercial kitchen"], ["Features", "Ohio Risk Level III licensed · official Zink Culinary Center"], ["Best for", "Classes, tastings, catered events"], ["Booking", "Start with the event wizard"]]}, "foundation": {"floor": 1, "name": "Foundation Boardroom", "label": "First Floor", "desc": "The first-floor meeting room - steps from the Taproom and the event spaces.", "url": "../boardrooms/", "img": "../images/foundation-boardroom.webp", "alt": "The Foundation Boardroom", "video": null, "rows": [["Capacity", "Seats 10"], ["Features", "First-floor meeting room"], ["Best for", "Meetings, workshops"], ["Booking", "Bookable in the Revelance App"]]}, "corevel": {"floor": 2, "name": "Co-Revel Coworking", "label": "Members' Floor", "desc": "The members' floor - set apart from events below, so your workday never gets bumped by a banquet.", "url": "../coworking/", "img": "../images/cowork-community.webp", "alt": "The Co-Revel coworking floor", "video": null, "rows": [["Floor", "Dedicated 2nd floor · never displaced by events"], ["Features", "Open seating, dedicated desks, private offices"], ["Best for", "Daily work, teams, day passes"], ["Booking", "Included with membership"]]}, "csuite": {"floor": 2, "name": "C-Suite Lounge", "label": "Members' Floor", "desc": "The private lounge. Your bottle, your locker, your client's favorite pour already waiting - and the whole room can be rented for private events.", "url": "../c-suite/", "img": "../images/csuite-lifestyle-lounge.webp", "alt": "The C-Suite Lounge", "video": null, "rows": [["Capacity", "14 seated · 25 standing"], ["Features", "50 personal bourbon lockers · 65″ TV"], ["Best for", "Client entertainment, bourbon tastings, private events"], ["Booking", "Included with membership · also available to rent"]]}, "cornerstone": {"floor": 2, "name": "Cornerstone Boardroom", "label": "Second Floor", "desc": "The members-only boardroom, reserved for Dedicated Desk tiers and up.", "url": "../boardrooms/", "img": "../images/cornerstone-boardroom.webp", "alt": "The Cornerstone Boardroom", "video": null, "rows": [["Capacity", "Seats 10"], ["Access", "Dedicated Desk members & above"], ["Best for", "Team meetings"], ["Booking", "Bookable in the Revelance App"]]}, "horizon": {"floor": 2, "name": "Horizon Boardroom", "label": "Second Floor", "desc": "The executive boardroom - the big table for the big meeting.", "url": "../boardrooms/", "img": "../images/horizon-boardroom.webp", "alt": "The Horizon Boardroom", "video": null, "rows": [["Capacity", "Seats 14"], ["Features", "Executive boardroom"], ["Best for", "Board meetings, presentations, private meetings"], ["Booking", "Members book in the Revelance App · also available to rent"]]}, "overlook": {"floor": 2, "name": "Overlook Boardroom", "label": "Second Floor", "desc": "The small room with the big windows - built for focused sessions.", "url": "../boardrooms/", "img": "../images/overlook-boardroom.webp", "alt": "The Overlook Boardroom", "video": null, "rows": [["Capacity", "Seats 6"], ["Features", "Panoramic views"], ["Best for", "Focused sessions, 1-on-1s"], ["Booking", "Bookable in the Revelance App"]]}, "robojo": {"floor": 1, "name": "RoboJo Coffee", "label": "First-Floor Lobby", "desc": "The robotic barista in the lobby — immediately on your left as you come in the front doors. Order ahead in the app and your latte is waiting.", "url": "../blog/robojo-coffee-app-preorder-latte-art-rewards", "img": "../images/lobby-grand.webp", "alt": "The RoboJo robotic coffee bar in the Revelance lobby", "video": null, "cta": "Read the Story", "rows": [["What", "Robotic barista café — espresso drinks & cold brew"], ["Order", "Preorder in the RoboJo app · latte art rewards"], ["Where", "Lobby, just inside the main entrance"], ["Access", "Open to the public"]]}, "podcast": {"floor": 1, "name": "Podcast Studio", "label": "First Floor", "desc": "The building's dedicated podcast room — record interviews, episodes, and company audio without leaving Revelance.", "url": "../coworking/", "img": "../images/podcast-studio-card.webp", "alt": "The Revelance Podcast Studio", "video": null, "cta": "Explore Membership", "rows": [["What", "Podcast & recording room"], ["Where", "First floor, beside the E9 Golf Simulator"], ["Details", "Ask the front desk · 513-794-5070"]]}, "cafe": {"floor": 2, "name": "Co-Revel Café", "label": "Members' Floor", "desc": "The members' café on the west wall of Co-Revel — home of the Fresh Blends robotic smoothie and shake bar.", "url": "../coworking/", "img": "../images/cowork-cafe-counter.webp", "alt": "The Co-Revel Café counter with the Fresh Blends smoothie bar", "video": null, "cta": "Explore Co-Revel", "rows": [["What", "Café + Fresh Blends smoothie & shake bar"], ["Menu", "Smoothies, shakes, frappés, cold brew, refreshers"], ["Where", "West wall of Co-Revel, second floor"], ["Access", "Included with membership & day passes"]]}, "booths": {"floor": 2, "name": "Phone Booths", "label": "Members' Floor", "desc": "Private booths along the back wall of Co-Revel — step in, shut the door, take the call.", "url": "../coworking/", "img": "../images/cowork-phone-booths.webp", "alt": "Four private phone booths with glass-panel doors on the Co-Revel floor", "video": null, "cta": "Explore Co-Revel", "rows": [["What", "Private call & focus booths"], ["Where", "East side of Co-Revel, by the Overlook Boardroom"], ["Booking", "Signed out in 15-minute blocks so everyone gets a turn"], ["Access", "Included with membership & day passes"]]}, "desks": {"floor": 2, "name": "Dedicated Desks", "label": "Members' Floor", "desc": "Your own enclosed desk pod in the heart of Co-Revel — set up once, leave your gear, and it's yours around the clock.", "url": "../memberships/#memberships", "img": "../images/cowork-focus-pods.webp", "alt": "Dedicated desk pods on the Co-Revel floor", "video": null, "cta": "See Membership Plans", "rows": [["What", "Your own enclosed desk pod"], ["Where", "Center of Co-Revel, second floor"], ["Access", "Dedicated Desk members & above"], ["Booking", "Included with the Dedicated Desk tier"]]}, "offices": {"floor": 2, "name": "Private Offices", "label": "Members' Floor", "desc": "Enclosed private offices along the west wall and north side of Co-Revel — a door, a desk, and the whole members' floor outside it.", "url": "../coworking/", "img": "../images/executive-office.webp", "alt": "A private office at Revelance", "video": null, "cta": "Explore Co-Revel", "rows": [["What", "Enclosed private offices"], ["Where", "West wall & north side of Co-Revel"], ["Details", "Ask about availability · 513-794-5070"]]}};
-function xpPick(id){
-  var r = XP_ROOMS[id];
-  document.querySelectorAll('.xp-room').forEach(function(p){ p.classList.toggle('sel', p.dataset.id === id); });
-  document.querySelectorAll('.xp-rg').forEach(function(g){ g.classList.toggle('sel', g.dataset.id === id); });
-  var ph = document.getElementById('xpPhoto'); ph.src = r.img; ph.alt = r.alt;
+/* 3D building map: the floor plans as a model you can turn; rooms rise on their real footprints. */
+var XP_ROOMS = {"revel": {"floor": 1, "name": "Revel Room", "label": "Event Center", "desc": "The event center. Weddings, galas, corporate events - with a built-in stage wall for presentations and celebrations alike.", "url": "../revel-room/", "img": "../images/revel-banquet-sunset.webp", "alt": "Banquet setup in the Revel Room at sunset", "video": null, "rows": [["Capacity", "125 banquet · 225 across connected spaces"], ["Features", "25-ft ceilings · 12×10 ft video wall"], ["Best for", "Weddings, galas, corporate events"], ["Booking", "Start with the event wizard"]]}, "taproom": {"floor": 1, "name": "The Taproom", "label": "First Floor", "desc": "Craft beer next door to everything. Cocktail hours flow straight from here into the Revel Room.", "url": "../taphouse/", "img": "../images/taphouse-overlook.webp", "alt": "Looking down into a full Taproom from the overlook", "video": null, "rows": [["Capacity", "60 seated · 80 standing"], ["Features", "Craft beer by Sonder Brewing · bartender included with events"], ["Best for", "Happy hours, cocktail receptions"], ["Booking", "Book with your event"]]}, "e9": {"floor": 1, "name": "Emergency 9", "label": "Golf Simulator", "desc": "Golf simulator lounge for practice, play, and client entertainment.", "url": "../e9/", "img": "../images/e9-golf-simulator.webp", "alt": "The Emergency 9 golf simulator", "video": null, "rows": [["Capacity", "25 seated · 40 standing"], ["Features", "ProTee VX simulator · 10×16 ft impact screen"], ["Best for", "Client entertainment, team events"], ["Booking", "Start with the event wizard"]]}, "culinary": {"floor": 1, "name": "Culinary Lab", "label": "Zink Foodservice", "desc": "Official Zink Culinary Center - classes, tastings, and the kitchen behind catered events.", "url": "../culinary-lab/", "img": "../images/culinary-lab.webp", "alt": "The Culinary Lab commercial kitchen", "video": null, "rows": [["Capacity", "20 seated · 30 standing"], ["Size", "400 sq ft commercial kitchen"], ["Features", "Ohio Risk Level III licensed · official Zink Culinary Center"], ["Best for", "Classes, tastings, catered events"], ["Booking", "Start with the event wizard"]]}, "foundation": {"floor": 1, "name": "Foundation Boardroom", "label": "First Floor", "desc": "The first-floor meeting room - steps from the Taproom and the event spaces.", "url": "../boardrooms/", "img": "../images/foundation-boardroom.webp", "alt": "The Foundation Boardroom", "video": null, "rows": [["Capacity", "Seats 10"], ["Features", "First-floor meeting room"], ["Best for", "Meetings, workshops"], ["Booking", "Bookable in the Revelance App"]]}, "corevel": {"floor": 2, "name": "Co-Revel Coworking", "label": "Members' Floor", "desc": "The members' floor - set apart from events below, so your workday never gets bumped by a banquet.", "url": "../coworking/", "img": "../images/cowork-community.webp", "alt": "The Co-Revel coworking floor", "video": null, "rows": [["Floor", "Dedicated 2nd floor · never displaced by events"], ["Features", "Open seating, dedicated desks, private offices"], ["Best for", "Daily work, teams, day passes"], ["Booking", "Included with membership"]]}, "csuite": {"floor": 2, "name": "C-Suite Lounge", "label": "Members' Floor", "desc": "The private lounge. Your bottle, your locker, your client's favorite pour already waiting - and the whole room can be rented for private events.", "url": "../c-suite/", "img": "../images/csuite-lifestyle-lounge.webp", "alt": "The C-Suite Lounge", "video": null, "rows": [["Capacity", "14 seated · 25 standing"], ["Features", "50 personal bourbon lockers · 65″ TV"], ["Best for", "Client entertainment, bourbon tastings, private events"], ["Booking", "Included with membership · also available to rent"]]}, "cornerstone": {"floor": 2, "name": "Cornerstone Boardroom", "label": "Second Floor", "desc": "The members-only boardroom, reserved for Dedicated Desk tiers and up.", "url": "../boardrooms/", "img": "../images/cornerstone-boardroom.webp", "alt": "The Cornerstone Boardroom", "video": null, "rows": [["Capacity", "Seats 10"], ["Access", "Dedicated Desk members & above"], ["Best for", "Team meetings"], ["Booking", "Bookable in the Revelance App"]]}, "horizon": {"floor": 2, "name": "Horizon Boardroom", "label": "Second Floor", "desc": "The executive boardroom - the big table for the big meeting.", "url": "../boardrooms/", "img": "../images/horizon-boardroom.webp", "alt": "The Horizon Boardroom", "video": null, "rows": [["Capacity", "Seats 14"], ["Features", "Executive boardroom"], ["Best for", "Board meetings, presentations, private meetings"], ["Booking", "Members book in the Revelance App · also available to rent"]]}, "overlook": {"floor": 2, "name": "Overlook Boardroom", "label": "Second Floor", "desc": "The small room with the big windows - built for focused sessions.", "url": "../boardrooms/", "img": "../images/overlook-boardroom.webp", "alt": "The Overlook Boardroom", "video": null, "rows": [["Capacity", "Seats 6"], ["Features", "Panoramic views"], ["Best for", "Focused sessions, 1-on-1s"], ["Booking", "Bookable in the Revelance App"]]}, "robojo": {"floor": 1, "name": "RoboJo Coffee", "label": "First-Floor Lobby", "desc": "The robotic barista in the lobby — immediately on your left as you come in the front doors. Order ahead in the app and your latte is waiting.", "url": "../blog/robojo-coffee-app-preorder-latte-art-rewards", "img": "../images/lobby-grand.webp", "alt": "The RoboJo robotic coffee bar in the Revelance lobby", "video": null, "cta": "Read the Story", "rows": [["What", "Robotic barista café — espresso drinks & cold brew"], ["Order", "Preorder in the RoboJo app · latte art rewards"], ["Where", "Lobby, just inside the main entrance"], ["Access", "Open to the public"]]}, "podcast": {"floor": 1, "name": "Podcast Studio", "label": "First Floor", "desc": "The building's dedicated podcast room — record interviews, episodes, and company audio without leaving Revelance.", "url": "../coworking/", "img": "../images/podcast-studio-card.webp", "alt": "The Revelance Podcast Studio", "video": null, "cta": "Explore Membership", "rows": [["What", "Podcast & recording room"], ["Where", "First floor, beside the E9 Golf Simulator"], ["Details", "Ask the front desk · 513-794-5070"]]}, "cafe": {"floor": 2, "name": "Co-Revel Café", "label": "Members' Floor", "desc": "The members' café on the west wall of Co-Revel — home of the Fresh Blends robotic smoothie and shake bar.", "url": "../coworking/", "img": "../images/cowork-cafe-counter.webp", "alt": "The Co-Revel Café counter with the Fresh Blends smoothie bar", "video": null, "cta": "Explore Co-Revel", "rows": [["What", "Café + Fresh Blends smoothie & shake bar"], ["Menu", "Smoothies, shakes, frappés, cold brew, refreshers"], ["Where", "West wall of Co-Revel, second floor"], ["Access", "Included with membership & day passes"]]}, "booths": {"floor": 2, "name": "Phone Booths", "label": "Members' Floor", "desc": "Private booths along the back wall of Co-Revel — step in, shut the door, take the call.", "url": "../coworking/", "img": "../images/cowork-phone-booths.webp", "alt": "Four private phone booths with glass-panel doors on the Co-Revel floor", "video": null, "cta": "Explore Co-Revel", "rows": [["What", "Private call & focus booths"], ["Where", "East side of Co-Revel, by the Overlook Boardroom"], ["Booking", "Signed out in 15-minute blocks so everyone gets a turn"], ["Access", "Included with membership & day passes"]]}, "desks": {"floor": 2, "name": "Dedicated Desks", "label": "Members' Floor", "desc": "Your own enclosed desk pod in the heart of Co-Revel — set up once, leave your gear, and it's yours around the clock.", "url": "../memberships/#memberships", "img": "../images/cowork-focus-pods.webp", "alt": "Dedicated desk pods on the Co-Revel floor", "video": null, "cta": "See Membership Plans", "rows": [["What", "Your own enclosed desk pod"], ["Where", "Center of Co-Revel, second floor"], ["Access", "Dedicated Desk members & above"], ["Booking", "Included with the Dedicated Desk tier"]]}, "offices": {"floor": 2, "name": "Private Offices", "label": "Members' Floor", "desc": "Enclosed private offices along the west wall and north side of Co-Revel — a door, a desk, and the whole members' floor outside it.", "url": "../coworking/", "img": "../images/executive-office.webp", "alt": "A private office at Revelance", "video": null, "cta": "Explore Co-Revel", "rows": [["What", "Enclosed private offices"], ["Where", "West wall & north side of Co-Revel"], ["Details", "Ask about availability · 513-794-5070"]]}, "lobby": {"floor": 1, "name": "Lobby & Front Desk", "label": "First Floor", "desc": "Come in through the front double doors on the left — RoboJo coffee is just inside on your left, and the front desk is staffed Mon–Fri 7am–6pm. The Foundation Boardroom, Emergency 9 and the Revel Room all open off the lobby.", "img": "../images/lobby-grand.webp", "alt": "The Revelance lobby with the RoboJo coffee bar", "rows": [["Front desk", "Staffed Mon–Fri 7am–6pm"], ["Just inside", "RoboJo coffee, on your left"], ["Parking", "Free lot to the left of the building"]]}, "wc1": {"floor": 1, "name": "Restrooms", "label": "Wayfinding · First Floor", "desc": "On the east side of the building, across the hall from the Revel Room. The elevator to the members’ floor is right beside them.", "rows": [["Where", "East hall, across from the Revel Room"], ["Nearby", "Elevator · Culinary Lab"]]}, "wc2": {"floor": 2, "name": "Restrooms", "label": "Wayfinding · Second Floor", "desc": "On the east side of the members’ floor, beside the elevator, with accessible stalls.", "rows": [["Where", "East side, beside the elevator"], ["Nearby", "Elevator · C-Suite Lounge"]]}, "lift1": {"floor": 1, "name": "Elevator", "label": "Wayfinding · First Floor", "desc": "Up to the members’ floor: Co-Revel, the boardrooms and the C-Suite Lounge. The restrooms are right next to it.", "rows": [["Goes to", "Second floor (members)"], ["Nearby", "Restrooms"]]}, "lift2": {"floor": 2, "name": "Elevator", "label": "Wayfinding · Second Floor", "desc": "Down to the event floor: the Taproom, the Revel Room and the main entrance. The restrooms are right next to it.", "rows": [["Goes to", "First floor (events)"], ["Nearby", "Restrooms"]]}};
+var ROOMS = XP_ROOMS;
+// Footprints in floor-plan units (floor-1 drawing, 2300×1650). Floor 2 is drawn
+// on its own sheet and lines up with floor 1 when shifted by (11, 184).
+var OX = 46, OY = 236, F2 = [11, 184];
+var H = 90, Z2 = 240;           // wall height for a ~10-ft room; floor-to-floor
+var GEO = {
+  1: { img: '../images/map-floor1.webp', w: 2300, h: 1650, off: [0, 0], rooms: [
+    { id: 'revel', name: 'Revel Room', note: '25-ft', h: 225, boxes: [[1310,1156,730,420]] },
+    { id: 'taproom', name: 'Taproom', boxes: [[1096,236,304,720],[1400,630,176,326]] },
+    { id: 'culinary', name: 'Culinary Lab', boxes: [[1410,224,626,400],[1720,624,316,56]] },
+    { id: 'e9', name: 'E9 Golf', boxes: [[696,670,410,354]] },
+    { id: 'foundation', name: 'Foundation', boxes: [[696,1040,260,240]] },
+    { id: 'lobby', name: 'Lobby', zone: true, h: 14, boxes: [[590,1296,700,290]] } ],
+    pins: [ { id: 'robojo', x: 880, y: 1452, icon: 'cup' }, { id: 'podcast', x: 592, y: 854, icon: 'mic' },
+            { id: 'wc1', x: 1932, y: 812, icon: 'wc', way: 'Restrooms' }, { id: 'lift1', x: 1758, y: 700, icon: 'lift', way: 'Elevator' } ] },
+  2: { img: '../images/map-floor2.webp', w: 2300, h: 1500, off: F2, rooms: [
+    { id: 'corevel', name: 'Co-Revel', boxes: [[48,1050,924,365]] },
+    { id: 'csuite', name: 'C-Suite', boxes: [[1430,490,230,370]] },
+    { id: 'cornerstone', name: 'Cornerstone', boxes: [[50,60,240,270]] },
+    { id: 'horizon', name: 'Horizon', boxes: [[456,864,208,172]] },
+    { id: 'overlook', name: 'Overlook', boxes: [[1016,486,210,190]] } ],
+    pins: [ { id: 'cafe', x: 165, y: 1230, icon: 'cup' }, { id: 'desks', x: 430, y: 290, icon: 'desk' },
+            { id: 'offices', x: 140, y: 690, icon: 'door' }, { id: 'booths', x: 900, y: 390, icon: 'phone' },
+            { id: 'wc2', x: 1986, y: 642, icon: 'wc', way: 'Restrooms' }, { id: 'lift2', x: 1810, y: 528, icon: 'lift', way: 'Elevator' } ] }
+};
+var ICONS = {
+  cup: '<path d="M5 8h11v6a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4z"/><path d="M16 10h2a2 2 0 0 1 0 4h-2"/>',
+  mic: '<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4"/>',
+  desk: '<path d="M3 9h18M5 9v10M19 9v10M9 4h6v5H9z"/>',
+  door: '<path d="M6 21V3h12v18M4 21h16M14 12h1"/>',
+  wc: '<circle cx="7.5" cy="4.5" r="1.6"/><circle cx="16.5" cy="4.5" r="1.6"/><path d="M7.5 8v12M5 9h5v6H5zM12 3v18M14.5 9h4l1.5 7h-7zM16.5 16v4"/>',
+  lift: '<rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M9 10l3-3 3 3M9 14l3 3 3-3"/>',
+  enter: '<path d="M14 4h5v16h-5M3 12h11M10 8l4 4-4 4"/>',
+  phone: '<path d="M6 3h3l2 5-2 1a11 11 0 0 0 6 6l1-2 5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 4 5a2 2 0 0 1 2-2z"/>'
+};
+var PW = 2007, PH = 1364, SLAB = 34, EXT = 26;
+
+function el(tag, cls, css, parent) {
+  var e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (css) e.style.cssText = css;
+  if (parent) parent.appendChild(e);
+  return e;
+}
+function face(parent, cls, x, y, w, h, tf) {
+  return el('div', 'x3-face x3-' + cls, 'left:' + x + 'px;top:' + y + 'px;width:' + w + 'px;height:' + h + 'px;transform-origin:0 0;transform:' + tf, parent);
+}
+// A room is one or more boxes: a lid at its wall height plus four walls.
+function box(parent, x, y, w, d, h) {
+  face(parent, 'top', x, y, w, d, 'translateZ(' + h + 'px)');
+  face(parent, 'wN', x, y, w, h, 'rotateX(90deg)');
+  face(parent, 'wS', x, y + d, w, h, 'rotateX(90deg)');
+  face(parent, 'wW', x, y, h, d, 'rotateY(-90deg)');
+  face(parent, 'wE', x + w, y, h, d, 'rotateY(-90deg)');
+}
+// Labels and pins are flat HTML over the model, pinned to an invisible point
+// in the 3D scene, so walls never cut through them and text stays crisp.
+var marks = [];
+function mark(parent, floor, tag, cls, x, y, z) {
+  var a = el('div', 'x3-anc', 'transform:translate3d(' + x + 'px,' + y + 'px,' + z + 'px)', parent);
+  var m = el(tag, cls, '', document.getElementById('x3Ov'));
+  marks.push({ a: a, m: m, floor: floor });
+  return m;
+}
+
+var world = document.getElementById('x3World');
+var floors = {};
+[1, 2].forEach(function (n) {
+  var g = GEO[n], f = el('div', 'x3-floor', '', world);
+  floors[n] = f;
+  // floor plate: the architect's drawing, a slab edge, and low exterior walls
+  var plate = el('div', 'x3-plate', '', f);
+  var img = el('img', '', 'left:' + (g.off[0] - OX) + 'px;top:' + (g.off[1] - OY) + 'px;width:' + g.w + 'px;height:' + g.h + 'px', plate);
+  img.src = g.img; img.alt = ''; img.draggable = false;
+  el('div', 'x3-slab', 'left:0;top:' + PH + 'px;width:' + PW + 'px;height:' + SLAB + 'px;transform-origin:0 0;transform:rotateX(-90deg)', f);
+  el('div', 'x3-slab', 'left:' + PW + 'px;top:0;width:' + SLAB + 'px;height:' + PH + 'px;transform-origin:0 0;transform:rotateY(90deg)', f);
+  el('div', 'x3-ext', 'left:0;top:0;width:' + PW + 'px;height:' + EXT + 'px;transform-origin:0 0;transform:rotateX(90deg)', f);
+  el('div', 'x3-ext', 'left:0;top:0;width:' + EXT + 'px;height:' + PH + 'px;transform-origin:0 0;transform:rotateY(-90deg)', f);
+  // corner points of the plate, used to tell which marks it hides in "Both floors"
+  f.corners = [[0, 0], [PW, 0], [PW, PH], [0, PH]].map(function (c) {
+    return el('div', 'x3-anc', 'transform:translate3d(' + c[0] + 'px,' + c[1] + 'px,0)', f);
+  });
+  g.rooms.forEach(function (r) {
+    var grp = el('div', 'x3-room' + (r.zone ? ' x3-zone' : ''), '', f);
+    grp.dataset.id = r.id;
+    var h = r.h || H, minx = 1e9, maxx = 0, miny = 1e9, maxy = 0;
+    r.boxes.forEach(function (b) {
+      var x = b[0] + g.off[0] - OX, y = b[1] + g.off[1] - OY;
+      box(grp, x, y, b[2], b[3], h);
+      minx = Math.min(minx, x); maxx = Math.max(maxx, x + b[2]); miny = Math.min(miny, y); maxy = Math.max(maxy, y + b[3]);
+    });
+    var main = r.boxes[0], cx = main[0] + main[2] / 2 + g.off[0] - OX, cy = main[1] + main[3] / 2 + g.off[1] - OY;
+    var s = mark(f, n, 'button', 'x3-lbl' + (r.zone ? ' x3-zl' : ''), cx, cy, h + 10);
+    s.innerHTML = r.name + (r.note ? '<small>' + r.note + '</small>' : '');
+    s.dataset.id = r.id; s.type = 'button'; s.setAttribute('aria-label', ROOMS[r.id] ? ROOMS[r.id].name : r.name);
+  });
+  g.pins.forEach(function (p) {
+    var px = p.x + g.off[0] - OX, py = p.y + g.off[1] - OY;
+    var s = mark(f, n, 'button', 'x3-pin' + (p.way ? ' x3-way' : ''), px, py, 0);
+    s.type = 'button'; s.dataset.id = p.id; s.setAttribute('aria-label', ROOMS[p.id].name);
+    s.innerHTML = '<i><svg viewBox="0 0 24 24" aria-hidden="true">' + ICONS[p.icon] + '</svg></i><u></u>';
+    if (typeof p.way === 'string') { var t = mark(f, n, 'div', 'x3-lbl x3-wlbl' + (p.icon === 'lift' ? ' x3-elv' : ''), px, py, 0); t.textContent = p.way; t.dataset.id = p.id; }
+  });
+});
+
+// ---------- view state ----------
+var stage = document.getElementById('x3Stage');
+var narrow = stage.clientWidth < 600;
+var view = { floor: 1, rz: narrow ? -22 : -32, tilt: narrow ? 60 : 66, flat: false };
+function fit() {
+  var w = stage.clientWidth, h = stage.clientHeight;
+  var k = view.flat ? Math.min(w * .94 / PW, h * .9 / PH)
+                    : Math.min(w * (w < 600 ? .94 / 2300 : .96 / 2450), h * .98 / (view.floor === 'both' ? 1900 : 1350));
+  world.style.setProperty('--k', k.toFixed(4));
+}
+function apply() {
+  world.style.setProperty('--rz', (view.flat ? 0 : view.rz) + 'deg');
+  world.style.setProperty('--tilt', (view.flat ? 0 : view.tilt) + 'deg');
+  var both = view.floor === 'both';
+  floors[1].style.transform = 'translateZ(' + (both ? -230 : 0) + 'px)';
+  floors[2].style.transform = 'translateZ(' + (both ? Z2 + 260 : view.floor === 2 ? Z2 - 60 : Z2 + 900) + 'px)';
+  floors[1].classList.toggle('x3-dim', view.floor === 2);
+  floors[2].classList.toggle('x3-away', view.floor === 1);
+  if (view.flat) { floors[2].classList.toggle('x3-away', view.floor !== 2); floors[1].classList.toggle('x3-away', view.floor === 2); }
+  else floors[1].classList.remove('x3-away');
+  document.getElementById('xpFlat').setAttribute('aria-pressed', String(view.flat));
+  document.getElementById('xpFlat').textContent = view.flat ? 'Back to 3D' : 'Flat map';
+  document.getElementById('x3Hint').textContent = view.flat ? 'Tap a space' : 'Drag to turn · tap a space';
+  stage.style.setProperty('--rz', (view.flat ? 0 : view.rz) + 'deg');
+  kick();
+  marks.forEach(function (k) {
+    var f = floors[k.floor];
+    k.m.classList.toggle('x3-off', f.classList.contains('x3-dim') || f.classList.contains('x3-away'));
+  });
+  fit();
+}
+// Each frame: put pins on their spots, then fit labels around them. A label
+// sits above its room; if that would cover a pin or another label it tries
+// below, then further up; all stay inside the frame. Only when nothing fits
+// is a label hidden, and the selected space's label always shows.
+var PAD = 6;
+function place() {
+  var s = stage.getBoundingClientRect(), W = s.width, Hh = s.height, taken = [];
+  function hits(b) {
+    for (var i = 0; i < taken.length; i++) {
+      var t = taken[i];
+      if (b.l < t.r + 3 && t.l < b.r + 3 && b.t < t.b + 3 && t.t < b.b + 3) return true;
+    }
+    return false;
+  }
+  function clampX(x, w) { return Math.max(PAD, Math.min(W - PAD - w, x)); }
+  // Fixed order so tapping a space never moves the other labels: restrooms
+  // first (always shown), then rooms top to bottom, elevators last (only if room).
+  function rank(k) { return k.m.classList.contains('x3-elv') ? -1 : k.m.classList.contains('x3-wlbl') ? 3 : 0; }
+  // In "Both floors", first-floor marks under the second floor are hidden:
+  // their rooms are out of sight, so a label there would read as upstairs.
+  var cover = null;
+  if (view.floor === 'both' && !view.flat) cover = floors[2].corners.map(function (a) {
+    var r = a.getBoundingClientRect(); return [r.left - s.left, r.top - s.top];
+  });
+  function under(x, y) {
+    var inside = false;
+    for (var i = 0, j = cover.length - 1; i < cover.length; j = i++) {
+      var xi = cover[i][0], yi = cover[i][1], xj = cover[j][0], yj = cover[j][1];
+      if ((yi > y) !== (yj > y) && x < (xj - xi) * (y - yi) / (yj - yi) + xi) inside = !inside;
+    }
+    return inside;
+  }
+  var live = [];
+  marks.forEach(function (k) {
+    if (k.m.classList.contains('x3-off')) return;
+    var r = k.a.getBoundingClientRect();
+    k.x = r.left - s.left; k.y = r.top - s.top;
+    var hide = !!cover && k.floor === 1 && under(k.x, k.y);
+    k.m.classList.toggle('x3-cov', hide);
+    if (hide) return;
+    k.w = k.m.offsetWidth; k.h = k.m.offsetHeight;
+    live.push(k);
+  });
+  live.filter(function (k) { return k.m.classList.contains('x3-pin'); }).forEach(function (k) {
+    var b = { l: clampX(k.x - k.w / 2, k.w), t: Math.max(PAD, k.y - k.h) };
+    b.r = b.l + k.w; b.b = b.t + k.h; taken.push(b);
+    k.m.style.left = b.l + 'px'; k.m.style.top = b.t + 'px';
+  });
+  live.filter(function (k) { return k.m.classList.contains('x3-lbl'); })
+    .sort(function (a, b) { return rank(b) - rank(a) || (a.y - b.y); })
+    .forEach(function (k) {
+      var cx = k.x - k.w / 2, up = k.y - k.h, mid = k.y - k.h / 2, b = null;
+      var tries = [[cx, up], [cx, k.y + 4], [k.x + 8, mid], [k.x - k.w - 8, mid], [cx, up - k.h - 4],
+                   [cx, k.y + k.h + 8], [k.x + 8, up], [k.x - k.w - 8, up], [k.x + 8, k.y + 4], [k.x - k.w - 8, k.y + 4],
+                   [cx, k.y - 44 - k.h], [k.x + 16, k.y - 44 - k.h], [k.x - k.w - 16, k.y - 44 - k.h]];
+      for (var i = 0; i < tries.length; i++) {
+        var l = clampX(tries[i][0], k.w), t = Math.max(PAD, Math.min(Hh - PAD - k.h, tries[i][1]));
+        var c = { l: l, t: t, r: l + k.w, b: t + k.h };
+        if (!hits(c)) { b = c; break; }
+      }
+      var sel = (k.m.classList.contains('x3-sel') || k.m.classList.contains('x3-wlbl')) && !k.m.classList.contains('x3-elv');
+      if (!b && sel) { var l0 = clampX(cx, k.w), t0 = Math.max(PAD, up); b = { l: l0, t: t0, r: l0 + k.w, b: t0 + k.h }; }
+      k.m.classList.toggle('x3-hid', !b);
+      if (!b) return;
+      taken.push(b);
+      k.m.style.left = b.l + 'px'; k.m.style.top = b.t + 'px';
+    });
+}
+// Labels re-place themselves only while the model is moving (and briefly after).
+var placing = false, until = 0;
+function kick(ms) { until = Math.max(until, performance.now() + (ms || 1400)); if (!placing) { placing = true; requestAnimationFrame(loop); } }
+function loop() { place(); if (performance.now() < until) requestAnimationFrame(loop); else placing = false; }
+
+// ---------- room card ----------
+function pick(id) {
+  var r = ROOMS[id]; if (!r) return;
+  document.querySelectorAll('.x3-room,.x3-pin,.x3-lbl').forEach(function (e) { e.classList.toggle('x3-sel', e.dataset.id === id); });
+  document.querySelectorAll('.x3-lbl,.x3-pin').forEach(function (e) { if (e.dataset.id) e.setAttribute('aria-pressed', e.dataset.id === id ? 'true' : 'false'); });
+  var ph = document.getElementById('xpPhoto'); ph.parentNode.hidden = !r.img;
+  if (r.img) { ph.src = r.img; ph.alt = r.alt || ''; }
   document.getElementById('xpSuite').textContent = r.label;
   document.getElementById('xpName').textContent = r.name;
   document.getElementById('xpDesc').textContent = r.desc;
-  var lk = document.getElementById('xpLink'); lk.href = r.url; lk.textContent = r.cta || 'Explore the Space';
+  var lk = document.getElementById('xpLink'); lk.hidden = !r.url;
+  if (r.url) { lk.href = r.url; lk.textContent = r.cta || 'Explore the Space'; }
   var dl = document.getElementById('xpDetails'); dl.innerHTML = '';
-  r.rows.forEach(function(row){ var d = document.createElement('div'); d.className = 'xp-row'; var dt = document.createElement('dt'); dt.textContent = row[0]; var dd = document.createElement('dd'); dd.textContent = row[1]; d.appendChild(dt); d.appendChild(dd); dl.appendChild(d); });
-  if (typeof gtag !== 'undefined') gtag('event','explore_space_view',{event_category:'explore_map',event_label:id});
+  r.rows.forEach(function (row) { var d = document.createElement('div'); d.className = 'xp-row'; var dt = document.createElement('dt'); dt.textContent = row[0]; var dd = document.createElement('dd'); dd.textContent = row[1]; d.appendChild(dt); d.appendChild(dd); dl.appendChild(d); });
+  if (typeof gtag !== 'undefined') gtag('event', 'explore_space_view', { event_category: 'explore_map', event_label: id });
+  kick();
 }
-function xpFloor(n){
-  var s1 = document.getElementById('xpSvg1'), s2 = document.getElementById('xpSvg2');
-  if(n===1){ s1.removeAttribute('hidden'); s2.setAttribute('hidden',''); } else { s2.removeAttribute('hidden'); s1.setAttribute('hidden',''); }
-  document.getElementById('xpF1').classList.toggle('on', n===1);
-  document.getElementById('xpF2').classList.toggle('on', n===2);
-  document.getElementById('xpSub').textContent = n===1
-    ? 'Events, entertainment, the Culinary Lab, and the Taproom - all on one level.'
-    : "The members' floor - coworking, boardrooms, and the C-Suite Lounge, set apart from events below.";
-  xpPick(n===1 ? 'revel' : 'corevel');
+var XP_SUB = {
+  1: 'Events, entertainment, the Culinary Lab, and the Taproom - all on one level.',
+  2: "The members' floor - coworking, boardrooms, and the C-Suite Lounge, set apart from events below.",
+  both: "Both floors pulled apart - the members' floor sits above the event floor."
+};
+function xpFloor(n) {
+  view.floor = n; apply();
+  document.getElementById('xpF1').classList.toggle('on', n === 1);
+  document.getElementById('xpF2').classList.toggle('on', n === 2);
+  document.getElementById('xpFB').classList.toggle('on', n === 'both');
+  document.getElementById('xpSub').textContent = XP_SUB[n];
+  var c = cur();
+  if (n !== 'both' && (!c || ROOMS[c].floor !== n)) pick(n === 1 ? 'revel' : 'corevel');
 }
-document.getElementById('xpF1').addEventListener('click', function(){ xpFloor(1); });
-document.getElementById('xpF2').addEventListener('click', function(){ xpFloor(2); });
-document.querySelectorAll('.xp-room').forEach(function(p){
-  p.addEventListener('click', function(){ xpPick(p.dataset.id); });
-  p.setAttribute('tabindex','0'); p.setAttribute('role','button');
-  p.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); xpPick(p.dataset.id); } });
+
+// ---------- input ----------
+document.getElementById('xpF1').onclick = function () { xpFloor(1); };
+document.getElementById('xpF2').onclick = function () { xpFloor(2); };
+document.getElementById('xpFB').onclick = function () { xpFloor('both'); };
+document.getElementById('xpRL').onclick = function () { view.flat = false; view.rz -= 90; apply(); };
+document.getElementById('xpRR').onclick = function () { view.flat = false; view.rz += 90; apply(); };
+document.getElementById('xpFlat').onclick = function () { view.flat = !view.flat; if (view.flat && view.floor === 'both') xpFloor(1); else apply(); };
+// Restrooms: the set on the floor in view (floor 1 when both are shown), with a short pulse.
+document.getElementById('xpWC').onclick = function () {
+  var id = view.floor === 2 ? 'wc2' : 'wc1';
+  if (view.floor === 'both') xpFloor(1); else apply();
+  pick(id);
+  var pin = document.querySelector('.x3-pin[data-id="' + id + '"]');
+  pin.classList.remove('x3-pulse'); void pin.offsetWidth; pin.classList.add('x3-pulse');
+};
+function cur() { var s = document.querySelector('.x3-room.x3-sel,.x3-pin.x3-sel'); return s && s.dataset.id; }
+document.getElementById('x3Ov').addEventListener('click', function (e) {
+  var t = e.target.closest('.x3-pin,.x3-lbl'); if (t && t.dataset.id) pick(t.dataset.id);
 });
-var xh = location.hash.replace('#','');
-if (XP_ROOMS[xh]) { xpFloor(XP_ROOMS[xh].floor); xpPick(xh); } else { xpPick('revel'); }
+var drag = null, moved = false;
+stage.addEventListener('pointerdown', function (e) {
+  if (view.flat) return;
+  drag = { x: e.clientX, y: e.clientY, rz: view.rz, tilt: view.tilt }; moved = false;
+});
+window.addEventListener('pointermove', function (e) {
+  if (!drag) return;
+  var dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+  if (!moved && Math.abs(dx) + Math.abs(dy) < 6) return;
+  if (!moved) { moved = true; stage.classList.add('x3-dragging'); }
+  view.rz = drag.rz + dx * .35;
+  view.tilt = Math.max(30, Math.min(76, drag.tilt - dy * .2));
+  world.style.setProperty('--rz', view.rz + 'deg');
+  world.style.setProperty('--tilt', view.tilt + 'deg');
+  stage.style.setProperty('--rz', view.rz + 'deg');
+  kick(300);
+});
+window.addEventListener('pointerup', function () {
+  if (drag) stage.classList.remove('x3-dragging');
+  drag = null;
+});
+window.addEventListener('pointercancel', function () { drag = null; stage.classList.remove('x3-dragging'); });
+stage.addEventListener('click', function (e) {
+  if (moved) { moved = false; return; }
+  var t = e.target.closest('.x3-room,.x3-pin');
+  if (t) pick(t.dataset.id);
+});
+window.addEventListener('resize', function () { fit(); kick(); });
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { kick(); });
+
+var xh = location.hash.replace('#', '');
+if (ROOMS[xh]) { xpFloor(ROOMS[xh].floor); pick(xh); } else { xpFloor(1); pick('revel'); }
+window.addEventListener('hashchange', function () { var h = location.hash.replace('#', ''); if (ROOMS[h]) { xpFloor(ROOMS[h].floor); pick(h); } });
+kick(2200);
+// Rooms rise out of the floor plates once on load.
+requestAnimationFrame(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce) world.style.transition = '--rz .8s cubic-bezier(.2,.7,.2,1),--tilt .8s cubic-bezier(.2,.7,.2,1),--g 1.1s cubic-bezier(.2,.7,.2,1) .25s';
+  world.style.setProperty('--g', '1');
+});
 </script>
 
 <section class="section" style="background:var(--pearl)">

@@ -84,7 +84,7 @@ jobs:
 
           # Check up to 5 changed site files (skip repo-only files, the 404
           # page, and pages netlify.toml redirects elsewhere).
-          grep -Ev '^(\.github/|netlify/|netlify\.toml$|README\.md$|.*\.md$|404\.html$)' /tmp/changed.txt > /tmp/cand.txt || true
+          grep -Ev '^(\.|netlify/|netlify\.toml$|README\.md$|.*\.md$|404\.html$)' /tmp/changed.txt > /tmp/cand.txt || true
           : > /tmp/check.txt
           while read -r f; do
             [ -f "$f" ] || continue

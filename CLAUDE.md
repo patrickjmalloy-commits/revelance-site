@@ -6,7 +6,12 @@ Static HTML site on Netlify. `staging` deploys to https://revelancestaging.netli
 
 ## Before pushing to staging
 
-Run the site rules and fix anything they report:
+After any change to events/index.html, sync the homepage events grid from it
+(the Events page is the source of truth; the homepage is generated):
+
+    python3 .github/scripts/sync_home_events.py
+
+Then run the site rules and fix anything they report:
 
     python3 .github/scripts/site_rules.py
 
@@ -27,6 +32,8 @@ request while it fails.
   and every page with a phone or email link includes the `rv-contact-clicks` tracker.
 - **Structured data:** every JSON-LD block is valid JSON, and every Event has name,
   startDate, endDate, location and offers (free events use a $0 offer).
+- **Homepage events:** the grid carries every upcoming card the sync script picks
+  from the Events page (run the script above if this fails).
 - **Menu:** the About menu links "Explore the Building" and the Memberships menu
   links "Virtual Address".
 

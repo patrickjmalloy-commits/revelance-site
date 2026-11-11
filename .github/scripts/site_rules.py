@@ -9,6 +9,7 @@ approval request.
 Each rule exists because the problem reached staging at least once.
 """
 import json
+import os
 import re
 from html.parser import HTMLParser
 import subprocess
@@ -138,9 +139,27 @@ def check(path, s, errors):
                 err(f'menu is missing the "{label}" link')
 
 
+def check_home_events(errors):
+    """The homepage events grid is generated from the Events page by
+    sync_home_events.py; a stale homepage (December events missing while the
+    Events page had them) reached production once."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location('sync_home_events', os.path.join(os.path.dirname(__file__), 'sync_home_events.py'))
+    sync = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(sync)
+    events_html, home_html = sync.read(sync.EVENTS), sync.read(sync.HOME)
+    want = sync.select(events_html)
+    have = sync.home_ids(home_html)
+    missing = [c for c in want if c not in have]
+    if missing:
+        errors.append('index.html: homepage events grid is missing ' + ', '.join(missing) +
+                      ' (run: python3 .github/scripts/sync_home_events.py)')
+
+
 def main():
     errors = []
     files = pages()
+    check_home_events(errors)
     for p in files:
         with open(p, encoding='utf-8') as fh:
             check(p, fh.read(), errors)

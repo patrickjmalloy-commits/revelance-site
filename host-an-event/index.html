@@ -831,8 +831,9 @@ a.space-card:hover{cursor:pointer}
 
 <!-- CLOSING CTA -->
 <!-- FAQ -->
-<!-- Q4 HOLIDAY SECTION (seasonal) -->
-<section class="section">
+<!-- Q4 HOLIDAY SECTION (seasonal) — remove after Jan 4, 2027; then drop the hidden attribute and the
+     switch script below so the kickoff section shows on its own (give it its own remove-after date, e.g. Mar 31, 2027) -->
+<section class="section" id="season-holiday">
 <div class="container">
 <span class="label">Q4 Books Fastest</span>
 <h2>Holiday parties, <em>handled</em></h2>
@@ -843,6 +844,22 @@ a.space-card:hover{cursor:pointer}
 </div>
 </section>
 <!-- /Q4 HOLIDAY SECTION -->
+<!-- Q1 KICKOFF SECTION (seasonal) — shown automatically from Jan 5, 2027 by the switch script -->
+<section class="section" id="season-kickoff" hidden>
+<div class="container">
+<span class="label">New Year, New Plans</span>
+<h2>January kickoffs <em>and the party December didn&rsquo;t have room for</em></h2>
+<p class="sub">The first quarter is when teams plan sales kickoffs, strategy offsites and the holiday party that got squeezed out of December. The Revel Room seats 125 for a banquet and 225 combined with the Taproom, boardrooms hold 6&ndash;14 with built-in AV, the bar pours at standard Sonder Brewing prices with the bartender included, and there&rsquo;s no mandatory catering. Free private parking, 25 minutes north of downtown Cincinnati. January dates are open; book before the calendar fills.</p>
+<div style="margin-top:20px;display:flex;gap:12px;flex-wrap:wrap">
+<a href="../team-building/" class="btn btn-gold">Plan a Kickoff &rarr;</a>
+<a href="../plan-your-event/" class="btn btn-ghost" style="color:var(--charcoal);border-color:rgba(0,0,0,.3)">Check January Dates</a>
+</div>
+</div>
+</section>
+<!-- /Q1 KICKOFF SECTION -->
+<script>
+(function(){var d=new Intl.DateTimeFormat("en-CA",{timeZone:"America/New_York"}).format(new Date());if(d>="2027-01-05"){var h=document.getElementById("season-holiday"),k=document.getElementById("season-kickoff");if(h)h.hidden=true;if(k)k.hidden=false;}})();
+</script>
 <section class="faq-section" id="faq" style="background:var(--white)">
 <div class="container">
 <div style="text-align:center;margin-bottom:8px">

@@ -34,6 +34,10 @@ request while it fails.
   startDate, endDate, location and offers (free events use a $0 offer).
 - **Homepage events:** the grid carries every upcoming card the sync script picks
   from the Events page (run the script above if this fails).
+- **Temporary content expires:** wrap any time-limited block (event callout,
+  seasonal banner) in `<!-- ... remove after Sep 30, 2026 -->` and delete it by
+  then; the rule fails once the date passes. Hidden homepage recap cards must be
+  deleted within two weeks of the event.
 - **Menu:** the About menu links "Explore the Building" and the Memberships menu
   links "Virtual Address".
 

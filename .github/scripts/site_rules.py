@@ -139,6 +139,30 @@ def check(path, s, errors):
                 err(f'menu is missing the "{label}" link')
 
 
+    # 7. Temporary content is removed on time. Anything time-limited (an event
+    #    callout, a seasonal banner) is wrapped in a comment such as
+    #    <!-- ... remove after Sep 30, 2026 --> and must be gone by that date.
+    #    (The Partners page kept promoting the Sept 30 planner luncheon into
+    #    November.) Hidden homepage recap cards also expire.
+    import datetime
+    today = datetime.date.fromisoformat(os.environ.get('SYNC_TODAY') or
+                                        datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=-5))).date().isoformat())
+    months = {m: i + 1 for i, m in enumerate(['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'])}
+    for m in re.finditer(r'(?i)<!--[^>]*?remove after\s+([A-Za-z]{3})[a-z]*\.?\s+(\d{1,2}),?\s+(\d{4})[^>]*-->', s):
+        try:
+            due = datetime.date(int(m.group(3)), months[m.group(1).lower()[:3]], int(m.group(2)))
+        except (KeyError, ValueError):
+            err(f'unreadable "remove after" date in comment: {m.group(0)[:60]}')
+            continue
+        if today > due:
+            err(f'temporary content past its removal date ({due.isoformat()}): {m.group(0)[:70]}')
+    if path == 'index.html':
+        recap = re.search(r'<div id="home-recap-cards"[^>]*>(.*?)<!-- /home-recap-cards -->', s, re.S)
+        if recap:
+            for c in re.finditer(r'<div id="(ev-[a-z0-9-]+)" class="ev-card[^"]*"[^>]*?data-event-date="(\d{4}-\d{2}-\d{2})"', recap.group(1), re.S):
+                if (today - datetime.date.fromisoformat(c.group(2))).days > 14:
+                    err(f'hidden recap card {c.group(1)} ({c.group(2)}) is more than two weeks old; delete it')
+
 def check_home_events(errors):
     """The homepage events grid is generated from the Events page by
     sync_home_events.py; a stale homepage (December events missing while the

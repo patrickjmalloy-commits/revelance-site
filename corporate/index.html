@@ -93,8 +93,8 @@ a{color:var(--gold-dark);text-decoration:none}a:hover{color:var(--gold)}
 /* LAYOUT */
 .container{max-width:1200px;margin:0 auto;padding:0 28px}
 .section{padding:80px 0}
-.label{font-size:.7rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:inline-flex;align-items:center;gap:14px}
-.label::before{content:'';width:32px;height:1px;background:var(--gold)}
+.label{font-size:.7rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--gold-dark);margin-bottom:16px;display:inline-flex;align-items:center;gap:14px}
+.label::before{content:'';width:32px;height:1px;background:var(--gold-dark)}
 h2{font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.6rem);font-weight:500;line-height:1.15;margin-bottom:16px}
 h2 em{font-style:italic;color:var(--gold-dark)}
 h2.light{color:#fff}h2.light em{color:var(--gold-light)}
@@ -243,7 +243,10 @@ h2.light{color:#fff}h2.light em{color:var(--gold-light)}
 .faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease}
 .faq-item.open .faq-a{max-height:800px}
 .faq-a p{padding:0 0 22px;font-size:.92rem;font-weight:300;color:var(--ash);line-height:1.7}
-.footer-newsletter{border-top:1px solid rgba(255,255,255,.07);padding-top:22px;margin-bottom:22px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}.footer-newsletter p{margin:0;font-size:.82rem;color:rgba(255,255,255,.5);white-space:nowrap}.fn-form{display:flex;gap:8px;flex:1;min-width:240px;max-width:420px}.fn-input{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:4px;color:#fff;font-size:.82rem;padding:9px 14px;font-family:inherit;outline:none;transition:border .2s}.fn-input::placeholder{color:rgba(255,255,255,.3)}.fn-input:focus{border-color:var(--gold)}.fn-btn{background:transparent;border:1px solid var(--gold);color:var(--gold);font-size:.78rem;font-weight:700;letter-spacing:.06em;padding:9px 16px;border-radius:4px;cursor:pointer;white-space:nowrap;font-family:inherit;transition:all .3s}.fn-btn:hover{background:var(--gold);color:var(--black)}@media(max-width:700px){.footer-newsletter{flex-direction:column;align-items:flex-start;gap:12px}.fn-form{max-width:100%;width:100%}}@media(min-width:769px){html{font-size:17px}}@media(max-width:768px){input:not([type=checkbox]):not([type=radio]),select,textarea{font-size:16px}}</style>
+.footer-newsletter{border-top:1px solid rgba(255,255,255,.07);padding-top:22px;margin-bottom:22px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}.footer-newsletter p{margin:0;font-size:.82rem;color:rgba(255,255,255,.5);white-space:nowrap}.fn-form{display:flex;gap:8px;flex:1;min-width:240px;max-width:420px}.fn-input{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:4px;color:#fff;font-size:.82rem;padding:9px 14px;font-family:inherit;outline:none;transition:border .2s}.fn-input::placeholder{color:rgba(255,255,255,.3)}.fn-input:focus{border-color:var(--gold)}.fn-btn{background:transparent;border:1px solid var(--gold);color:var(--gold);font-size:.78rem;font-weight:700;letter-spacing:.06em;padding:9px 16px;border-radius:4px;cursor:pointer;white-space:nowrap;font-family:inherit;transition:all .3s}.fn-btn:hover{background:var(--gold);color:var(--black)}@media(max-width:700px){.footer-newsletter{flex-direction:column;align-items:flex-start;gap:12px}.fn-form{max-width:100%;width:100%}}@media(min-width:769px){html{font-size:17px}}@media(max-width:768px){input:not([type=checkbox]):not([type=radio]),select,textarea{font-size:16px}}/* eyebrow labels: gold-dark on light sections, gold-light on dark */
+.section-dark .label,.section-gold .label,.dark .label,.sw-dark .label,.insights .label,.hero .label,.cta-band .label,.past-bg .label,[style*="--charcoal"] .label,[style*="--black"] .label,.section-dark .section-label,.dark .section-label,[style*="--charcoal"] .section-label,[style*="--black"] .section-label{color:var(--gold-light)}
+.section-dark .label::before,.section-gold .label::before,.dark .label::before,.sw-dark .label::before,.insights .label::before,.hero .label::before,.cta-band .label::before,.past-bg .label::before,[style*="--charcoal"] .label::before,[style*="--black"] .label::before{background:var(--gold-light)}
+</style>
 <!-- Google Analytics -->
 <script>(function(){if(location.hostname!=='revelanceoh.com'&&location.hostname!=='www.revelanceoh.com')return;var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-V2N2YENTZE';document.head.appendChild(s);})();</script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-V2N2YENTZE');</script>
@@ -303,7 +306,7 @@ h2.light{color:#fff}h2.light em{color:var(--gold-light)}
 <div class="container">
   <div class="corp-inner">
     <div class="reveal">
-      <span class="label" style="color:var(--gold)">For Companies</span>
+      <span class="label">For Companies</span>
       <h2 class="heading">One account. <em>Total flexibility.</em></h2>
       <p class="subtext" style="color:var(--ash);margin-bottom:28px">Every company is different. Instead of a rigid membership, we offer a pre-funded corporate account your team can use however they need — boardrooms on Tuesday, a team offsite on Thursday, day passes for remote workers on Friday.</p>
       <div class="corp-steps">
@@ -338,7 +341,7 @@ h2.light{color:#fff}h2.light em{color:var(--gold-light)}
       <a class="photo-link" href="../c-suite/" aria-label="See the C-Suite Lounge" style="display:block;height:100%"><picture><source srcset="../images/bourbon-lockers.webp" type="image/webp"><img loading="lazy" src="../images/bourbon-lockers.jpg" alt="The C-Suite executive bourbon lounge at Revelance" style="width:100%;height:100%;object-fit:cover"></picture></a>
     </div>
     <div>
-      <span class="label" style="color:var(--gold)">Client Entertainment</span>
+      <span class="label">Client Entertainment</span>
       <h3 style="font-family:var(--serif);font-size:1.5rem;color:#fff;margin-bottom:12px;font-weight:500">The C-Suite <em style="color:var(--gold-light)">Bourbon Lockers</em></h3>
       <p style="color:rgba(255,255,255,.5);font-size:.92rem;line-height:1.7;margin-bottom:16px">Fifty personal bourbon lockers in an exclusive executive lounge overlooking the Taproom. Stock your locker, host clients in a room that feels like your private club, and close deals over a pour of your own collection. Included with Executive Office memberships.</p>
       <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px">

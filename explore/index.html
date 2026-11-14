@@ -62,8 +62,8 @@ a{color:var(--gold-dark);text-decoration:none}a:hover{color:var(--gold)}
 
 .container{max-width:1200px;margin:0 auto;padding:0 28px}
 .section{padding:70px 0}
-.label{font-size:.7rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;display:inline-flex;align-items:center;gap:14px}
-.label::before{content:'';width:32px;height:1px;background:var(--gold)}
+.label{font-size:.7rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--gold-dark);margin-bottom:18px;display:inline-flex;align-items:center;gap:14px}
+.label::before{content:'';width:32px;height:1px;background:var(--gold-dark)}
 h2{font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.6rem);font-weight:500;line-height:1.15;margin-bottom:16px}
 h2 em{font-style:italic;color:var(--gold-dark)}
 h2 em{font-style:italic;font-weight:400}
@@ -84,7 +84,7 @@ a.audience-card:hover{border-color:var(--gold);transform:translateY(-3px);box-sh
 .dark{background:var(--charcoal);color:#fff}
 .dark h2{color:#fff}
 .dark .sub{color:rgba(255,255,255,.45)}
-.dark .label{color:var(--gold)}
+.dark .label{color:var(--gold-dark)}
 
 .specs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .spec{text-align:center;padding:20px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px}
@@ -250,6 +250,9 @@ html{font-size:17px.footer .container{max-width:1600px;padding:0 48px}.footer-gr
 @media(max-width:900px){.x3-stage{height:430px}}
 @media(max-width:480px){.x3-stage{height:340px}.x3-lbl.x3-elv{display:none}.x3-lbl{font-size:10.5px;padding:4px 7px}.x3-lbl small{display:none}.x3-pin i{width:21px;height:21px}.x3-pin u{height:9px}}
 @media(prefers-reduced-motion:reduce){.x3-world,.x3-floor,.x3-compass i{transition:none!important}.x3-pin.x3-pulse i{animation:none}}
+/* eyebrow labels: gold-dark on light sections, gold-light on dark */
+.section-dark .label,.section-gold .label,.dark .label,.sw-dark .label,.insights .label,.hero .label,.cta-band .label,.past-bg .label,[style*="--charcoal"] .label,[style*="--black"] .label,.section-dark .section-label,.dark .section-label,[style*="--charcoal"] .section-label,[style*="--black"] .section-label{color:var(--gold-light)}
+.section-dark .label::before,.section-gold .label::before,.dark .label::before,.sw-dark .label::before,.insights .label::before,.hero .label::before,.cta-band .label::before,.past-bg .label::before,[style*="--charcoal"] .label::before,[style*="--black"] .label::before{background:var(--gold-light)}
 </style>
 <link rel="preload" as="image" href="../images/map-floor1.webp" type="image/webp">
 <link rel="preload" as="image" href="../images/map-floor2.webp" type="image/webp">

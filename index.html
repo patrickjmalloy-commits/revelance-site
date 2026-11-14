@@ -138,7 +138,7 @@
 :root{--black:#0B0E11;--charcoal:#151A20;--slate:#1E252E;--steel:#2A333E;--graphite:#3A4450;--ash:#5A6572;--silver:#8A929A;--mist:#B8BEC4;--cloud:#E8EAED;--pearl:#F4F5F6;--white:#FDFEFE;--gold:#C9A96E;--gold-light:#D4BA85;--gold-dark:#B08C4A;--gold-glow:rgba(201,169,110,0.12);--serif:'Playfair Display',Georgia,serif;--sans:'Outfit',-apple-system,sans-serif;--shadow-sm:0 2px 12px rgba(0,0,0,0.06);--shadow-md:0 8px 30px rgba(0,0,0,0.08);--shadow-lg:0 16px 50px rgba(0,0,0,0.12);--ease:cubic-bezier(0.25,0.46,0.45,0.94)}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:68px;font-size:16px;-webkit-font-smoothing:antialiased;background:#0B0E11;overflow-y:scroll}body{font-family:var(--sans);color:var(--charcoal);background:#0B0E11;line-height:1.6;overflow-x:hidden}::selection{background:var(--gold);color:var(--black)}
 .container{max-width:1200px;margin:0 auto;padding:0 28px}.section{padding:60px 0}
-.label{font-family:var(--sans);font-size:.7rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;display:inline-flex;align-items:center;gap:14px}.label::before{content:'';width:32px;height:1px;background:var(--gold)}
+.label{font-family:var(--sans);font-size:.7rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--gold-dark);margin-bottom:18px;display:inline-flex;align-items:center;gap:14px}.label::before{content:'';width:32px;height:1px;background:var(--gold-dark)}
 .heading{font-family:var(--serif);font-size:clamp(2rem,3.8vw,3rem);font-weight:500;line-height:1.15;color:var(--black);margin-bottom:20px}.heading em{font-style:italic;color:var(--gold-dark)}
 .subtext{font-size:1.05rem;font-weight:300;color:var(--ash);max-width:580px;line-height:1.75}
 
@@ -375,7 +375,10 @@
 @media(max-width:900px){.workspace-strip{grid-template-columns:1fr 1fr}}
 @media(max-width:700px){.mem-grid{grid-template-columns:1fr;max-width:380px;margin-left:auto;margin-right:auto}.workspace-strip{grid-template-columns:1fr;gap:10px}.workspace-strip .ws-img{height:160px}}
 
-.footer-newsletter{border-top:1px solid rgba(255,255,255,.07);padding-top:22px;margin-bottom:22px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}.footer-newsletter p{margin:0;font-size:.82rem;color:rgba(255,255,255,.5);white-space:nowrap}.fn-form{display:flex;gap:8px;flex:1;min-width:240px;max-width:420px}.fn-input{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:4px;color:#fff;font-size:.82rem;padding:9px 14px;font-family:inherit;outline:none;transition:border .2s}.fn-input::placeholder{color:rgba(255,255,255,.3)}.fn-input:focus{border-color:var(--gold)}.fn-btn{background:transparent;border:1px solid var(--gold);color:var(--gold);font-size:.78rem;font-weight:700;letter-spacing:.06em;padding:9px 16px;border-radius:4px;cursor:pointer;white-space:nowrap;font-family:inherit;transition:all .3s}.fn-btn:hover{background:var(--gold);color:var(--black)}@media(max-width:700px){.footer-newsletter{flex-direction:column;align-items:flex-start;gap:12px}.fn-form{max-width:100%;width:100%}}@media(max-width:768px){input:not([type=checkbox]):not([type=radio]),select,textarea{font-size:16px}}</style>
+.footer-newsletter{border-top:1px solid rgba(255,255,255,.07);padding-top:22px;margin-bottom:22px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}.footer-newsletter p{margin:0;font-size:.82rem;color:rgba(255,255,255,.5);white-space:nowrap}.fn-form{display:flex;gap:8px;flex:1;min-width:240px;max-width:420px}.fn-input{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:4px;color:#fff;font-size:.82rem;padding:9px 14px;font-family:inherit;outline:none;transition:border .2s}.fn-input::placeholder{color:rgba(255,255,255,.3)}.fn-input:focus{border-color:var(--gold)}.fn-btn{background:transparent;border:1px solid var(--gold);color:var(--gold);font-size:.78rem;font-weight:700;letter-spacing:.06em;padding:9px 16px;border-radius:4px;cursor:pointer;white-space:nowrap;font-family:inherit;transition:all .3s}.fn-btn:hover{background:var(--gold);color:var(--black)}@media(max-width:700px){.footer-newsletter{flex-direction:column;align-items:flex-start;gap:12px}.fn-form{max-width:100%;width:100%}}@media(max-width:768px){input:not([type=checkbox]):not([type=radio]),select,textarea{font-size:16px}}/* eyebrow labels: gold-dark on light sections, gold-light on dark */
+.section-dark .label,.section-gold .label,.dark .label,.sw-dark .label,.insights .label,.hero .label,.cta-band .label,.past-bg .label,[style*="--charcoal"] .label,[style*="--black"] .label,.section-dark .section-label,.dark .section-label,[style*="--charcoal"] .section-label,[style*="--black"] .section-label{color:var(--gold-light)}
+.section-dark .label::before,.section-gold .label::before,.dark .label::before,.sw-dark .label::before,.insights .label::before,.hero .label::before,.cta-band .label::before,.past-bg .label::before,[style*="--charcoal"] .label::before,[style*="--black"] .label::before{background:var(--gold-light)}
+</style>
 
 <!-- Individual Event Schema for Search & AI -->
 <script type="application/ld+json">
@@ -732,7 +735,7 @@
 <div class="container">
 
 <div class="reveal" style="text-align:center;margin-bottom:44px">
-<span class="label" style="justify-content:center;color:var(--gold)">In the News</span>
+<span class="label" style="justify-content:center">In the News</span>
 <h2 class="heading" style="color:#fff;max-width:640px;margin-left:auto;margin-right:auto">A $5.5M private business club — <em>covered by Cincinnati's top outlets</em></h2>
 </div>
 
@@ -760,7 +763,7 @@
 <div style="border-top:1px solid rgba(255,255,255,.07);margin-bottom:44px"></div>
 
 <div class="reveal" style="text-align:center;margin-bottom:32px">
-<span class="label" style="justify-content:center;color:var(--gold)">What People Say</span>
+<span class="label" style="justify-content:center">What People Say</span>
 <h2 class="heading" style="color:#fff;max-width:520px;margin-left:auto;margin-right:auto">Trusted by <em>professionals</em> across Cincinnati</h2>
 </div>
 
@@ -1097,7 +1100,7 @@ document.querySelectorAll('.ev-card').forEach(card=>{
 <section class="cta-band"><div class="container reveal"><h2>See it for yourself</h2><p>Whether you're looking for workspace, planning an event, or exploring a partnership — start here.</p><div class="cta-btns"><a href="#free-day" class="btn btn-white">Try a Free Day</a><a href="host-an-event/" class="btn btn-white">Host Your Event</a><a href="#contact" data-interest="Event Space Rental" class="btn btn-white">Send a Message</a><a href="tel:5137945070" class="btn btn-ghost" style="border-color:rgba(255,255,255,.4)">Call 513-794-5070</a></div></div></section>
 
 <!-- INSIGHTS -->
-<section class="insights section" style="background:var(--charcoal)"><div class="container"><div class="reveal" style="text-align:center"><span class="label" style="justify-content:center;color:var(--gold)">From the Club</span><h2 class="heading" style="color:#fff;max-width:580px;margin-left:auto;margin-right:auto">Thinking behind <em>the building</em></h2><p class="subtext" style="color:rgba(255,255,255,.55);margin:0 auto;text-align:center">What makes Revelance different — and why it matters for how you work, meet, and host.</p></div>
+<section class="insights section" style="background:var(--charcoal)"><div class="container"><div class="reveal" style="text-align:center"><span class="label" style="justify-content:center">From the Club</span><h2 class="heading" style="color:#fff;max-width:580px;margin-left:auto;margin-right:auto">Thinking behind <em>the building</em></h2><p class="subtext" style="color:rgba(255,255,255,.55);margin:0 auto;text-align:center">What makes Revelance different — and why it matters for how you work, meet, and host.</p></div>
 <div class="insight-grid" id="insightGrid" style="opacity:0;transition:opacity .6s ease"></div>
 <script>
 revIdle(function(){

@@ -68,8 +68,8 @@ img{max-width:100%;display:block}
 .btn-outline{background:transparent;border:1.5px solid var(--mist);color:var(--charcoal)}.btn-outline:hover{border-color:var(--gold);color:var(--gold-dark)}
 
 /* ── LABELS ── */
-.label{font-size:.7rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:inline-flex;align-items:center;gap:14px}
-.label::before{content:'';width:32px;height:1px;background:var(--gold)}
+.label{font-size:.7rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--gold-dark);margin-bottom:16px;display:inline-flex;align-items:center;gap:14px}
+.label::before{content:'';width:32px;height:1px;background:var(--gold-dark)}
 .heading{font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.6rem);font-weight:500;line-height:1.15;margin-bottom:16px}
 .heading em{font-style:italic;color:var(--gold-light)}
 .subtext{color:var(--ash);font-size:1rem;max-width:600px;line-height:1.7;margin-bottom:32px}
@@ -354,6 +354,10 @@ a.space-card:hover{cursor:pointer}
 @media(max-width:640px){.cmp-grid .colhead{padding:6px 12px 14px}.cmp-grid .cell{padding:13px 12px;font-size:.84rem}.cmp-grid .rowlabel{min-width:74px;font-size:.56rem}}
 /* ===== /SPACES COMPARISON ===== */
 .xp-teaser{display:grid}@media(max-width:860px){.xp-teaser{grid-template-columns:1fr!important}}.dark .sub{color:rgba(255,255,255,.55)}
+/* eyebrow labels: gold-dark on light sections, gold-light on dark */
+.spaces .label,.diff .label{color:var(--gold-light)}.spaces .label::before,.diff .label::before{background:var(--gold-light)}
+.section-dark .label,.section-gold .label,.dark .label,.sw-dark .label,.insights .label,.hero .label,.cta-band .label,.past-bg .label,[style*="--charcoal"] .label,[style*="--black"] .label,.section-dark .section-label,.dark .section-label,[style*="--charcoal"] .section-label,[style*="--black"] .section-label{color:var(--gold-light)}
+.section-dark .label::before,.section-gold .label::before,.dark .label::before,.sw-dark .label::before,.insights .label::before,.hero .label::before,.cta-band .label::before,.past-bg .label::before,[style*="--charcoal"] .label::before,[style*="--black"] .label::before{background:var(--gold-light)}
 </style>
 
 <script type="application/ld+json">
@@ -582,7 +586,7 @@ a.space-card:hover{cursor:pointer}
 <section class="spaces section" id="spaces">
 <div class="container">
   <div class="reveal">
-    <span class="label" style="color:var(--gold)">Six Spaces</span>
+    <span class="label">Six Spaces</span>
     <h2 class="heading">One venue. <em>Every format.</em></h2>
     <p class="subtext">Each space can stand alone or connect with others. Mix and match for a seamless multi-room event.</p>
   </div>
@@ -674,7 +678,7 @@ a.space-card:hover{cursor:pointer}
 <div class="container">
   <div class="diff-grid">
     <div class="reveal">
-      <span class="label" style="color:var(--gold)">Why Revelance</span>
+      <span class="label">Why Revelance</span>
       <h2 class="heading" style="color:#fff">The things that make <em>your job easier</em></h2>
       <p class="subtext" style="color:rgba(255,255,255,.55)">Every item on this list is an objection you won't have to manage. We designed the venue around the planner's experience, not just the guest's.</p>
       <div class="diff-list">
@@ -782,7 +786,7 @@ a.space-card:hover{cursor:pointer}
 <div class="container">
 <div class="reveal" style="display:flex;flex-wrap:wrap;align-items:center;gap:24px;justify-content:space-between">
   <div style="flex:1;min-width:220px">
-    <span class="label" style="color:var(--gold)">For Event Professionals</span>
+    <span class="label">For Event Professionals</span>
     <p style="font-size:.92rem;color:rgba(255,255,255,.55);line-height:1.6;margin:6px 0 0">Event planners, caterers &amp; restaurants — no mandatory catering means your clients book us and hire you.</p>
   </div>
   <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center">
@@ -799,7 +803,7 @@ a.space-card:hover{cursor:pointer}
 <section class="reviews section">
 <div class="container">
   <div class="reveal" style="text-align:center">
-    <span class="label" style="justify-content:center;color:var(--gold)">What Clients Say</span>
+    <span class="label" style="justify-content:center">What Clients Say</span>
     <h2 class="heading" style="color:var(--black);max-width:500px;margin:0 auto 40px">Real events. <em>Real results.</em></h2>
   </div>
   <div class="rev-grid" id="rev-grid"></div>

@@ -76,8 +76,8 @@ a{color:var(--gold-dark);text-decoration:none}a:hover{color:var(--gold)}
 /* LAYOUT */
 .container{max-width:1200px;margin:0 auto;padding:0 28px}
 .section{padding:80px 0}
-.label{font-size:.7rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:inline-flex;align-items:center;gap:14px}
-.label::before{content:'';width:32px;height:1px;background:var(--gold)}
+.label{font-size:.7rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--gold-dark);margin-bottom:16px;display:inline-flex;align-items:center;gap:14px}
+.label::before{content:'';width:32px;height:1px;background:var(--gold-dark)}
 h2{font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.6rem);font-weight:500;line-height:1.15;margin-bottom:16px}
 h2 em{font-style:italic;color:var(--gold-dark)}
 h2.light{color:#fff}h2.light em{color:var(--gold-light)}
@@ -204,7 +204,11 @@ h2.light{color:#fff}h2.light em{color:var(--gold-light)}
 .float-bar-btn-outline{background:transparent;border:1px solid rgba(255,255,255,.25);color:#fff}
 .float-bar-close{background:none;border:none;color:rgba(255,255,255,.4);font-size:1.1rem;cursor:pointer;padding:4px 8px;margin-left:4px}
 @media(min-width:701px){.float-bar{display:block}}
-.footer-newsletter{border-top:1px solid rgba(255,255,255,.07);padding-top:22px;margin-bottom:22px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}.footer-newsletter p{margin:0;font-size:.82rem;color:rgba(255,255,255,.5);white-space:nowrap}.fn-form{display:flex;gap:8px;flex:1;min-width:240px;max-width:420px}.fn-input{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:4px;color:#fff;font-size:.82rem;padding:9px 14px;font-family:inherit;outline:none;transition:border .2s}.fn-input::placeholder{color:rgba(255,255,255,.3)}.fn-input:focus{border-color:var(--gold)}.fn-btn{background:transparent;border:1px solid var(--gold);color:var(--gold);font-size:.78rem;font-weight:700;letter-spacing:.06em;padding:9px 16px;border-radius:4px;cursor:pointer;white-space:nowrap;font-family:inherit;transition:all .3s}.fn-btn:hover{background:var(--gold);color:var(--black)}@media(max-width:700px){.footer-newsletter{flex-direction:column;align-items:flex-start;gap:12px}.fn-form{max-width:100%;width:100%}}@media(min-width:769px){html{font-size:17px}}@media(max-width:768px){input:not([type=checkbox]):not([type=radio]),select,textarea{font-size:16px}}.xp-teaser{display:grid}@media(max-width:860px){.xp-teaser{grid-template-columns:1fr!important}}</style>
+.footer-newsletter{border-top:1px solid rgba(255,255,255,.07);padding-top:22px;margin-bottom:22px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}.footer-newsletter p{margin:0;font-size:.82rem;color:rgba(255,255,255,.5);white-space:nowrap}.fn-form{display:flex;gap:8px;flex:1;min-width:240px;max-width:420px}.fn-input{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:4px;color:#fff;font-size:.82rem;padding:9px 14px;font-family:inherit;outline:none;transition:border .2s}.fn-input::placeholder{color:rgba(255,255,255,.3)}.fn-input:focus{border-color:var(--gold)}.fn-btn{background:transparent;border:1px solid var(--gold);color:var(--gold);font-size:.78rem;font-weight:700;letter-spacing:.06em;padding:9px 16px;border-radius:4px;cursor:pointer;white-space:nowrap;font-family:inherit;transition:all .3s}.fn-btn:hover{background:var(--gold);color:var(--black)}@media(max-width:700px){.footer-newsletter{flex-direction:column;align-items:flex-start;gap:12px}.fn-form{max-width:100%;width:100%}}@media(min-width:769px){html{font-size:17px}}@media(max-width:768px){input:not([type=checkbox]):not([type=radio]),select,textarea{font-size:16px}}.xp-teaser{display:grid}@media(max-width:860px){.xp-teaser{grid-template-columns:1fr!important}}/* eyebrow labels: gold-dark on light sections, gold-light on dark */
+.contact-hero .label{color:var(--gold-light)}.contact-hero .label::before{background:var(--gold-light)}
+.section-dark .label,.section-gold .label,.dark .label,.sw-dark .label,.insights .label,.hero .label,.cta-band .label,.past-bg .label,[style*="--charcoal"] .label,[style*="--black"] .label,.section-dark .section-label,.dark .section-label,[style*="--charcoal"] .section-label,[style*="--black"] .section-label{color:var(--gold-light)}
+.section-dark .label::before,.section-gold .label::before,.dark .label::before,.sw-dark .label::before,.insights .label::before,.hero .label::before,.cta-band .label::before,.past-bg .label::before,[style*="--charcoal"] .label::before,[style*="--black"] .label::before{background:var(--gold-light)}
+</style>
 <!-- Google Analytics -->
 <script>(function(){if(location.hostname!=='revelanceoh.com'&&location.hostname!=='www.revelanceoh.com')return;var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-V2N2YENTZE';document.head.appendChild(s);})();</script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-V2N2YENTZE');</script>
@@ -240,7 +244,7 @@ h2.light{color:#fff}h2.light em{color:var(--gold-light)}
 <section class="contact-hero">
 <div class="container">
 
-<span class="label" style="color:var(--gold)">Legal</span>
+<span class="label">Legal</span>
 <h1>Privacy <em>Policy</em></h1>
 <p>What we collect when you use our website, why we collect it, and the choices you have.</p>
 </div>

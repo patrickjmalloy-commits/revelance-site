@@ -33,7 +33,7 @@ body{font-family:'Outfit',sans-serif;color:#fff;min-height:100vh;display:flex;fl
 .nav-back:hover{color:var(--gold)}
 main{flex:1;display:flex;align-items:flex-start;justify-content:center;padding:96px 16px 40px}
 .card{width:100%;max-width:480px;background:var(--charcoal);border:1px solid rgba(201,169,110,.18);border-top:4px solid var(--gold);border-radius:12px;padding:30px 24px 26px}
-.card .label{font-size:.62rem;font-weight:700;letter-spacing:.22em;color:var(--gold);text-transform:uppercase;margin-bottom:8px}
+.card .label{font-size:.62rem;font-weight:700;letter-spacing:.22em;color:var(--gold-dark);text-transform:uppercase;margin-bottom:8px}
 .card h1{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:500;line-height:1.15;margin-bottom:8px}
 .card h1 em{color:var(--gold-light);font-style:italic}
 .card .sub{font-size:.86rem;color:rgba(255,255,255,.5);line-height:1.6;margin-bottom:20px}
@@ -60,6 +60,9 @@ form input:focus,form select:focus{border-color:var(--gold);outline:none}
 #done p{font-size:.88rem;color:rgba(255,255,255,.55);line-height:1.7}
 footer{padding:18px 16px;text-align:center;font-size:.72rem;color:rgba(255,255,255,.35)}
 @media(max-width:768px){input:not([type=checkbox]):not([type=radio]),select,textarea{font-size:16px}}
+/* eyebrow labels: gold-dark on light sections, gold-light on dark */
+.section-dark .label,.section-gold .label,.dark .label,.sw-dark .label,.insights .label,.hero .label,.cta-band .label,.past-bg .label,[style*="--charcoal"] .label,[style*="--black"] .label,.section-dark .section-label,.dark .section-label,[style*="--charcoal"] .section-label,[style*="--black"] .section-label{color:var(--gold-light)}
+.section-dark .label::before,.section-gold .label::before,.dark .label::before,.sw-dark .label::before,.insights .label::before,.hero .label::before,.cta-band .label::before,.past-bg .label::before,[style*="--charcoal"] .label::before,[style*="--black"] .label::before{background:var(--gold-light)}
 </style>
 <script>(function(){if(location.hostname!=='revelanceoh.com'&&location.hostname!=='www.revelanceoh.com')return;var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-V2N2YENTZE';document.head.appendChild(s);})();</script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-V2N2YENTZE');</script>

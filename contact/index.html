@@ -50,7 +50,7 @@
 :root{--black:#0B0E11;--charcoal:#151A20;--slate:#1E252E;--graphite:#3A4450;--ash:#5A6572;--silver:#8A929A;--mist:#B8BEC4;--cloud:#E8EAED;--pearl:#F4F5F6;--white:#FDFEFE;--gold:#C9A96E;--gold-light:#D4BA85;--gold-dark:#B08C4A;--serif:'Playfair Display',Georgia,serif;--sans:'Outfit',-apple-system,sans-serif;--ease:cubic-bezier(0.25,0.46,0.45,0.94)}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth;font-size:16px;-webkit-font-smoothing:antialiased;background:#0B0E11;overflow-y:scroll}body{font-family:var(--sans);color:var(--charcoal);background:var(--white);line-height:1.6;overflow-x:hidden}
 .container{max-width:1200px;margin:0 auto;padding:0 28px}.section{padding:60px 0}
-.label{font-family:var(--sans);font-size:.7rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;display:inline-flex;align-items:center;gap:14px}.label::before{content:'';width:32px;height:1px;background:var(--gold)}
+.label{font-family:var(--sans);font-size:.7rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--gold-dark);margin-bottom:18px;display:inline-flex;align-items:center;gap:14px}.label::before{content:'';width:32px;height:1px;background:var(--gold-dark)}
 .heading{font-family:var(--serif);font-size:clamp(1.8rem,3.8vw,2.6rem);font-weight:500;line-height:1.15;color:var(--black);margin-bottom:20px}.heading em{font-style:italic;color:var(--gold-dark)}
 
 /* CONTACT */
@@ -111,7 +111,11 @@
 @media(max-width:600px){.footer-grid{grid-template-columns:1fr}}
 @media(max-width:700px){.contact-grid{grid-template-columns:1fr;gap:36px}.c-form{order:-1}.cta-row{flex-direction:column}.cta-card{min-width:unset}}
 @media(min-width:1400px){.container{max-width:1600px;padding:0 48px}.footer .container{max-width:1600px;padding:0 48px}.footer-grid{gap:48px}}
-@media(max-width:768px){input:not([type=checkbox]):not([type=radio]),select,textarea{font-size:16px}}</style>
+@media(max-width:768px){input:not([type=checkbox]):not([type=radio]),select,textarea{font-size:16px}}/* eyebrow labels: gold-dark on light sections, gold-light on dark */
+.contact-hero .label{color:var(--gold-light)}.contact-hero .label::before{background:var(--gold-light)}
+.section-dark .label,.section-gold .label,.dark .label,.sw-dark .label,.insights .label,.hero .label,.cta-band .label,.past-bg .label,[style*="--charcoal"] .label,[style*="--black"] .label,.section-dark .section-label,.dark .section-label,[style*="--charcoal"] .section-label,[style*="--black"] .section-label{color:var(--gold-light)}
+.section-dark .label::before,.section-gold .label::before,.dark .label::before,.sw-dark .label::before,.insights .label::before,.hero .label::before,.cta-band .label::before,.past-bg .label::before,[style*="--charcoal"] .label::before,[style*="--black"] .label::before{background:var(--gold-light)}
+</style>
 <!-- Google Analytics -->
 <script>(function(){if(location.hostname!=='revelanceoh.com'&&location.hostname!=='www.revelanceoh.com')return;var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-V2N2YENTZE';document.head.appendChild(s);})();</script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-V2N2YENTZE');</script>
@@ -147,7 +151,7 @@
 <!-- HERO -->
 <section class="contact-hero">
 <div class="container">
-<span class="label" style="color:var(--gold)">Get in Touch</span>
+<span class="label">Get in Touch</span>
 <h1>Book a tour or <em>ask us anything</em></h1>
 <p>We respond quickly — usually the same day. No hard sell, no pressure. Come see the building for yourself.</p>
 </div>

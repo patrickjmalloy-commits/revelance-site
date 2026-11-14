@@ -99,7 +99,20 @@ def build_grid(events_html, chosen):
 def build_itemlist(events_html, home_html, chosen):
     src = json.loads(itemlist(events_html).group(1))
     dst = json.loads(itemlist(home_html).group(1))
-    items = {it['item']['url'].rsplit('#', 1)[-1]: it['item'] for it in src['itemListElement']}
+    # An entry's url is either the Events page anchor (…/events/#ev-id) or the
+    # event's own page (…/events/<slug>/, named on the card as data-event-page).
+    ids, blocks = upcoming_cards(events_html)
+    page_of = {}
+    for cid, block in zip(ids, blocks):
+        m = re.search(r'data-event-page="([^"]+)"', block.split('>', 1)[0])
+        if m:
+            page_of['https://revelanceoh.com' + m.group(1)] = cid
+    items = {}
+    for it in src['itemListElement']:
+        url = it['item']['url']
+        key = url.rsplit('#', 1)[-1] if '#' in url else page_of.get(url)
+        if key:
+            items[key] = it['item']
     missing = [c for c in chosen if c not in items]
     if missing:
         sys.exit('events/index.html ItemList has no entry for: ' + ', '.join(missing))

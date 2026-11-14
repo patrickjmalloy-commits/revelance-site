@@ -54,7 +54,7 @@ const EVENTS = {
     time: '10:00 AM – 3:00 PM',
     location: 'Revelance · 8460 Duke Blvd, Mason OH 45040',
     desc: 'Sonder Brewing and Revelance team up for holiday cheer — local vendors, delicious drinks, and festive fun. Open to the public.',
-    shareUrl: 'https://revelanceoh.com/events/#ev-hops-holly-holiday-market',
+    shareUrl: 'https://www.facebook.com/events/2272106446862544/',
     image: 'https://revelanceoh.com/images/og-hops-holly-holiday-market.jpg',
   },
   'ev-nothin-but-networking': {

@@ -1,0 +1,26 @@
+.evp{max-width:1100px;margin:0 auto;padding:96px 24px 72px}
+.evp .back{font-size:.85rem;color:var(--ash);text-decoration:none;display:inline-flex;align-items:center;gap:6px;margin-bottom:26px}.evp .back:hover{color:var(--gold-dark)}
+.evp-hero{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.evp-hero picture img{width:100%;height:100%;object-fit:cover;border-radius:14px;aspect-ratio:4/3;display:block}
+.evp .label{font-size:.7rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--gold-dark);display:inline-flex;align-items:center;gap:14px;margin-bottom:14px}.evp .label::before{content:'';width:32px;height:1px;background:var(--gold-dark)}
+.evp h1{font-family:var(--serif,'Playfair Display',serif);font-weight:500;font-size:clamp(2rem,4.2vw,3.2rem);line-height:1.1;color:var(--charcoal);margin:0 0 18px}.evp h1 em{color:var(--gold-dark);font-style:italic}
+.evp-meta{display:grid;grid-template-columns:auto 1fr;gap:8px 16px;font-size:.95rem;color:var(--ash);margin:0 0 22px}.evp-meta dt{font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.7rem;color:var(--gold-dark);padding-top:3px}.evp-meta dd{margin:0;color:var(--charcoal)}.evp-meta a{color:var(--gold-dark);font-weight:600}
+.evp-badge{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:20px;margin-bottom:18px}.evp-badge.pub{background:#e8f5e9;color:#2e7d32}.evp-badge.mem{background:#fff3e0;color:#e65100}.evp-badge.ind{background:rgba(33,150,243,.1);color:#1976D2}
+.evp-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.evp-actions .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:8px;font-weight:700;font-size:.92rem;text-decoration:none;cursor:pointer;border:1.5px solid transparent;font-family:inherit}
+.evp-actions .btn-gold{background:var(--gold);color:var(--black)}.evp-actions .btn-gold:hover{background:var(--gold-light)}
+.evp-actions .btn-line{background:#fff;color:var(--charcoal);border-color:rgba(0,0,0,.18)}.evp-actions .btn-line:hover{border-color:var(--gold-dark);color:var(--gold-dark)}
+.evp-body{display:grid;grid-template-columns:1.4fr .8fr;gap:48px;margin-top:56px}
+.evp-body h2{font-family:var(--serif,'Playfair Display',serif);font-weight:500;font-size:1.6rem;color:var(--charcoal);margin:0 0 16px}.evp-body h2 em{color:var(--gold-dark);font-style:italic}
+.evp-body p{font-size:1rem;line-height:1.75;color:var(--ash);margin:0 0 18px}
+.evp-side{background:var(--pearl);border-radius:14px;padding:26px 28px;align-self:start}
+.evp-side h3{font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-dark);margin:0 0 14px}
+.evp-side dl{margin:0 0 18px}.evp-side dt{font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ash);margin-top:12px}.evp-side dd{margin:2px 0 0;color:var(--charcoal);font-size:.95rem;line-height:1.5}
+.evp-side address{font-style:normal;font-size:.95rem;line-height:1.6;color:var(--charcoal)}.evp-side address a{color:var(--gold-dark);font-weight:600}
+.evp-past{display:none;background:#FFF8E6;border:1px solid rgba(176,140,74,.35);border-radius:10px;padding:14px 18px;margin:0 0 22px;color:var(--charcoal);font-size:.95rem}.evp-past a{color:var(--gold-dark);font-weight:700}
+.evp-more{margin-top:64px;border-top:1px solid rgba(0,0,0,.08);padding-top:40px}
+.evp-more .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
+.evp-more a.card{display:block;background:#fff;border:1px solid rgba(0,0,0,.07);border-radius:12px;padding:20px 22px;text-decoration:none;color:var(--charcoal);transition:box-shadow .2s}.evp-more a.card:hover{box-shadow:0 8px 30px rgba(0,0,0,.08)}
+.evp-more .when{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-dark)}.evp-more .name{font-weight:700;margin:6px 0 4px}.evp-more .where{font-size:.85rem;color:var(--ash)}
+.evp-toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(20px);background:var(--charcoal);color:#fff;padding:12px 20px;border-radius:8px;font-size:.9rem;opacity:0;transition:.3s;pointer-events:none;z-index:2000}.evp-toast.show{opacity:1;transform:translateX(-50%)}
+@media(max-width:860px){.evp{padding:84px 20px 56px}.evp-hero{grid-template-columns:1fr;gap:24px}.evp-hero picture{order:-1}.evp-body{grid-template-columns:1fr;gap:28px;margin-top:40px}.evp-more .grid{grid-template-columns:1fr}}

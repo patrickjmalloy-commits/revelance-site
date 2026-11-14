@@ -180,10 +180,21 @@ def check_home_events(errors):
                       ' (run: python3 .github/scripts/sync_home_events.py)')
 
 
+def check_event_pages(errors):
+    """Every upcoming event card has its own page (built by event_pages.py)."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location('event_pages', os.path.join(os.path.dirname(__file__), 'event_pages.py'))
+    ep = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(ep)
+    for cid, why in ep.missing(ep.read(ep.EVENTS)):
+        errors.append(f'events/index.html: {cid}: {why} (run: python3 .github/scripts/event_pages.py)')
+
+
 def main():
     errors = []
     files = pages()
     check_home_events(errors)
+    check_event_pages(errors)
     for p in files:
         with open(p, encoding='utf-8') as fh:
             check(p, fh.read(), errors)

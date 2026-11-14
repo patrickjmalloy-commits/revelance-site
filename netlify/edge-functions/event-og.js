@@ -209,7 +209,7 @@ const EVENTS = {
     location: 'Culinary Lab at Revelance · 8460 Duke Blvd, Mason OH 45040',
     desc: 'Asian cuisine demands precision — wok heat, steam timing, consistent sauce work at volume. Watch it live.',
     shareUrl: 'https://evt.to/3fcfgg6qz13x',
-    image: 'https://upcdn.io/FW25b1i/image/uploads/acgLzAHDOzULtkHcxmUR333159/8FaQf9p9.png',
+    image: 'https://revelanceoh.com/images/og-zinkubator-asian-bistro.jpg',
   },
   'ev-zinkubator-le-petit-pop-up': {
     title: 'ZinkUbator: Le Petit Pop Up',
@@ -218,7 +218,7 @@ const EVENTS = {
     location: 'Culinary Lab at Revelance · 8460 Duke Blvd, Mason OH 45040',
     desc: 'A refined small-plates French concept executed live on commercial cooking equipment — elegant technique, exacting temperature control.',
     shareUrl: 'https://evt.to/rb3vfh7xcr4n',
-    image: 'https://upcdn.io/FW25b1i/image/uploads/acgLzAHDOzULtkHcxmUR333159/ogpjkrgQ.png',
+    image: 'https://revelanceoh.com/images/og-zinkubator-le-petit-pop-up.jpg',
   },
 };
 

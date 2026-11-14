@@ -1038,7 +1038,7 @@ function addToCalendar(btn){
 function shareFB(btn){
   const card=btn.closest('.ev-card');
   const base=window.location.origin;
-  const shareUrl=base+'/events/?share='+(card.id||'');
+  const shareUrl=card.dataset.eventPage?base+card.dataset.eventPage:base+'/events/?share='+(card.id||'');
   const url='https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(shareUrl);
   window.open(url,'fb-share','width=580,height=400');
 }
@@ -1047,7 +1047,7 @@ function shareFB(btn){
 function shareLI(btn){
   const card=btn.closest('.ev-card');
   const base=window.location.origin;
-  const shareUrl=base+'/events/?share='+(card.id||'');
+  const shareUrl=card.dataset.eventPage?base+card.dataset.eventPage:base+'/events/?share='+(card.id||'');
   const url='https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(shareUrl);
   window.open(url,'li-share','width=580,height=400');
 }
@@ -1057,7 +1057,7 @@ function copyEventLink(btn){
   const card=btn.closest('.ev-card');
   const slug=card.id||'';
   const base=window.location.origin;
-  const url=base+'/events/'+(slug?'?share='+slug:'');
+  const url=card.dataset.eventPage?base+card.dataset.eventPage:base+'/events/'+(slug?'?share='+slug:'');
   navigator.clipboard.writeText(url).then(()=>showToast('🔗 Event link copied'));
 }
 
@@ -1476,7 +1476,7 @@ revIdle(function(){
     var date      = card.getAttribute('data-event-date')     || '';
     var endTime   = card.getAttribute('data-event-end')      || '23:59';
     var title     = card.getAttribute('data-event-title')    || '';
-    var shareUrl  = card.getAttribute('data-event-share-url')|| '/events/';
+    var shareUrl  = card.getAttribute('data-event-page') || card.getAttribute('data-event-share-url') || '/events/';
     var recapUrl  = card.getAttribute('data-recap-url')      || '';
     var cardId    = card.id || '';
     if (!date || !cardId) return;

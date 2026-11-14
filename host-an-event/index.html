@@ -358,6 +358,7 @@ a.space-card:hover{cursor:pointer}
 .spaces .label,.diff .label{color:var(--gold-light)}.spaces .label::before,.diff .label::before{background:var(--gold-light)}
 .section-dark .label,.section-gold .label,.dark .label,.sw-dark .label,.insights .label,.hero .label,.cta-band .label,.past-bg .label,[style*="--charcoal"] .label,[style*="--black"] .label,.section-dark .section-label,.dark .section-label,[style*="--charcoal"] .section-label,[style*="--black"] .section-label{color:var(--gold-light)}
 .section-dark .label::before,.section-gold .label::before,.dark .label::before,.sw-dark .label::before,.insights .label::before,.hero .label::before,.cta-band .label::before,.past-bg .label::before,[style*="--charcoal"] .label::before,[style*="--black"] .label::before{background:var(--gold-light)}
+.rev-stars,.review-stars{display:inline-flex;gap:2px;line-height:1}.rev-stars svg,.review-stars svg{width:1em;height:1em;fill:currentColor;display:block}
 </style>
 
 <script type="application/ld+json">
@@ -827,7 +828,7 @@ a.space-card:hover{cursor:pointer}
   picks.forEach(function(r){
     var div=document.createElement('div');
     div.className='rev-card reveal';
-    div.innerHTML='<div class="rev-badge '+r.badge+'">'+(r.badge==='corp'?'Corporate':'Personal')+'</div><div class="rev-stars">★★★★★</div><blockquote>'+r.q+'</blockquote><div class="rev-who">'+r.who+'</div><div class="rev-src">'+r.src+'</div>';
+    div.innerHTML='<div class="rev-badge '+r.badge+'">'+(r.badge==='corp'?'Corporate':'Personal')+'</div><div class="rev-stars" role="img" aria-label="5 out of 5 stars"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 15 4.8 17.7l1-5.8L1.5 7.8l5.9-.9z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 15 4.8 17.7l1-5.8L1.5 7.8l5.9-.9z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 15 4.8 17.7l1-5.8L1.5 7.8l5.9-.9z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 15 4.8 17.7l1-5.8L1.5 7.8l5.9-.9z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 15 4.8 17.7l1-5.8L1.5 7.8l5.9-.9z"/></svg></div><blockquote>'+r.q+'</blockquote><div class="rev-who">'+r.who+'</div><div class="rev-src">'+r.src+'</div>';
     grid.appendChild(div);
   });
 })();

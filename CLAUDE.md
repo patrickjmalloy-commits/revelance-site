@@ -76,3 +76,14 @@ reverts newer work.
 `netlify/functions/events-admin.js`, after a server-side password check against the
 `ADMIN_EVENTS_PASSWORD` environment variable. Keep it noindex, out of the sitemap and
 menus, with no analytics; never put event details in static files.
+
+## Retired pages (so a ranking drop is not chased as a bug)
+
+- `/blog/food-truck-commissary-kitchen-cincinnati` — retired Oct 15, 2026,
+  confirmed deliberate by Patrick Nov 16. 301 to `/culinary-lab/`, out of the
+  sitemap and blog index; the file stays in the repo as noindex. The Culinary
+  Lab is the Zink test kitchen and is never offered for commissary or
+  food-truck use, so do not restore the post or add that pitch anywhere.
+
+When a ranking page is retired or redirected, add a line here in the same
+commit.

@@ -202,6 +202,11 @@ h1{{font-family:'Playfair Display',serif;font-weight:500;font-size:{size}px;line
             sys.exit(f'could not render {out}: {e}. Add the image by hand (1200x630) and rerun.')
     return out
 
+GEO_META = '''<meta name="geo.region" content="US-OH">
+  <meta name="geo.placename" content="Mason">
+  <meta name="geo.position" content="39.3135;-84.3025">
+  <meta name="ICBM" content="39.3135, -84.3025">'''
+
 
 def build_page(ev, others, events_html):
     shell = read(SHELL)
@@ -223,6 +228,8 @@ def build_page(ev, others, events_html):
     h = head
     h = re.sub(r'<title>.*?</title>', f'<title>{esc(title)}</title>', h)
     h = re.sub(r'<link rel="canonical" href="[^"]*">', f'<link rel="canonical" href="{url}">', h)
+    if 'geo.region' not in h:
+        h = h.replace(f'<link rel="canonical" href="{url}">', f'<link rel="canonical" href="{url}">\n  ' + GEO_META)
     h = re.sub(r'<meta name="description" content="[^"]*">', f'<meta name="description" content="{esc(desc)}">', h)
     h = re.sub(r'<meta name="keywords" content="[^"]*">\n?', '', h)
     h = re.sub(r'<meta name="robots" content="noindex">', '<meta name="robots" content="index, follow, max-image-preview:large">', h)
@@ -242,7 +249,7 @@ def build_page(ev, others, events_html):
     ld = {"@context": "https://schema.org", "@type": "Event", "name": ev['title'], "description": desc,
           "startDate": start_iso, "endDate": end_iso, "eventStatus": "https://schema.org/EventScheduled",
           "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode", "url": url, "image": [img_url],
-          "location": {"@type": "Place", "name": ev['location'].split(' · ')[0], "address": {"@type": "PostalAddress", "streetAddress": "8460 Duke Blvd", "addressLocality": "Mason", "addressRegion": "OH", "postalCode": "45040", "addressCountry": "US"}},
+          "location": {"@type": "Place", "name": ev['location'].split(' · ')[0], "address": {"@type": "PostalAddress", "streetAddress": "8460 Duke Blvd", "addressLocality": "Mason", "addressRegion": "OH", "postalCode": "45040", "addressCountry": "US"}, "geo": {"@type": "GeoCoordinates", "latitude": 39.3135, "longitude": -84.3025}},
           "organizer": {"@type": "Organization", "name": ev['host'].split(' & ')[0], "url": SITE + '/'},
           "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD", "availability": "https://schema.org/InStock", "url": ev['rsvp'][0] if ev['rsvp'] else url},
           "isAccessibleForFree": True}

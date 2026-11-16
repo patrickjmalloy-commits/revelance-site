@@ -38,6 +38,19 @@
   status = 404
   force = true
 
+# --- Cancelled event: Clue'dunnit recap removed Nov 16, 2026 -> Blog ---
+[[redirects]]
+  from = "/blog/cluedunnit-murder-mystery-night-mason-ohio"
+  to = "/blog/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/cluedunnit-murder-mystery-night-mason-ohio.html"
+  to = "/blog/"
+  status = 301
+  force = true
+
 # --- Retired post (commissary pitch no longer offered) -> Culinary Lab ---
 [[redirects]]
   from = "/blog/food-truck-commissary-kitchen-cincinnati"

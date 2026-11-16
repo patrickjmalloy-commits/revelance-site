@@ -85,5 +85,9 @@ menus, with no analytics; never put event details in static files.
   Lab is the Zink test kitchen and is never offered for commissary or
   food-truck use, so do not restore the post or add that pitch anywhere.
 
+- `/blog/cluedunnit-murder-mystery-night-mason-ohio` — removed Nov 16, 2026: the
+  Oct 9 Clue'dunnit event was cancelled, so the event card and recap are gone
+  and the URL 301s to `/blog/`.
+
 When a ranking page is retired or redirected, add a line here in the same
 commit.

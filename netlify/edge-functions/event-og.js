@@ -12,15 +12,6 @@ const EVENTS = {
     shareUrl: 'https://www.eventbrite.com/e/event-planner-luncheon-tickets-1998813310418?aff=oddtdtcreator',
     image: 'https://revelanceoh.com/images/og-event-planner-luncheon.jpg',
   },
-  'ev-murder-mystery-cluedunnit': {
-    title: 'Clue’dunnit?! — An Interactive Murder Mystery',
-    date: 'Friday, October 9, 2026',
-    time: '7:00 PM – 9:00 PM',
-    location: 'Revelance · 8460 Duke Blvd, Mason OH 45040',
-    desc: 'Everyone’s a suspect. An interactive murder mystery cocktail evening — $45 ticket includes the mystery, hot appetizers, trivia, and prizes, with Sonder Brewing behind the cash bar.',
-    shareUrl: 'https://events.humanitix.com/cluedunnit-an-interactive-murder-mystery-mason',
-    image: 'https://revelanceoh.com/images/og-murder-mystery-cluedunnit.jpg',
-  },
   'ev-brews-boos-happy-hour': {
     title: 'Brews & Boos Happy Hour',
     date: 'Tuesday, October 20, 2026',
